@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj" />
+    <ProjectReference Include="..\WeddingPlanner.DataAccess\WeddingPlanner.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Impls\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+</Project>
