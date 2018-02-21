@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WeddingPlanner.Models.Domain;
 using WeddingPlanner.Models.Dtos;
@@ -38,7 +39,15 @@ namespace WeddingPlanner.Api.Controllers
 		[Route("")]
 		public async Task<IActionResult> Get()
 		{
-			return Ok("Hello, world.");
+			return Ok("Hello.");
+		}
+
+		[HttpGet]
+		[Authorize]
+		[Route("protected")]
+		public async Task<IActionResult> Protected()
+		{
+			return Ok("Success!");
 		}
 
 		[HttpPost]
@@ -47,40 +56,50 @@ namespace WeddingPlanner.Api.Controllers
 		{
 			return Ok(_passwordChecker.CheckPassword(request.Password));
 		}
-
-		// POST api/values
+		
 		[AllowAnonymous]
 		[HttpPost]
 		[Route("login")]
-		public IActionResult Login([FromBody] LoginDto request)
+		public async Task<IActionResult> Login([FromBody] LoginDto login)
 		{
-			if (request.Email != "user" || request.Password != "password")
-				return BadRequest("Could not verify username and password");
+			var result =
+				await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
 
-			var claims = new[]
-			{
-				new Claim(ClaimTypes.Name, request.Email)
-			};
+			if (!result.Succeeded) return Forbid();
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecretKey));
-			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-			var token = new JwtSecurityToken(
-#if DEBUG
-				issuer: "localhost",
-				audience: "localhost",
-#else
-				issuer: "jdmallen.com",
-			    audience: "jdmallen.com",
-#endif
-				claims: claims,
-				expires: DateTime.Now.AddMinutes(30),
-				signingCredentials: creds);
+			var appUser = await _userManager.Users.SingleOrDefaultAsync(u => u.Email == login.Email);
+			var token = await GenerateJwtToken(login.Email, appUser);
 
 			return Ok(new
 			{
-				token = new JwtSecurityTokenHandler().WriteToken(token)
+				token
 			});
+		}
+
+		[AllowAnonymous]
+		[HttpPost]
+		[Route("register")]
+		public async Task<IActionResult> Register([FromBody] RegisterDto register)
+		{
+			var appUser = new AppUser
+			{
+				UserName = register.Email,
+				Email = register.Email
+			};
+			var result = await _userManager.CreateAsync(appUser, register.Password);
+
+			if (result.Succeeded)
+			{
+				await _signInManager.SignInAsync(appUser, false);
+				var token = await GenerateJwtToken(register.Email, appUser);
+
+				return Ok(new
+				{
+					token
+				});
+			}
+
+			return StatusCode(500, result.Errors);
 		}
 
 		private async Task<string> GenerateJwtToken(string email, AppUser user)
@@ -94,7 +113,7 @@ namespace WeddingPlanner.Api.Controllers
 
 			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecretKey));
 			var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-			var expires = DateTime.Now.AddDays(Convert.ToDouble(_settings.JwtExpireDays));
+			var expires = DateTime.UtcNow.AddMinutes(_settings.JwtExpireMinutes);
 
 			var token = new JwtSecurityToken(
 				_settings.JwtIssuer,
