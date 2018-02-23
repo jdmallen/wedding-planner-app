@@ -1,20 +1,29 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using JDMallen.Toolbox.Infrastructure.EFCore.Config;
 using JDMallen.Toolbox.Infrastructure.EFCore.Models;
 using JDMallen.Toolbox.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using WeddingPlanner.Models.Entities;
 
 namespace WeddingPlanner.DataAccess.Config
 {
-	public class WpDbContext : EFContextBase, IEFContext
+	public class WpIdentityContext : IdentityDbContext<AppUser,AppRole,Guid>, IEFContext
 	{
-		public WpDbContext(DbContextOptions options) : base(options)
+		public WpIdentityContext(DbContextOptions options) : base(options)
 		{
 		}
-		
+
+		public IQueryable<TEntityModel> GetQueryable<TEntityModel>()
+			where TEntityModel : class, IEntityModel
+			=> Set<TEntityModel>();
+
+		public Task<int> SaveAllChanges(CancellationToken cancellationToken = default(CancellationToken))
+			=> SaveChangesAsync(true, cancellationToken);
+
 		public Task<EntityEntry<TEntityModel>> AddAsync<TEntityModel, TId>(
 			TEntityModel model,
 			CancellationToken cancellationToken = default(CancellationToken))

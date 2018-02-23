@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WeddingPlanner.Models.Domain;
 using WeddingPlanner.Models.Dtos;
+using WeddingPlanner.Models.Entities;
 using WeddingPlanner.Service.Interfaces;
 
 namespace WeddingPlanner.Api.Controllers

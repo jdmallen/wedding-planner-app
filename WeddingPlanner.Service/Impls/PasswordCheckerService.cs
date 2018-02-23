@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using WeddingPlanner.Models.Dtos;
+using WeddingPlanner.Models.Enums;
 using WeddingPlanner.Service.Interfaces;
 using WeddingPlanner.Service.Resources;
 
@@ -24,17 +25,18 @@ namespace WeddingPlanner.Service.Impls
 		/// <param name="password"></param>
 		/// <param name="threshold"></param>
 		/// <returns></returns>
-		public PasswordResult CheckPassword(string password, double threshold = 50)
+		public PasswordResult CheckPassword(string password, float threshold = 50F)
 		{
 			var result = new PasswordResult();
 			if (string.IsNullOrWhiteSpace(password) || password.Length < 2)
 			{
 				result.BitsOfEntropy = 0;
+				result.Strength = PasswordStrength.VeryWeak;
 				result.Error = PasswordError.TooShort;
 				return result;
 			}
 
-			double bits = 0;
+			var bits = 0F;
 			var isCommon = IsCommonPassword(password);
 			var len = password.Length;
 			var plower = password.ToLowerInvariant();
@@ -43,13 +45,14 @@ namespace WeddingPlanner.Service.Impls
 			for (var b = 1; b < len; b++)
 			{
 				var bidx = GetIndex(plower[b]);
-				var parseOk = double.TryParse(ResourceFile.FrequencyTable.ToArray()[aidx * 27 + bidx], out var freq);
-				var c = 1.0 - (parseOk ? freq : 0);
-				bits += Math.Log(GetCharacterSet(password), 2) * c * c;
+				var parseOk = float.TryParse(ResourceFile.FrequencyTable.ToArray()[aidx * 27 + bidx], out var freq);
+				var c = 1.0F - (parseOk ? freq : 0);
+				bits += (float)Math.Log(GetCharacterSet(password), 2) * c * c;
 				aidx = bidx;
 			}
 
 			result.BitsOfEntropy = bits;
+			result.Strength = EvaluateStrength(bits);
 			if (isCommon) result.Error = PasswordError.TooCommon;
 			if (len < 8) result.Error = result.Error | PasswordError.TooShort;
 			if (bits < threshold) result.Error = result.Error | PasswordError.NotComplexEnough;
@@ -118,6 +121,14 @@ namespace WeddingPlanner.Service.Impls
 				}
 			}
 			return characters;
+		}
+
+		private static PasswordStrength EvaluateStrength(float bits)
+		{
+			if (bits > 120) return PasswordStrength.VeryStrong;
+			if (bits > 90) return PasswordStrength.Strong;
+			if (bits > 60) return PasswordStrength.Moderate;
+			return bits > 30 ? PasswordStrength.Weak : PasswordStrength.VeryWeak;
 		}
 	}
 }

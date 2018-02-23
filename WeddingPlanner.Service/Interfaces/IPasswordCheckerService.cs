@@ -5,6 +5,6 @@ namespace WeddingPlanner.Service.Interfaces
 {
 	public interface IPasswordCheckerService: IService
 	{
-		PasswordResult CheckPassword(string password, double threshold = 50);
+		PasswordResult CheckPassword(string password, float threshold = 50F);
 	}
 }

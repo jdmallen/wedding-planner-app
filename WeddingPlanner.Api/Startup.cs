@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -11,9 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 using WeddingPlanner.DataAccess.Config;
-using WeddingPlanner.Models.Domain;
+using WeddingPlanner.Models.Entities;
 using WeddingPlanner.Service.Impls;
 using WeddingPlanner.Service.Interfaces;
 

@@ -1,12 +1,15 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using WeddingPlanner.Models.Enums;
 
 namespace WeddingPlanner.Models.Dtos
 {
 	public class PasswordResult
 	{
-		public double BitsOfEntropy { get; set; }
+		public float BitsOfEntropy { get; set; }
+
+		public PasswordStrength Strength { get; set; }
 
 		public bool IsError => Error != PasswordError.None;
 
