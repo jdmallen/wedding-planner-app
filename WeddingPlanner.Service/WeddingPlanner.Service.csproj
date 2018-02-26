@@ -5,17 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Impls\**" />
+    <Compile Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Impls\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <None Remove="Impls\**" />
+    <None Remove="Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="RestSharp" Version="106.2.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj" />
     <ProjectReference Include="..\WeddingPlanner.DataAccess\WeddingPlanner.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Impls\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

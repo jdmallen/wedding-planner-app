@@ -14,6 +14,8 @@
 
 		public string JwtSecretKey { get; set; }
 
+		public string CertificateFilename { get; set; }
+
 		public string CertificatePassword { get; set; }
 	}
 }

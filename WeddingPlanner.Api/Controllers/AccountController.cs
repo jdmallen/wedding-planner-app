@@ -18,20 +18,20 @@ namespace WeddingPlanner.Api.Controllers
 	public class AccountController : Controller
 	{
 		private readonly Settings _settings;
-//		private readonly IPasswordCheckerService _passwordChecker;
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly UserManager<AppUser> _userManager;
+		private readonly IPasswordValidator<AppUser> _passwordValidator;
 
 		public AccountController(
 			Settings settings, 
-//			IPasswordCheckerService passwordChecker, 
 			SignInManager<AppUser> signInManager, 
-			UserManager<AppUser> userManager)
+			UserManager<AppUser> userManager,
+			IPasswordValidator<AppUser> passwordValidator)
 		{
 			_settings = settings;
-//			_passwordChecker = passwordChecker;
 			_signInManager = signInManager;
 			_userManager = userManager;
+			_passwordValidator = passwordValidator;
 		}
 
 		[HttpGet]

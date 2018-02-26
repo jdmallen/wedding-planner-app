@@ -18,18 +18,18 @@ using WeddingPlanner.Models.Entities;
 
 namespace WeddingPlanner.Api
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
 #if DEBUG
 			settings.JwtSecretKey = Configuration["JwtSecretKey"];
@@ -37,7 +37,7 @@ namespace WeddingPlanner.Api
 			settings.CertificatePassword = Configuration["CertificatePassword"];
 #endif
 			services.AddSingleton(settings);
-			
+
 			var builder = new SqlConnectionStringBuilder
 			{
 				DataSource = settings.DbConnectionServer,
@@ -78,7 +78,7 @@ namespace WeddingPlanner.Api
 							ClockSkew = TimeSpan.Zero
 						};
 					});
-			
+
 			services.AddAntiforgery(
 				options =>
 				{
@@ -89,28 +89,34 @@ namespace WeddingPlanner.Api
 				}
 			);
 
-            services.AddMvc(
+			services.AddMvc(
 				options =>
 				{
 					options.SslPort = 44321;
 					options.Filters.Add(new RequireHttpsAttribute());
 				});
-        }
-		
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, WpDbContext dbContext)
+		}
+
+		public void Configure(
+			IApplicationBuilder app,
+			IHostingEnvironment env,
+			ILoggerFactory loggerFactory,
+			WpIdentityContext identityContext,
+			WpDbContext dbContext)
 		{
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
 			app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
 
 			app.UseAuthentication();
 
-            app.UseMvc();
+			app.UseMvc();
 
-//			dbContext.Database.EnsureCreated();
+			identityContext.Database.EnsureCreated();
+			dbContext.Database.EnsureCreated();
 		}
-    }
+	}
 }

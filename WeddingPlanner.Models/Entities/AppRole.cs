@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using JDMallen.Toolbox.Models;
 
 namespace WeddingPlanner.Models.Entities
 {
-	public class AppRole : IdentityRole<Guid>
+	public class AppRole : IdRole
 	{
 	}
 }
