@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JDMallen.Toolbox.Infrastructure.EFCore.Models;
+using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace WeddingPlanner.DataAccess.Config
 {
 	public class WpIdentityContext : IdentityDbContext<AppUser,AppRole,Guid>, IEFContext
 	{
-		public WpIdentityContext(DbContextOptions options) : base(options)
+		public WpIdentityContext(DbContextOptions<WpIdentityContext> options) : base(options)
 		{
 		}
 

@@ -57,5 +57,22 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserTokens.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="Security\wp.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlSchemaComparison.scmp" />
   </ItemGroup>
 </Project>

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
 </Project>

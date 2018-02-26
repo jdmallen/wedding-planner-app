@@ -4,14 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using JDMallen.Toolbox.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using WeddingPlanner.Models.Dtos;
 using WeddingPlanner.Models.Entities;
-using WeddingPlanner.Service.Interfaces;
 
 namespace WeddingPlanner.Api.Controllers
 {
@@ -19,18 +18,18 @@ namespace WeddingPlanner.Api.Controllers
 	public class AccountController : Controller
 	{
 		private readonly Settings _settings;
-		private readonly IPasswordCheckerService _passwordChecker;
+//		private readonly IPasswordCheckerService _passwordChecker;
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly UserManager<AppUser> _userManager;
 
 		public AccountController(
 			Settings settings, 
-			IPasswordCheckerService passwordChecker, 
+//			IPasswordCheckerService passwordChecker, 
 			SignInManager<AppUser> signInManager, 
 			UserManager<AppUser> userManager)
 		{
 			_settings = settings;
-			_passwordChecker = passwordChecker;
+//			_passwordChecker = passwordChecker;
 			_signInManager = signInManager;
 			_userManager = userManager;
 		}
@@ -54,7 +53,7 @@ namespace WeddingPlanner.Api.Controllers
 		[Route("check")]
 		public IActionResult CheckPassword([FromBody] LoginDto request)
 		{
-			return Ok(_passwordChecker.CheckPassword(request.Password));
+			return Ok(/*_passwordChecker.CheckPassword(request.Password)*/);
 		}
 		
 		[AllowAnonymous]

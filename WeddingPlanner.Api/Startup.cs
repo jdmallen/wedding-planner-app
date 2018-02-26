@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using JDMallen.Toolbox.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,8 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Entities;
-using WeddingPlanner.Service.Impls;
-using WeddingPlanner.Service.Interfaces;
 
 namespace WeddingPlanner.Api
 {
@@ -45,10 +44,19 @@ namespace WeddingPlanner.Api
 														sqlServerOptions.UseRowNumberForPaging(false);
 														sqlServerOptions.EnableRetryOnFailure(5);
 													}));
+	        services.AddDbContext<WpIdentityContext>(contextOptions => contextOptions.UseSqlServer(
+													builder.ToString(),
+													sqlServerOptions =>
+													{
+														sqlServerOptions.UseRowNumberForPaging(false);
+														sqlServerOptions.EnableRetryOnFailure(5);
+													}));
 
-			services.AddIdentity<AppUser, AppRole>()
-					.AddEntityFrameworkStores<WpDbContext>()
-					.AddDefaultTokenProviders();
+	        services.AddIdentity<AppUser, AppRole>()
+		        .AddEntityFrameworkStores<WpIdentityContext>()
+		        .AddDefaultTokenProviders()
+		        .AddPasswordValidator<CustomPasswordValidator<AppUser>>();
+//	        services.AddScoped<IPasswordValidator<>>();
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -73,7 +81,7 @@ namespace WeddingPlanner.Api
 						};
 					});
 
-			services.AddScoped<IPasswordCheckerService, PasswordCheckerService>();
+//			services.AddScoped<IPasswordCheckerService, PasswordCheckerService>();
 
             services.AddMvc();
         }
@@ -89,7 +97,7 @@ namespace WeddingPlanner.Api
 
             app.UseMvc();
 
-			dbContext.Database.EnsureCreated();
+//			dbContext.Database.EnsureCreated();
 		}
     }
 }
