@@ -43,7 +43,6 @@ namespace WeddingPlanner.Api
 #if DEBUG
 			settings.JwtSecretKey = Configuration[nameof(settings.JwtSecretKey)];
 			settings.DbConnectionPassword = Configuration[nameof(settings.DbConnectionPassword)];
-			settings.CertificatePassword = Configuration[nameof(settings.CertificatePassword)];
 			settings.GitHubClientSecret = Configuration[nameof(settings.GitHubClientSecret)];
 #endif
 			services.AddSingleton(settings);

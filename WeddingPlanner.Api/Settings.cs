@@ -15,11 +15,7 @@
 		public string JwtIssuer { get; set; }
 
 		public string JwtSecretKey { get; set; }
-
-		public string CertificateFilename { get; set; }
-
-		public string CertificatePassword { get; set; }
-
+		
 		public string GitHubClientId { get; set; }
 
 		public string GitHubClientSecret { get; set; }
