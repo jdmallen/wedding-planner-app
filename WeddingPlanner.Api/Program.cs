@@ -21,7 +21,7 @@ namespace WeddingPlanner.Api
 											44321,
 											listenOptions =>
 											{
-												listenOptions.UseHttps("cert.pfx", "" /*TODO password*/);
+												listenOptions.UseHttps("cert.pfx", "");
 											});
 						})
 						.UseUrls("https://localhost:44321")

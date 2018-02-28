@@ -5,11 +5,16 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using JDMallen.Toolbox.Dtos;
+using JDMallen.Toolbox.Extensions;
+using JDMallen.Toolbox.Factories;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using WeddingPlanner.DataAccess.Config;
+using WeddingPlanner.Models.Dtos;
 using WeddingPlanner.Models.Entities;
 
 namespace WeddingPlanner.Api.Controllers
@@ -17,21 +22,24 @@ namespace WeddingPlanner.Api.Controllers
 	[Route("api/[controller]")]
 	public class AccountController : Controller
 	{
+		private readonly IJwtTokenFactory _jwtTokenFactory;
 		private readonly Settings _settings;
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly UserManager<AppUser> _userManager;
-		private readonly IPasswordValidator<AppUser> _passwordValidator;
+		private readonly WpIdentityContext _identityContext;
 
 		public AccountController(
+			IJwtTokenFactory jwtTokenFactory,
 			Settings settings, 
 			SignInManager<AppUser> signInManager, 
 			UserManager<AppUser> userManager,
-			IPasswordValidator<AppUser> passwordValidator)
+			WpIdentityContext identityContext)
 		{
+			_jwtTokenFactory = jwtTokenFactory;
 			_settings = settings;
 			_signInManager = signInManager;
 			_userManager = userManager;
-			_passwordValidator = passwordValidator;
+			_identityContext = identityContext;
 		}
 
 		[HttpGet]
@@ -58,16 +66,21 @@ namespace WeddingPlanner.Api.Controllers
 		
 		[AllowAnonymous]
 		[HttpPost]
-		[Route("login")]
-		public async Task<IActionResult> Login([FromBody] LoginDto login)
+		[Route("login/email")]
+		public async Task<IActionResult> LoginEmail([FromBody] LoginDto login)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var result =
 				await _signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
 
 			if (!result.Succeeded) return Forbid();
 
 			var appUser = await _userManager.Users.SingleOrDefaultAsync(u => u.Email == login.Email);
-			var token = await GenerateJwtToken(login.Email, appUser);
+			var token = GenerateJwtToken(login.Email, appUser);
 
 			return Ok(new
 			{
@@ -76,32 +89,45 @@ namespace WeddingPlanner.Api.Controllers
 		}
 
 		[AllowAnonymous]
+		[HttpGet]
+		[Route("login/github")]
+		public IActionResult LoginGithub(string returnUrl = "/")
+		{
+			return Challenge(new AuthenticationProperties
+							{
+								RedirectUri = returnUrl
+							},
+							"GitHub");
+		}
+
+		[AllowAnonymous]
 		[HttpPost]
 		[Route("register")]
-		public async Task<IActionResult> Register([FromBody] RegisterDto register)
+		public async Task<IActionResult> Register([FromBody] RegistrationDto register)
 		{
 			var appUser = new AppUser
 			{
+				Email = register.Email,
+				DisplayName = register.DisplayName,
+				InvitationCode = register.InvitationCode,
 				UserName = register.Email,
-				Email = register.Email
 			};
 			var result = await _userManager.CreateAsync(appUser, register.Password);
 
-			if (result.Succeeded)
+			if (!result.Succeeded) return BadRequest(ModelState.AddIdentityErrors(result));
+
+			await _identityContext.Users.AddAsync(appUser);
+			await _identityContext.SaveChangesAsync();
+			await _signInManager.SignInAsync(appUser, false);
+			
+			var token = GenerateJwtToken(register.Email, appUser);
+			return Ok(new
 			{
-				await _signInManager.SignInAsync(appUser, false);
-				var token = await GenerateJwtToken(register.Email, appUser);
-
-				return Ok(new
-				{
-					token
-				});
-			}
-
-			return StatusCode(500, result.Errors);
+				token
+			});
 		}
 
-		private async Task<string> GenerateJwtToken(string email, AppUser user)
+		private string GenerateJwtToken(string email, AppUser user)
 		{
 			var claims = new List<Claim>
 			{
