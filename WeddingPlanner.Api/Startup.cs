@@ -74,7 +74,16 @@ namespace WeddingPlanner.Api
 														sqlServerOptions.EnableRetryOnFailure(5);
 													}));
 
-			services.AddCustomIdentity<WpIdentityContext, AppUser, AppRole>(builder.ToString());
+			services.AddCustomIdentity<WpIdentityContext, AppUser, AppRole>(builder.ToString(),
+																			options =>
+																			{
+																				options.Password.RequireDigit = false;
+																				options.Password.RequireLowercase = false;
+																				options.Password.RequireNonAlphanumeric = false;
+																				options.Password.RequireUppercase = false;
+																				options.Password.RequiredLength = 2;
+																				options.Password.RequiredUniqueChars = 1;
+																			});
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
