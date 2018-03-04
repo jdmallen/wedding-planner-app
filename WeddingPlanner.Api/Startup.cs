@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
+using JDMallen.Toolbox.Constants;
+using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Factories;
 using JDMallen.Toolbox.Options;
 using Microsoft.AspNetCore.Authentication;
@@ -40,20 +42,23 @@ namespace WeddingPlanner.Api
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
+			var oAuthSettings = Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
 #if DEBUG
 			settings.JwtSecretKey = Configuration[nameof(settings.JwtSecretKey)];
 			settings.DbConnectionPassword = Configuration[nameof(settings.DbConnectionPassword)];
-			settings.GitHubClientSecret = Configuration[nameof(settings.GitHubClientSecret)];
+			oAuthSettings.GitHubClientSecret = Configuration[nameof(oAuthSettings.GitHubClientSecret)];
+			oAuthSettings.GoogleClientSecret = Configuration[nameof(oAuthSettings.GoogleClientSecret)];
 #endif
 			services.AddSingleton(settings);
+
+			var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
 
 			services.Configure<JwtOptions>(options =>
 			{
 				options.Audience = settings.JwtAudience;
 				options.Issuer = settings.JwtIssuer;
 				options.ValidForSpan = TimeSpan.FromMinutes(settings.JwtExpireMinutes);
-				var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
-				options.SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+				options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 			});
 
 			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
@@ -101,41 +106,14 @@ namespace WeddingPlanner.Api
 						{
 							ValidIssuer = settings.JwtIssuer,
 							ValidAudience = settings.JwtIssuer,
-							IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey)),
+							ValidateIssuerSigningKey = true,
+							IssuerSigningKey = signingKey,
+							RequireExpirationTime = true,
 							ClockSkew = TimeSpan.Zero
 						};
 					})
-					.AddOAuth("GitHub", options =>
-					{
-						options.ClientId = settings.GitHubClientId;
-						options.ClientSecret = settings.GitHubClientSecret;
-						options.CallbackPath = new PathString("/signin-github");
-						options.AuthorizationEndpoint = "https://github.com/login/oauth/authorize";
-						options.TokenEndpoint = "https://github.com/login/oauth/access_token";
-						options.UserInformationEndpoint = "https://api.github.com/user";
-						options.ClaimActions.MapJsonKey(ClaimTypes.NameIdentifier, "id");
-						options.ClaimActions.MapJsonKey(ClaimTypes.Name, "name");
-						options.ClaimActions.MapJsonKey("urn:github:login", "login");
-						options.ClaimActions.MapJsonKey("urn:github:url", "html_url");
-						options.ClaimActions.MapJsonKey("urn:github:avatar", "avatar_url");
-
-						options.Events = new OAuthEvents
-						{
-							OnCreatingTicket = async context =>
-							{
-								var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
-								request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-								request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-
-								var response = await context.Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, context.HttpContext.RequestAborted);
-								response.EnsureSuccessStatusCode();
-
-								var user = JObject.Parse(await response.Content.ReadAsStringAsync());
-								Debug.WriteLine(user);
-								context.RunClaimActions(user);
-							}
-						};
-					});
+					.AddOAuthGitHub(oAuthSettings)
+					.AddOAuthGoogle(oAuthSettings);
 
 			services.AddAntiforgery(
 				options =>

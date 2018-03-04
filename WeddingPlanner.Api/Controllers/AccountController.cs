@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
+using JDMallen.Toolbox.Constants;
 using JDMallen.Toolbox.Dtos;
 using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Factories;
@@ -13,8 +10,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Dtos;
 using WeddingPlanner.Models.Entities;
@@ -78,7 +73,7 @@ namespace WeddingPlanner.Api.Controllers
 		
 		[AllowAnonymous]
 		[HttpPost]
-		[Route("login/email")]
+		[Route("login")]
 		public async Task<IActionResult> LoginEmail([FromBody] LoginDto login)
 		{
 			if (!ModelState.IsValid)
@@ -121,7 +116,19 @@ namespace WeddingPlanner.Api.Controllers
 							{
 								RedirectUri = returnUrl
 							},
-							"GitHub");
+							OAuthSchemes.GitHub);
+		}
+
+		[AllowAnonymous]
+		[HttpGet]
+		[Route("login/google")]
+		public IActionResult LoginGoogle(string returnUrl = "/")
+		{
+			return Challenge(new AuthenticationProperties
+							{
+								RedirectUri = returnUrl
+							},
+							OAuthSchemes.Google);
 		}
 
 		[AllowAnonymous]
@@ -142,9 +149,6 @@ namespace WeddingPlanner.Api.Controllers
 			var result = await _userManager.CreateAsync(appUser, register.Password);
 
 			if (!result.Succeeded) return BadRequest(ModelState.AddIdentityErrors(result));
-
-//			await _identityContext.Users.AddAsync(appUser);
-//			await _identityContext.SaveChangesAsync();
 
 			return CreatedAtAction("LoginEmail",
 									new LoginDto()
