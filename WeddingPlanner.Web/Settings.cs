@@ -1,4 +1,4 @@
-﻿namespace WeddingPlanner.Api
+﻿namespace WeddingPlanner.Web
 {
     public class Settings
     {

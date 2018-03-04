@@ -14,10 +14,10 @@ using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Dtos;
 using WeddingPlanner.Models.Entities;
 
-namespace WeddingPlanner.Api.Controllers
+namespace WeddingPlanner.Web.Controllers
 {
 	[Route("api/[controller]")]
-	public class AccountController : Controller
+	public class ApiAccountController : Controller
 	{
 		private readonly IJwtTokenFactory _jwtTokenFactory;
 		private readonly Settings _settings;
@@ -25,7 +25,7 @@ namespace WeddingPlanner.Api.Controllers
 		private readonly UserManager<AppUser> _userManager;
 		private readonly WpIdentityContext _identityContext;
 
-		public AccountController(
+		public ApiAccountController(
 			IJwtTokenFactory jwtTokenFactory,
 			Settings settings, 
 			SignInManager<AppUser> signInManager, 

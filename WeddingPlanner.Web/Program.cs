@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WeddingPlanner.Api
+namespace WeddingPlanner.Web
 {
 	public class Program
 	{

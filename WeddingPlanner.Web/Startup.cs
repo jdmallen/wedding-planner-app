@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Text;
-using JDMallen.Toolbox.Constants;
 using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Factories;
 using JDMallen.Toolbox.Options;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,11 +16,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Entities;
 
-namespace WeddingPlanner.Api
+namespace WeddingPlanner.Web
 {
 	public class Startup
 	{
@@ -151,7 +143,19 @@ namespace WeddingPlanner.Api
 
 			app.UseStaticFiles("");
 
-			app.UseMvc();
+			app.UseMvc(routes =>
+			{
+				routes.MapRoute(
+					name: "default", 
+					template: "{controller=BaseView}/{action=Index}/{id?}");
+				routes.MapSpaFallbackRoute(
+					name: "spa-fallback",
+					defaults: new
+					{
+						controller = "BaseView",
+						action = "Index"
+					});
+			});
 
 			identityContext.Database.EnsureCreated();
 			dbContext.Database.EnsureCreated();

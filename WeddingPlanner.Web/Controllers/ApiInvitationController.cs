@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WeddingPlanner.Api.Controllers
+namespace WeddingPlanner.Web.Controllers
 {
 	[Authorize]
 	[Route("api/[controller]")]
-    public class InvitationController : Controller
+    public class ApiInvitationController : Controller
     {
         public IActionResult Index()
         {
