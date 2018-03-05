@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
   </ItemGroup>
 
   <ItemGroup>

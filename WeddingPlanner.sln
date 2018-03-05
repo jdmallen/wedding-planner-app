@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Web", "WeddingPlanner.Web\WeddingPlanner.Web.csproj", "{6CF842D4-8772-4CDE-A27F-16C1A1C634C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox", "..\JDMallen.Toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj", "{FE27029E-A191-40B0-BF61-4CD7F7C7C9F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox", "..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj", "{FE27029E-A191-40B0-BF61-4CD7F7C7C9F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Service", "WeddingPlanner.Service\WeddingPlanner.Service.csproj", "{B0F79EC9-A6B4-4AC9-910B-36A78EC3BC93}"
 EndProject
@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Models", "WeddingPlanner.Models\WeddingPlanner.Models.csproj", "{0697E368-0ADB-4451-9DA9-204161B32EC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.Infrastructure.EFCore", "..\JDMallen.Toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj", "{AE520EC2-8BDE-4A58-B0A0-13BC7991AC47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.Infrastructure.EFCore", "..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj", "{AE520EC2-8BDE-4A58-B0A0-13BC7991AC47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.RepositoryPattern", "..\JDMallen.Toolbox\JDMallen.Toolbox.RepositoryPattern\JDMallen.Toolbox.RepositoryPattern.csproj", "{C986AAB1-3C1D-4790-B2D2-88643595F4FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.RepositoryPattern", "..\toolbox\JDMallen.Toolbox.RepositoryPattern\JDMallen.Toolbox.RepositoryPattern.csproj", "{C986AAB1-3C1D-4790-B2D2-88643595F4FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.Microservices", "..\JDMallen.Toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj", "{DA308251-B7EF-4B09-95FD-CA7312A23364}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JDMallen.Toolbox.Microservices", "..\toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj", "{DA308251-B7EF-4B09-95FD-CA7312A23364}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

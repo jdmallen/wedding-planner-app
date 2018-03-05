@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />
     <ProjectReference Include="..\WeddingPlanner.Models\WeddingPlanner.Models.csproj" />
   </ItemGroup>
 

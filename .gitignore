@@ -26,7 +26,7 @@ bld/
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/
+wwwroot/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -230,5 +230,45 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
+# Sensitive data
 **/credentials.json
 **/sample_oauth*.json
+
+## Javascript
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+**/ClientApp/**/*.css
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+*~
+*.pyc
+.grunt
+_SpecRunner.html
+__benchmarks__
+remote-repo/
+flow-coverage/
+.module-cache
+fixtures/dom/public/react-dom.js
+fixtures/dom/public/react.js
+test/the-files-to-test.generated.js
+*.log*
+chrome-user-data
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+.vscode
+*.swp
+*.swo

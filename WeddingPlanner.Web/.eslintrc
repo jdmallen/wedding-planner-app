@@ -1,0 +1,22 @@
+{
+	"parser": "babel-eslint",
+	"plugins": [
+		"react"
+	],
+	"env": {
+		"browser": true
+	},
+	"rules": {
+		"max-len": [1, 80, 2, {"ignoreComments": true}],
+		"prop-types": [1],
+		"no-tabs": "off",
+		"no-mixed-spaces-and-tabs": "warn",
+		"indent": ["error","tab"],
+		"linebreak-style": ["error", "windows"],
+		"comma-dangle": ["warn", "always-multiline"],
+		"no-unused-vars": "warn",
+		"class-methods-use-this": "warn",
+		"react/jsx-indent": [2, "tab"]
+	},
+	"extends": ["airbnb"]
+}

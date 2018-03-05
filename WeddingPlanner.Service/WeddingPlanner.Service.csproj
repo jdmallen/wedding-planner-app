@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj" />
     <ProjectReference Include="..\WeddingPlanner.DataAccess\WeddingPlanner.DataAccess.csproj" />
   </ItemGroup>
 

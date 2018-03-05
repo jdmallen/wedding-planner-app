@@ -12,6 +12,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\lib\" />
+    <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,8 +34,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\JDMallen.Toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
     <ProjectReference Include="..\WeddingPlanner.Service\WeddingPlanner.Service.csproj" />
   </ItemGroup>
+
+	<Target Name="PrecompileScript" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' != 'Debug' ">
+		<Exec Command="npm install" />
+		<Exec Command="npm run build" />
+	</Target>
 
 </Project>
