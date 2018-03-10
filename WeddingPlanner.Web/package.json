@@ -8,34 +8,17 @@
 	},
 	"devDependencies": {
 		"babel-core": "^6.26.0",
-		"babel-eslint": "^8.2.1",
 		"babel-loader": "^7.1.2",
-		"babel-preset-airbnb": "^2.4.0",
-		"babel-preset-env": "^1.6.1",
-		"babel-preset-react": "^6.24.1",
-		"babel-register": "^6.26.0",
 		"eslint": "^4.17.0",
 		"eslint-config-airbnb": "^16.1.0",
 		"eslint-loader": "^1.9.0",
-		"eslint-plugin-import": "^2.8.0",
-		"eslint-plugin-jsx-a11y": "^6.0.3",
-		"eslint-plugin-react": "^7.6.1",
-		"husky": "^0.14.3",
 		"node-sass-chokidar": "0.0.3",
 		"npm-run-all": "^4.1.2",
-		"prettier": "1.10.2",
-		"pretty-quick": "^1.4.0",
 		"webpack": "^3.10.0"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run precommit",
-			"pre-push": ""
-		}
 	},
 	"scripts": {
 		"build": "npm-run-all build-css build-js",
-		"build-js": "webpack --optimize-minimize --config webpack.config.babel.js",
+		"build-js": "webpack --config webpack.config.babel.js",
 		"build-js-min": "webpack --optimize-minimize --config webpack.config.babel.js",
 		"build-css": "node-sass-chokidar ClientApp/ -o ClientApp/",
 		"precommit": "pretty-quick --staged",
