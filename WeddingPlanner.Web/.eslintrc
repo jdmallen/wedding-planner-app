@@ -16,7 +16,8 @@
 		"comma-dangle": ["warn", "always-multiline"],
 		"no-unused-vars": "warn",
 		"class-methods-use-this": "warn",
-		"react/jsx-indent": [2, "tab"]
+		"react/jsx-indent": [2, "tab"],
+		"quotes": ["error", "double"]
 	},
 	"extends": ["airbnb"]
 }
