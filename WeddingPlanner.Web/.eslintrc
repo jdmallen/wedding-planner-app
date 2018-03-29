@@ -17,7 +17,14 @@
 		"no-unused-vars": "warn",
 		"class-methods-use-this": "warn",
 		"react/jsx-indent": [2, "tab"],
-		"quotes": ["error", "double"]
+		"quotes": ["error", "double"],
+		"space-before-function-paren": ["error", {
+			"anonymous": "never",
+			"named": "never",
+			"asyncArrow": "ignore"
+		}],
+		"react/forbid-prop-types": "off",
+		"react/no-unused-prop-types":  "warn"
 	},
 	"extends": ["airbnb"]
 }
