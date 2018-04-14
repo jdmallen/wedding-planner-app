@@ -1,7 +1,7 @@
 ﻿export default (state = {
 	hasErrored: false,
 	isLoading: false,
-	list: []
+	list: [],
 }, action) => {
 	switch (action.type) {
 	case "LIST_HAS_ERRORED":

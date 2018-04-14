@@ -5,8 +5,6 @@ import rootReducer from "../reducers";
 
 const middleware = [thunk];
 
-console.log(process.env);
-
 if (process.env.ASPNETCORE_ENVIRONMENT !== "Production") {
 	middleware.push(createLogger());
 }

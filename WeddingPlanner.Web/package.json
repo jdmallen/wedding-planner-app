@@ -58,7 +58,7 @@
 		]
 	},
 	"scripts": {
-		"build": "webpack --config webpack.config.babel.js",
+		"build": "webpack --debug --mode \"development\" --config webpack.config.babel.js",
 		"build-min": "webpack --optimize-minimize --config webpack.config.babel.js",
 		"precommit": "lint-staged",
 		"watch": "webpack --w --config webpack.config.babel.js"

@@ -8,15 +8,15 @@
 	},
 	"rules": {
 		"max-len": [1, 80, 2, {"ignoreComments": true}],
-		"prop-types": [1],
+		"react/prop-types": [0],
 		"no-tabs": "off",
 		"no-mixed-spaces-and-tabs": "warn",
-		"indent": ["error","tab"],
+		"indent": ["warn","tab"],
 		"linebreak-style": ["error", "windows"],
 		"comma-dangle": ["warn", "always-multiline"],
 		"no-unused-vars": "warn",
 		"class-methods-use-this": "warn",
-		"react/jsx-indent": [2, "tab"],
+		"react/jsx-indent": [1, "tab"],
 		"quotes": ["error", "double"],
 		"space-before-function-paren": ["error", {
 			"anonymous": "never",
@@ -26,5 +26,14 @@
 		"react/forbid-prop-types": "off",
 		"react/no-unused-prop-types":  "warn"
 	},
-	"extends": ["airbnb"]
+	"extends": ["airbnb"],
+	"overrides":  [
+		{
+			"files": [ "*Container.jsx" ],
+			"rules": {
+				"react/prop-types": [1]
+			}
+		}
+	] 
 }
+

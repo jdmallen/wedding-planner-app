@@ -1,12 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import fontawesome from "@fortawesome/fontawesome";
-import { faUser, faCircle } from "@fortawesome/fontawesome-free-solid";
-import { faFacebook } from "@fortawesome/fontawesome-free-brands";
+import { faUser } from "@fortawesome/fontawesome-free-solid";
 import configureStore from "./store/configureStore";
-import App from "./containers/App";
+import App from "./containers/AppContainer";
 
 fontawesome.library.add(faUser);
 
