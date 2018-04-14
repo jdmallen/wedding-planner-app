@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import fontawesome from "@fortawesome/fontawesome";
 import { faUser, faCircle } from "@fortawesome/fontawesome-free-solid";
 import { faFacebook } from "@fortawesome/fontawesome-free-brands";
-import configureStore from "./redux/configureStore";
+import configureStore from "./store/configureStore";
 import App from "./containers/App";
 
 fontawesome.library.add(faUser);

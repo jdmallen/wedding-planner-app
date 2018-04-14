@@ -6,10 +6,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\actions\.gitkeep" />
+    <None Remove="ClientApp\components\.gitkeep" />
+    <None Remove="ClientApp\constants\.gitkeep" />
+    <None Remove="ClientApp\containers\.gitkeep" />
+    <None Remove="ClientApp\middleware\.gitkeep" />
+    <None Remove="ClientApp\reducers\.gitkeep" />
+    <None Remove="ClientApp\redux\.gitkeep" />
+    <None Remove="ClientApp\store\.gitkeep" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="cert.pfx" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\components\" />
+    <Folder Include="ClientApp\constants\" />
+    <Folder Include="ClientApp\middleware\" />
+    <Folder Include="ClientApp\redux\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\js\" />

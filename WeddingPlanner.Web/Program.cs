@@ -1,4 +1,5 @@
-﻿using JDMallen.Toolbox.Extensions;
+﻿using System.Threading;
+using JDMallen.Toolbox.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -8,6 +9,7 @@ namespace WeddingPlanner.Web
 	{
 		public static void Main(string[] args)
 		{
+			Thread.Sleep(10000);
 			BuildWebHost(args).Run();
 		}
 
@@ -15,7 +17,6 @@ namespace WeddingPlanner.Web
 		{
 			return WebHost.CreateDefaultBuilder(args)
 						.UseKestrel(options => options.ConfigureEndpoints())
-						.UseUrls("https://localhost:44321")
 						.UseStartup<Startup>()
 						.Build();
 		}

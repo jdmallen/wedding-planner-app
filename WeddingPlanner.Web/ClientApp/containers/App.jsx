@@ -2,12 +2,12 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { listFetchData } from "../redux/actions/list";
+import { listFetchData } from "../actions/listActions";
 import styles from "./App.scss";
 
 class App extends Component {
 	componentDidMount() {
-		this.props.fetchData("http(s)://5aae9a497389ab0014b7b953.mockapi.io/api/v1/list");
+		this.props.fetchData("https://5aae9a497389ab0014b7b953.mockapi.io/api/v1/list");
 	}
 
 	render() {

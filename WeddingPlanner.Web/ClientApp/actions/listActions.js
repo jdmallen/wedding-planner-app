@@ -1,23 +1,23 @@
 import axios from "axios";
 
-export function listHasErrored(bool) {
+export function listHasErrored(boolValue) {
 	return {
 		type: "LIST_HAS_ERRORED",
-		hasErrored: bool
+		payload: boolValue
 	};
 }
 
-export function listIsLoading(bool) {
+export function listIsLoading(boolValue) {
 	return {
 		type: "LIST_IS_LOADING",
-		isLoading: bool
+		payload: boolValue
 	};
 }
 
 export function listFetchDataSuccess(list) {
 	return {
 		type: "LIST_FETCH_DATA_SUCCESS",
-		list
+		payload: list
 	};
 }
 
