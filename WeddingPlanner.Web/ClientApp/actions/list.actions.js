@@ -1,22 +1,23 @@
 import axios from "axios";
+import listConstants from "../constants/list.constants";
 
 export function listHasErrored(boolValue) {
 	return {
-		type: "LIST_HAS_ERRORED",
+		type: listConstants.LIST_HAS_ERRORED,
 		payload: boolValue,
 	};
 }
 
 export function listIsLoading(boolValue) {
 	return {
-		type: "LIST_IS_LOADING",
+		type: listConstants.LIST_IS_LOADING,
 		payload: boolValue,
 	};
 }
 
 export function listFetchDataSuccess(list) {
 	return {
-		type: "LIST_FETCH_DATA_SUCCESS",
+		type: listConstants.LIST_FETCH_DATA_SUCCESS,
 		payload: list,
 	};
 }
@@ -37,7 +38,6 @@ export function listFetchData(url) {
 
 		axios.get(url)
 			.then((response) => {
-				console.log(response);
 				dispatch(listIsLoading(false));
 				return response;
 			})

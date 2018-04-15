@@ -2,7 +2,7 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { listFetchData } from "../actions/listActions";
+import { listFetchData } from "../actions/list.actions";
 import styles from "./AppContainer.scss";
 import Table from "../components/Table";
 

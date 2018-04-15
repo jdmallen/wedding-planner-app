@@ -21,8 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\components\" />
-    <Folder Include="ClientApp\constants\" />
     <Folder Include="ClientApp\middleware\" />
     <Folder Include="ClientApp\redux\" />
     <Folder Include="Models\" />

@@ -12,11 +12,11 @@ const Table = props => (
 		</thead>
 		<tbody>
 			{
-				props.list.map((row, index) => (
-					<tr key={index}>
+				props.list.map(row => (
+					<tr key={row.id}>
 						<td>{row.id}</td>
 						<td>{row.name}</td>
-						<td>{row.isAwesome}</td>
+						<td>{row.isAwesome ? "Yep!" : "Nope."}</td>
 						<td>{new Date(row.createdAt * 1000).toISOString()}</td>
 					</tr>
 				))

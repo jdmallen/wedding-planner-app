@@ -16,7 +16,7 @@ using WeddingPlanner.Models.Entities;
 
 namespace WeddingPlanner.Web.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/account")]
 	public class ApiAccountController : Controller
 	{
 		private readonly IJwtTokenFactory _jwtTokenFactory;
