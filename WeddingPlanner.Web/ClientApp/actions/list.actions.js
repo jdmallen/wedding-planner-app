@@ -22,16 +22,6 @@ export function listFetchDataSuccess(list) {
 	};
 }
 
-export function errorAfterFiveSeconds() {
-	// We return a function instead of an action object
-	return (dispatch) => {
-		setTimeout(() => {
-			// This function is able to dispatch other action creators
-			dispatch(listHasErrored(true));
-		}, 5000);
-	};
-}
-
 export function listFetchData(url) {
 	return (dispatch) => {
 		dispatch(listIsLoading(true));

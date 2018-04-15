@@ -6,6 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\fonts\**" />
+    <Compile Remove="wwwroot\img\**" />
+    <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="wwwroot\fonts\**" />
+    <Content Remove="wwwroot\img\**" />
+    <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="wwwroot\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\img\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="wwwroot\fonts\**" />
+    <None Remove="wwwroot\img\**" />
+    <None Remove="wwwroot\lib\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\actions\.gitkeep" />
     <None Remove="ClientApp\components\.gitkeep" />
     <None Remove="ClientApp\constants\.gitkeep" />
@@ -27,9 +42,6 @@
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\css\" />
-    <Folder Include="wwwroot\lib\" />
-    <Folder Include="wwwroot\fonts\" />
-    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
   <ItemGroup>

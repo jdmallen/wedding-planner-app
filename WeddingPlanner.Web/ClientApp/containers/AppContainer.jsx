@@ -16,12 +16,8 @@ class App extends Component {
 		return (
 			<div className={styles.app}>
 				<header className={styles.appHeader}>
-					<img src="img/logo.svg" className={styles.appLogo} alt="logo" />
-					<h1 className={styles.appTitle}>Welcome to React</h1>
+					<h1 className={styles.appTitle}>Kristen & Jesse</h1>
 				</header>
-				<p className={styles.appIntro}>
-					Symbols yeah: <FontAwesomeIcon icon="user" />
-				</p>
 				<Table list={this.props.list} />
 			</div>
 		);

@@ -5,6 +5,9 @@ import fontawesome from "@fortawesome/fontawesome";
 import { faUser } from "@fortawesome/fontawesome-free-solid";
 import configureStore from "./store/configureStore";
 import App from "./containers/AppContainer";
+import { getBrowserInfo } from "./helpers";
+
+getBrowserInfo();
 
 fontawesome.library.add(faUser);
 

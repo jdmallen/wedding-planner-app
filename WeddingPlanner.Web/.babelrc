@@ -1,4 +1,4 @@
 {
 	"plugins": ["transform-object-rest-spread"],
-	"presets": [["env", { "targets": { "browsers": ["last 2 years"] } }], "react"]
+	"presets": [["env", { "targets": { "browsers": ["defaults"] } }], "react"]
 }
