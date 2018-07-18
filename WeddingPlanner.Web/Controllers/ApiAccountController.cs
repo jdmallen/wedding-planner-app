@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Dtos;
 using WeddingPlanner.Models.Entities;
+using WeddingPlanner.Models.Entities.Identity;
 
 namespace WeddingPlanner.Web.Controllers
 {
@@ -23,20 +24,17 @@ namespace WeddingPlanner.Web.Controllers
 		private readonly Settings _settings;
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly UserManager<AppUser> _userManager;
-		private readonly WpIdentityContext _identityContext;
 
 		public ApiAccountController(
 			IJwtTokenFactory jwtTokenFactory,
 			Settings settings, 
 			SignInManager<AppUser> signInManager, 
-			UserManager<AppUser> userManager,
-			WpIdentityContext identityContext)
+			UserManager<AppUser> userManager)
 		{
 			_jwtTokenFactory = jwtTokenFactory;
 			_settings = settings;
 			_signInManager = signInManager;
 			_userManager = userManager;
-			_identityContext = identityContext;
 		}
 
 		[HttpGet]

@@ -20,8 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Constants\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />
-    <ProjectReference Include="..\WeddingPlanner.Models\WeddingPlanner.Models.csproj" />
   </ItemGroup>
 
 </Project>

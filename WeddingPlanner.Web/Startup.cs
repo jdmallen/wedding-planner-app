@@ -18,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using WeddingPlanner.DataAccess.Config;
-using WeddingPlanner.Models.Entities;
+using WeddingPlanner.Models.Entities.Identity;
 
 namespace WeddingPlanner.Web
 {
@@ -69,7 +69,8 @@ namespace WeddingPlanner.Web
 				Server = settings.DbConnectionServer,
 				Database = "wedding_planner",
 				UserID = settings.DbConnectionLogin,
-				Password = settings.DbConnectionPassword
+				Password = settings.DbConnectionPassword,
+				OldGuids = true
 			};
 
 			services.AddDbContextPool<WpDbContext>(
@@ -79,13 +80,9 @@ namespace WeddingPlanner.Web
 					{
 						sqlServerOptions.UnicodeCharSet(CharSet.Utf8mb4);
 						sqlServerOptions.EnableRetryOnFailure(5);
-						sqlServerOptions.ExecutionStrategy(
-							dependencies
-								=> new MySqlRetryingExecutionStrategy(dependencies));
 					}));
 
-			services.AddCustomIdentity<WpIdentityContext, AppUser, AppRole>(
-				mySqlConnectionStringBuilder.ToString(),
+			services.AddCustomIdentity<WpDbContext, AppUser, AppRole>(
 				options =>
 				{
 					options.Password.RequireDigit = false;
@@ -146,7 +143,6 @@ namespace WeddingPlanner.Web
 			IApplicationBuilder app,
 			IHostingEnvironment env,
 			ILoggerFactory loggerFactory,
-			WpIdentityContext identityContext,
 			WpDbContext dbContext)
 		{
 			if (env.IsDevelopment())
@@ -175,7 +171,6 @@ namespace WeddingPlanner.Web
 						});
 				});
 
-			identityContext.Database.EnsureCreated();
 			dbContext.Database.EnsureCreated();
 		}
 	}
