@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using JDMallen.Toolbox.Extensions;
@@ -16,6 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using MySql.Data.MySqlClient;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Entities;
 
@@ -34,76 +35,92 @@ namespace WeddingPlanner.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
-			var oAuthSettings = Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
+			var oAuthSettings =
+				Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
 #if DEBUG
 			settings.JwtSecretKey = Configuration[nameof(settings.JwtSecretKey)];
-			settings.DbConnectionPassword = Configuration[nameof(settings.DbConnectionPassword)];
-			oAuthSettings.GitHubClientSecret = Configuration[nameof(oAuthSettings.GitHubClientSecret)];
-			oAuthSettings.GoogleClientSecret = Configuration[nameof(oAuthSettings.GoogleClientSecret)];
+			settings.DbConnectionPassword =
+				Configuration[nameof(settings.DbConnectionPassword)];
+			oAuthSettings.GitHubClientSecret =
+				Configuration[nameof(oAuthSettings.GitHubClientSecret)];
+			oAuthSettings.GoogleClientSecret =
+				Configuration[nameof(oAuthSettings.GoogleClientSecret)];
 #endif
 			services.AddSingleton(settings);
 
-			var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
+			var signingKey =
+				new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
 
-			services.Configure<JwtOptions>(options =>
-			{
-				options.Audience = settings.JwtAudience;
-				options.Issuer = settings.JwtIssuer;
-				options.ValidForSpan = TimeSpan.FromMinutes(settings.JwtExpireMinutes);
-				options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-			});
+			services.Configure<JwtOptions>(
+				options =>
+				{
+					options.Audience = settings.JwtAudience;
+					options.Issuer = settings.JwtIssuer;
+					options.ValidForSpan = TimeSpan.FromMinutes(settings.JwtExpireMinutes);
+					options.SigningCredentials = new SigningCredentials(
+						signingKey,
+						SecurityAlgorithms.HmacSha256);
+				});
 
 			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
 
-			var builder = new SqlConnectionStringBuilder
+			var mySqlConnectionStringBuilder = new MySqlConnectionStringBuilder
 			{
-				DataSource = settings.DbConnectionServer,
-				InitialCatalog = "WeddingPlanner",
+				Server = settings.DbConnectionServer,
+				Database = "wedding_planner",
 				UserID = settings.DbConnectionLogin,
 				Password = settings.DbConnectionPassword
 			};
 
-			services.AddDbContext<WpDbContext>(contextOptions => contextOptions.UseSqlServer(
-													builder.ToString(),
-													sqlServerOptions =>
-													{
-														sqlServerOptions.UseRowNumberForPaging(false);
-														sqlServerOptions.EnableRetryOnFailure(5);
-													}));
+			services.AddDbContextPool<WpDbContext>(
+				contextOptions => contextOptions.UseMySql(
+					mySqlConnectionStringBuilder.ToString(),
+					sqlServerOptions =>
+					{
+						sqlServerOptions.UnicodeCharSet(CharSet.Utf8mb4);
+						sqlServerOptions.EnableRetryOnFailure(5);
+						sqlServerOptions.ExecutionStrategy(
+							dependencies
+								=> new MySqlRetryingExecutionStrategy(dependencies));
+					}));
 
-			services.AddCustomIdentity<WpIdentityContext, AppUser, AppRole>(builder.ToString(),
-																			options =>
-																			{
-																				options.Password.RequireDigit = false;
-																				options.Password.RequireLowercase = false;
-																				options.Password.RequireNonAlphanumeric = false;
-																				options.Password.RequireUppercase = false;
-																				options.Password.RequiredLength = 2;
-																				options.Password.RequiredUniqueChars = 1;
-																			});
+			services.AddCustomIdentity<WpIdentityContext, AppUser, AppRole>(
+				mySqlConnectionStringBuilder.ToString(),
+				options =>
+				{
+					options.Password.RequireDigit = false;
+					options.Password.RequireLowercase = false;
+					options.Password.RequireNonAlphanumeric = false;
+					options.Password.RequireUppercase = false;
+					options.Password.RequiredLength = 2;
+					options.Password.RequiredUniqueChars = 1;
+				});
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-			services.AddAuthentication(options =>
-					{
-						options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-						options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-						options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-					})
-					.AddJwtBearer(config =>
-					{
-						config.RequireHttpsMetadata = true;
-						config.SaveToken = true;
-						config.TokenValidationParameters = new TokenValidationParameters
+			services.AddAuthentication(
+						options =>
 						{
-							ValidIssuer = settings.JwtIssuer,
-							ValidAudience = settings.JwtIssuer,
-							ValidateIssuerSigningKey = true,
-							IssuerSigningKey = signingKey,
-							RequireExpirationTime = true,
-							ClockSkew = TimeSpan.Zero
-						};
-					})
+							options.DefaultAuthenticateScheme =
+								JwtBearerDefaults.AuthenticationScheme;
+							options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+							options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+						})
+					.AddJwtBearer(
+						config =>
+						{
+							config.RequireHttpsMetadata = true;
+							config.SaveToken = true;
+							config.TokenValidationParameters = new TokenValidationParameters
+							{
+								ValidIssuer = settings.JwtIssuer,
+								ValidAudience = settings.JwtIssuer,
+								ValidateIssuerSigningKey = true,
+								IssuerSigningKey = signingKey,
+								RequireExpirationTime = true,
+								ClockSkew = TimeSpan.Zero
+							};
+						})
 					.AddOAuthGitHub(oAuthSettings)
 					.AddOAuthGoogle(oAuthSettings);
 
@@ -143,19 +160,20 @@ namespace WeddingPlanner.Web
 
 			app.UseStaticFiles("");
 
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default", 
-					template: "{controller=BaseView}/{action=Index}/{id?}");
-				routes.MapSpaFallbackRoute(
-					name: "spa-fallback",
-					defaults: new
-					{
-						controller = "BaseView",
-						action = "Index"
-					});
-			});
+			app.UseMvc(
+				routes =>
+				{
+					routes.MapRoute(
+						name: "default",
+						template: "{controller=BaseView}/{action=Index}/{id?}");
+					routes.MapSpaFallbackRoute(
+						name: "spa-fallback",
+						defaults: new
+						{
+							controller = "BaseView",
+							action = "Index"
+						});
+				});
 
 			identityContext.Database.EnsureCreated();
 			dbContext.Database.EnsureCreated();
