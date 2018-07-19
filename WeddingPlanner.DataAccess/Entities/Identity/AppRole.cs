@@ -34,5 +34,7 @@ namespace WeddingPlanner.Models.Entities.Identity
 						.IsRequired();
 				});
 		}
+
+		public string IdText => Id.ToString();
 	}
 }
