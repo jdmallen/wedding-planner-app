@@ -11,7 +11,7 @@ namespace WeddingPlanner.Models.Entities.Identity
 	{
 		public new Guid Id { get; set; }
 
-		public string IdText { get; }
+		public string IdText => Id.ToString();
 
 		[NotMapped]
 		public MiniGuid ShortId

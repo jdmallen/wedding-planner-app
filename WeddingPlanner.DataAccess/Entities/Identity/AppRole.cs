@@ -21,8 +21,8 @@ namespace WeddingPlanner.Models.Entities.Identity
 					ar.ToTable("AspNetRoles");
 					ar.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
 
-					ar.Property(r => r.Name).HasMaxLength(256);
-					ar.Property(r => r.NormalizedName).HasMaxLength(256);
+					ar.Property(r => r.Name).HasMaxLength(191);
+					ar.Property(r => r.NormalizedName).HasMaxLength(191);
 
 					ar.HasMany<AppUserRole>()
 						.WithOne()

@@ -76,10 +76,10 @@ namespace WeddingPlanner.Web
 			services.AddDbContextPool<WpDbContext>(
 				contextOptions => contextOptions.UseMySql(
 					mySqlConnectionStringBuilder.ToString(),
-					sqlServerOptions =>
+					mySqlOptions =>
 					{
-						sqlServerOptions.UnicodeCharSet(CharSet.Utf8mb4);
-						sqlServerOptions.EnableRetryOnFailure(5);
+						mySqlOptions.UnicodeCharSet(CharSet.Utf8mb4);
+						mySqlOptions.EnableRetryOnFailure(5);
 					}));
 
 			services.AddCustomIdentity<WpDbContext, AppUser, AppRole>(

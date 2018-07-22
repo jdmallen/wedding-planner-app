@@ -12,7 +12,10 @@ namespace WeddingPlanner.DataAccess.Entities
 
 		public override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			throw new NotImplementedException();
+			modelBuilder.Entity<Invitation>(i => {
+				i.HasKey(x => x.Id);
+				i.HasOne(x => x.InvitationType).WithMany().HasForeignKey(x => x.InvitationTypeId);
+			});
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +12,12 @@ namespace WeddingPlanner.Models.Entities.Identity
 
 		public string IdText => Id.ToString();
 
-		public MiniGuid ShortId { get; set; }
+		[NotMapped]
+		public MiniGuid ShortId
+		{
+			get => MiniGuid.Encode(Id);
+			set => Id = MiniGuid.Decode(value);
+		}
 
 		public DateTime DateCreated { get; set; }
 
