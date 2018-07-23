@@ -21,9 +21,9 @@ namespace WeddingPlanner.Models.Entities.Identity
 				au =>
 				{
 					au.HasMany<AppUserRole>()
-					.WithOne()
-					.HasForeignKey(ur => ur.UserId)
-					.IsRequired();
+						.WithOne()
+						.HasForeignKey(ur => ur.UserId)
+						.IsRequired();
 				});
 		}
 

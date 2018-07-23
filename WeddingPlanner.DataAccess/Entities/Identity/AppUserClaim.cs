@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Structs;
@@ -8,6 +9,7 @@ namespace WeddingPlanner.Models.Entities.Identity
 {
 	public class AppUserClaim : IdentityUserClaim<Guid>, IEntityModel<Guid>
 	{
+		[Key]
 		public new Guid Id { get; set; }
 
 		public string IdText => Id.ToString();

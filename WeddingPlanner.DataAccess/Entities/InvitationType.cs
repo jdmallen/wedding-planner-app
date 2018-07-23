@@ -12,7 +12,6 @@ namespace WeddingPlanner.DataAccess.Entities
 		public override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<InvitationType>(it => {
-				it.HasKey(x => x.Id);
 			});
 		}
 	}

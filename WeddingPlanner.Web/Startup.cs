@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Text;
 using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Factories;
+using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -170,8 +172,13 @@ namespace WeddingPlanner.Web
 							action = "Index"
 						});
 				});
-
-			dbContext.Database.EnsureCreated();
+#if DEBUG
+			//dbContext.Model.GetEntityTypes().ToList().ForEach(et => {
+			//	var tableName = et.GetAnnotations().First(x => x.Name == "Relational:TableName").Value;
+			//	dbContext.Database.ExecuteSqlCommand($"DROP TABLE `{tableName}`;");
+			//});
+			//dbContext.Database.EnsureCreated();
+#endif
 		}
 	}
 }

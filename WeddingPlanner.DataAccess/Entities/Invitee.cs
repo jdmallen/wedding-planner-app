@@ -4,24 +4,22 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WeddingPlanner.DataAccess.Entities
 {
-	public class Invitation : MySqlComplexEntityModel<Guid>
+	public class Invitee : MySqlComplexEntityModel<Guid>
 	{
-		public string EnvelopeAddressee { get; set; }
-
-		public Guid InvitationTypeId { get; set; }
+		public Guid InvitationId { get; set; }
 
 		public Guid AddressId { get; set; }
 
-		public virtual Address Address { get; set; }
+		public virtual Invitation Invitation { get; set; }
 
-		public virtual InvitationType InvitationType { get; set; }
+		public virtual Address Address { get; set; }
 
 		public override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			modelBuilder.Entity<Invitation>(i => {
-				i.HasOne(x => x.InvitationType)
+			modelBuilder.Entity<Invitee>(i => {
+				i.HasOne(x => x.Invitation)
 					.WithMany()
-					.HasForeignKey(x => x.InvitationTypeId);
+					.HasForeignKey(x => x.InvitationId);
 				i.HasOne(x => x.Address)
 					.WithMany()
 					.HasForeignKey(x => x.AddressId);

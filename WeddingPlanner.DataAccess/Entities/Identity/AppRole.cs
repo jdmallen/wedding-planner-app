@@ -16,7 +16,6 @@ namespace WeddingPlanner.Models.Entities.Identity
 			modelBuilder.Entity<AppRole>(
 				ar =>
 				{
-					ar.HasKey(r => r.Id);
 					ar.HasIndex(r => r.NormalizedName).HasName("RoleNameIndex").IsUnique();
 					ar.ToTable("AspNetRoles");
 					ar.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();

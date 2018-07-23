@@ -29,7 +29,6 @@ namespace WeddingPlanner.Models.Entities.Identity
 			modelBuilder.Entity<AppRoleClaim>(
 				arc =>
 				{
-					arc.HasKey(rc => rc.Id);
 					arc.ToTable("AspNetRoleClaims");
 				});
 		}
