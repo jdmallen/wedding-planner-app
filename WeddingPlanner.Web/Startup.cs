@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -173,11 +174,38 @@ namespace WeddingPlanner.Web
 						});
 				});
 #if DEBUG
-			//dbContext.Model.GetEntityTypes().ToList().ForEach(et => {
-			//	var tableName = et.GetAnnotations().First(x => x.Name == "Relational:TableName").Value;
-			//	dbContext.Database.ExecuteSqlCommand($"DROP TABLE `{tableName}`;");
-			//});
-			//dbContext.Database.EnsureCreated();
+			var conn = dbContext.Database.GetDbConnection();
+			conn.Open();
+			dbContext.Model.GetEntityTypes()
+				.ToList()
+				.ForEach(
+					et =>
+					{
+						bool tableExists;
+						var tableName =
+							et.GetAnnotations().FirstOrDefault(x => x.Name == "Relational:TableName")
+								?.Value.ToString()
+								.ToLowerInvariant()
+							?? et.ClrType.Name.ToLowerInvariant();
+						using (var cmd = conn.CreateCommand())
+						{
+							cmd.CommandText =
+								$"SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = \'{dbContext.Database.GetDbConnection().Database}\' AND TABLE_NAME = \'{tableName.ToLowerInvariant()}\';";
+							cmd.CommandType = CommandType.Text;
+							using (var reader = cmd.ExecuteReader())
+							{
+								reader.Read();
+								tableExists = reader.GetInt32(0) > 0;
+								reader.Close();
+							}
+						}
+						if (!tableExists)
+							return;
+						var dropCommand = $"SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;DROP TABLE `{tableName.ToLowerInvariant()}`;SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;";
+						dbContext.Database.ExecuteSqlCommand(dropCommand);
+					});
+			conn.Close();
+			dbContext.Database.EnsureCreated();
 #endif
 		}
 	}
