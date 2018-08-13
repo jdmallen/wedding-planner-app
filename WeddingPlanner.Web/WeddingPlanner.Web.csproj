@@ -61,9 +61,14 @@
     <ProjectReference Include="..\WeddingPlanner.Service\WeddingPlanner.Service.csproj" />
   </ItemGroup>
 
-	<Target Name="PrecompileScript" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' != 'Debug' ">
-		<Exec Command="npm install" />
-		<Exec Command="npm run build" />
+	<Target Name="BuildDevJS" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Debug' ">
+		<Exec Command="yarn" />
+		<Exec Command="yarn build" />
+	</Target>
+
+	<Target Name="BuildProdJS" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' != 'Debug' ">
+		<Exec Command="yarn" />
+		<Exec Command="yarn build-min" />
 	</Target>
 
 </Project>

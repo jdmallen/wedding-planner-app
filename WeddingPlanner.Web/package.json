@@ -64,6 +64,6 @@
 		"build": "webpack --debug --mode \"development\" --config webpack.config.js",
 		"build-min": "webpack --optimize-minimize --config webpack.config.js",
 		"precommit": "lint-staged",
-		"watch": "webpack --w --config webpack.config.babel.js"
+		"watch": "webpack --w --config webpack.config.js"
 	}
 }

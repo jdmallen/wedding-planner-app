@@ -7,13 +7,24 @@ const APP_DIR = path.resolve(__dirname, "ClientApp");
 
 const isProd =
 	process.argv.indexOf("--optimize-minimize") > -1 ||
-	process.argv.indexOf("-p") > -1;
+		process.argv.indexOf("-p") > -1;
 
 module.exports = {
 	devtool: isProd ? "" : "source-map",
 	entry: ["babel-polyfill", `${APP_DIR}/index.jsx`],
 	module: {
 		rules: [
+			{
+				test: /\.(png|jpg|gif)$/i,
+				use: [
+					{
+						loader: "url-loader",
+						options: {
+							limit: 8192
+						}
+					}
+				]
+			},
 			{
 				test: /\.(js|jsx)$/,
 				use: [

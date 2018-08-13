@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { listFetchData } from "../actions/list.actions";
 import styles from "./AppContainer.scss";
+import Entry from "../components/Entry";
 import Table from "../components/Table";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
 				<header className={styles.appHeader}>
 					<h1 className={styles.appTitle}>Kristen & Jesse</h1>
 				</header>
+				<Entry />
 				<Table list={this.props.list} />
 			</div>
 		);
