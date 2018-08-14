@@ -6,6 +6,8 @@ import { faUser } from "@fortawesome/fontawesome-free-solid";
 import configureStore from "./store/configureStore";
 import App from "./containers/AppContainer";
 import { getBrowserInfo } from "./helpers";
+import "./index.scss";
+import "../Styles/customBootstrap.scss";
 
 getBrowserInfo();
 

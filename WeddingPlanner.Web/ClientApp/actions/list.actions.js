@@ -1,5 +1,5 @@
 import axios from "axios";
-import listConstants from "../constants/list.constants";
+import { listConstants } from "../constants";
 
 export function listHasErrored(boolValue) {
 	return {

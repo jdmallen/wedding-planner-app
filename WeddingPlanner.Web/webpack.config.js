@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const BUILD_DIR = path.resolve(__dirname, "wwwroot");
 const APP_DIR = path.resolve(__dirname, "ClientApp");
+const STYLES_DIR = path.resolve(__dirname, "Styles");
 
 const isProd =
 	process.argv.indexOf("--optimize-minimize") > -1 ||
@@ -35,6 +36,7 @@ module.exports = {
 			},
 			{
 				test: /\.scss$/,
+				include: APP_DIR,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
 					use: [
@@ -43,6 +45,22 @@ module.exports = {
 							options: {
 								modules: true,
 								localIdentName: "[name]__[local]___[hash:base64:5]"
+							}
+						},
+						"sass-loader"
+					]
+				})
+			},
+			{
+				test: /\.scss$/,
+				include: STYLES_DIR,
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: [
+						{
+							loader: "css-loader",
+							options: {
+								sourceMap: true
 							}
 						},
 						"sass-loader"

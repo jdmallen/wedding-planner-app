@@ -1,7 +1,9 @@
 ﻿/* eslint prefer-destructuring: 0 */
 
 export function addWarning() {
-	document.getElementById("browser-warning").innerHTML =
+	const warning = document.getElementById("browser-warning");
+	warning.display = "block";
+	warning.innerHTML =
 		"You are using an <strong>outdated</strong> and " +
 		"<strong>unsupported</strong> browser. " +
 		"Please <a href=\"https://browsehappy.com/\">upgrade " +

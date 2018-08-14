@@ -2,7 +2,21 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import {
+	Collapse,
+	Navbar,
+	NavbarToggler,
+	NavbarBrand,
+	Nav,
+	NavItem,
+	NavLink,
+	UncontrolledDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem,
+	} from "reactstrap";
 import { listFetchData } from "../actions/list.actions";
+import toggleNav from "../actions/ui.actions";
 import styles from "./AppContainer.scss";
 import Entry from "../components/Entry";
 import Table from "../components/Table";
@@ -16,11 +30,38 @@ class App extends Component {
 	render() {
 		return (
 			<div className={styles.app}>
-				<header className={styles.appHeader}>
-					<h1 className={styles.appTitle}>Kristen & Jesse</h1>
-				</header>
+				<Navbar color="black" dark expand="md">
+					<NavbarBrand href="/">Kristen & Jesse</NavbarBrand>
+					<NavbarToggler onClick={this.props.toggleNav()} />
+					<Collapse isOpen={this.props.isOpen} navbar>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<NavLink href="/components/">Components</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+							</NavItem>
+							<UncontrolledDropdown nav inNavbar>
+								<DropdownToggle nav caret>
+									Options
+								</DropdownToggle>
+								<DropdownMenu right>
+									<DropdownItem>
+										Option 1
+									</DropdownItem>
+									<DropdownItem>
+										Option 2
+									</DropdownItem>
+									<DropdownItem divider />
+									<DropdownItem>
+										Reset
+									</DropdownItem>
+								</DropdownMenu>
+							</UncontrolledDropdown>
+						</Nav>
+					</Collapse>
+				</Navbar>
 				<Entry />
-				<Table list={this.props.list} />
 			</div>
 		);
 	}
@@ -31,6 +72,7 @@ App.propTypes = {
 	hasErrored: PropTypes.bool,
 	isLoading: PropTypes.bool,
 	fetchData: PropTypes.func.isRequired,
+	toggleNav: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
@@ -47,6 +89,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	fetchData: url => dispatch(listFetchData(url)),
+	toggleNav: val => dispatch(toggleNav()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
