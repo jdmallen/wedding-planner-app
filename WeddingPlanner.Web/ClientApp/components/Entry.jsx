@@ -3,10 +3,7 @@ import styles from "./Entry.scss";
 import heartImgSrc from "../../Images/crossstitch-heart.png";
 
 const Entry = props => (
-	<div className={styles.entry}>
-		<div>
-			<img src={heartImgSrc} className={styles.heartImage} alt="Cross-stitched red heart." />
-		</div>
+	<div className={styles.heartImageDiv} style={{ background: `center / contain no-repeat url(${heartImgSrc})` }}>
 		<div className={styles.kAndJOverlay}>K&nbsp;&amp;&nbsp;J</div>
 	</div>
 );

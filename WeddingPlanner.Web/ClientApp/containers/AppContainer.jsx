@@ -15,8 +15,8 @@ import {
 	DropdownMenu,
 	DropdownItem,
 	} from "reactstrap";
-import { listFetchData } from "../actions/list.actions";
-import toggleNav from "../actions/ui.actions";
+import { listFetchData } from "../ducks/list";
+import { toggleNav } from "../ducks/ui";
 import styles from "./AppContainer.scss";
 import Entry from "../components/Entry";
 import Table from "../components/Table";
@@ -27,12 +27,16 @@ class App extends Component {
 			"/api/v1/list");
 	}
 
+	toggle() {
+		this.props.toggleNav(!this.props.isOpen);
+	}
+
 	render() {
 		return (
 			<div className={styles.app}>
-				<Navbar color="black" dark expand="md">
+				<Navbar color="black" fixed dark expand="md">
 					<NavbarBrand href="/">Kristen & Jesse</NavbarBrand>
-					<NavbarToggler onClick={this.props.toggleNav()} />
+					<NavbarToggler onClick={() => this.toggle()} />
 					<Collapse isOpen={this.props.isOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
@@ -71,6 +75,7 @@ App.propTypes = {
 	list: PropTypes.array,
 	hasErrored: PropTypes.bool,
 	isLoading: PropTypes.bool,
+	isOpen: PropTypes.bool,
 	fetchData: PropTypes.func.isRequired,
 	toggleNav: PropTypes.func.isRequired,
 };
@@ -79,17 +84,19 @@ App.defaultProps = {
 	list: [],
 	hasErrored: false,
 	isLoading: false,
+	isOpen: false,
 };
 
 const mapStateToProps = state => ({
-	list: state.listReducer.list,
-	hasErrored: state.listReducer.hasErrored,
-	isLoading: state.listReducer.isLoading,
+	list: state.list.list,
+	hasErrored: state.list.hasErrored,
+	isLoading: state.list.isLoading,
+	isOpen: state.ui.isOpen,
 });
 
 const mapDispatchToProps = dispatch => ({
 	fetchData: url => dispatch(listFetchData(url)),
-	toggleNav: val => dispatch(toggleNav()),
+	toggleNav: isOpen => dispatch(toggleNav(isOpen)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

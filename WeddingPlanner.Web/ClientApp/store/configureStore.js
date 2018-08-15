@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import { createLogger } from "redux-logger";
-import rootReducer from "../reducers";
+import * as reducers from "../ducks";
 
 const middleware = [thunk];
 
@@ -9,10 +9,10 @@ if (process.env.ASPNETCORE_ENVIRONMENT !== "Production") {
 	middleware.push(createLogger());
 }
 
-export default function(initialState) {
-	return createStore(
-		rootReducer,
-		initialState,
-		applyMiddleware(...middleware)
-	);
-}
+const rootReducer = combineReducers(reducers);
+
+export default initialState => createStore(
+	rootReducer,
+	initialState,
+	applyMiddleware(...middleware)
+);

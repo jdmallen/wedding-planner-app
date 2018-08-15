@@ -22,12 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\actions\.gitkeep" />
     <None Remove="ClientApp\components\.gitkeep" />
-    <None Remove="ClientApp\constants\.gitkeep" />
     <None Remove="ClientApp\containers\.gitkeep" />
     <None Remove="ClientApp\middleware\.gitkeep" />
-    <None Remove="ClientApp\reducers\.gitkeep" />
     <None Remove="ClientApp\redux\.gitkeep" />
     <None Remove="ClientApp\store\.gitkeep" />
   </ItemGroup>

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "url-loader": "^1.0.1"
+  }
+}
