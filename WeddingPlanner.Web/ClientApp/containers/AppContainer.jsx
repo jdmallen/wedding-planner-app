@@ -1,6 +1,7 @@
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Switch, Route, Link, NavLink as RouterNavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
 	Collapse,
@@ -19,7 +20,7 @@ import { listFetchData } from "../ducks/list";
 import { toggleNav } from "../ducks/ui";
 import styles from "./AppContainer.scss";
 import Entry from "../components/Entry";
-import Table from "../components/Table";
+import Login from "../components/Login";
 
 class App extends Component {
 	componentDidMount() {
@@ -35,37 +36,20 @@ class App extends Component {
 		return (
 			<div className={styles.app}>
 				<Navbar color="black" fixed dark expand="md">
-					<NavbarBrand href="/">Kristen & Jesse</NavbarBrand>
+					<NavbarBrand tag={Link} to="/">Kristen & Jesse</NavbarBrand>
 					<NavbarToggler onClick={() => this.toggle()} />
 					<Collapse isOpen={this.props.isOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink href="/components/">Components</NavLink>
+								<NavLink tag={RouterNavLink} to="/login">Login</NavLink>
 							</NavItem>
-							<NavItem>
-								<NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-							</NavItem>
-							<UncontrolledDropdown nav inNavbar>
-								<DropdownToggle nav caret>
-									Options
-								</DropdownToggle>
-								<DropdownMenu right>
-									<DropdownItem>
-										Option 1
-									</DropdownItem>
-									<DropdownItem>
-										Option 2
-									</DropdownItem>
-									<DropdownItem divider />
-									<DropdownItem>
-										Reset
-									</DropdownItem>
-								</DropdownMenu>
-							</UncontrolledDropdown>
 						</Nav>
 					</Collapse>
 				</Navbar>
-				<Entry />
+				<Switch>
+					<Route exact path="/" component={Entry} />
+					<Route path="/login" component={Login} />
+				</Switch>
 			</div>
 		);
 	}

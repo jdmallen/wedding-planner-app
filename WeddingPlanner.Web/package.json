@@ -12,6 +12,7 @@
 		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"babel-polyfill": "^6.26.0",
 		"bootstrap": "^4.1.3",
+		"history": "^4.7.2",
 		"lodash": "^4.17.5",
 		"material-ui": "^0.20.0",
 		"prop-types": "^15.6.1",
@@ -19,6 +20,8 @@
 		"react-dom": "^16.2.0",
 		"react-popper": "^1.0.2",
 		"react-redux": "^5.0.7",
+		"react-router": "^4.3.1",
+		"react-router-dom": "^4.3.1",
 		"react-transition-group": "^2.4.0",
 		"reactstrap": "^6.3.1",
 		"redux": "^3.7.2",
@@ -68,6 +71,6 @@
 		"build": "webpack --debug --mode \"development\" --config webpack.config.js",
 		"build-min": "webpack --optimize-minimize --config webpack.config.js",
 		"precommit": "lint-staged",
-		"watch": "webpack --w --config webpack.config.js"
+		"watch": "webpack --w --mode \"development\" --config webpack.config.js"
 	}
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+import { Router, Route, IndexRoute } from "react-router";
+import createBrowserHistory from "history/createBrowserHistory";
 import fontawesome from "@fortawesome/fontawesome";
 import { faUser } from "@fortawesome/fontawesome-free-solid";
-import configureStore from "./store/configureStore";
+import store from "./store";
 import App from "./containers/AppContainer";
 import { getBrowserInfo } from "./helpers";
 import "./index.scss";
@@ -13,11 +15,19 @@ getBrowserInfo();
 
 fontawesome.library.add(faUser);
 
-const store = configureStore();
+const history = createBrowserHistory();
+
+const reduxStore = store();
+
+const router = (
+	<Provider store={reduxStore}>
+		<Router history={history}>
+			<Route path="/" component={App} />
+		</Router>
+	</Provider>
+);
 
 render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
+	router,
 	document.getElementById("root")
 );
