@@ -1,0 +1,53 @@
+﻿.formSignin {
+	text-align: center;
+	width: 100%;
+	padding: 15px;
+	margin-left: inherit !important;
+	margin-right: inherit !important;
+
+	h1 {
+		margin: 20px auto auto auto;
+	}
+
+	.checkbox {
+		font-weight: 400;
+	}
+
+	.form-control {
+		position: relative;
+		box-sizing: border-box;
+		height: auto;
+		padding: 10px;
+		font-size: 16px;
+	}
+
+	.form-control:focus {
+		z-index: 2;
+	}
+
+	input[type="email"] {
+		margin-bottom: -1px;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	input[type="password"] {
+		margin-bottom: 10px;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+
+.opalImgDiv {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40vmin;
+	margin: 10vmin;
+}
+
+.kAndJOverlay {
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 10vmin;
+	text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}

@@ -5,6 +5,7 @@ import { Switch, Route, Link, NavLink as RouterNavLink } from "react-router-dom"
 import PropTypes from "prop-types";
 import {
 	Collapse,
+	Container,
 	Navbar,
 	NavbarToggler,
 	NavbarBrand,
@@ -20,7 +21,7 @@ import { listFetchData } from "../ducks/list";
 import { toggleNav } from "../ducks/ui";
 import styles from "./AppContainer.scss";
 import Entry from "../components/Entry";
-import Login from "../components/Login";
+import Login from "../containers/LoginContainer";
 
 class App extends Component {
 	componentDidMount() {
@@ -35,7 +36,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className={styles.app}>
-				<Navbar color="black" fixed dark expand="md">
+				<Navbar color="black" dark expand="md">
 					<NavbarBrand tag={Link} to="/">Kristen & Jesse</NavbarBrand>
 					<NavbarToggler onClick={() => this.toggle()} />
 					<Collapse isOpen={this.props.isOpen} navbar>
@@ -46,10 +47,12 @@ class App extends Component {
 						</Nav>
 					</Collapse>
 				</Navbar>
-				<Switch>
-					<Route exact path="/" component={Entry} />
-					<Route path="/login" component={Login} />
-				</Switch>
+				<Container>
+					<Switch>
+						<Route exact path="/" component={Entry} />
+						<Route path="/login" component={Login} />
+					</Switch>
+				</Container>
 			</div>
 		);
 	}

@@ -1,20 +1,16 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
-.heartImage{
-	width: 100%;
-	height: auto;
-}
 .heartImageDiv {
 	display: flex;
 	margin: auto;
 	justify-content: center;
 	align-items: center;
 	height: 60vh;
-	width: 100vw;
 	padding-bottom: 5vh;
 }
+
 .kAndJOverlay {
 	font-family: 'Shadows Into Light', cursive;
-	font-size: 14vw;
+	font-size: 20vmin;
 	text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
 }

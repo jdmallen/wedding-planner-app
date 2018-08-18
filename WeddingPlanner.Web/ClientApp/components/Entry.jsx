@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import styles from "./Entry.scss";
-import heartImgSrc from "../../Images/crossstitch-heart.png";
+import heartImgSrc from "../../Images/crossstitch_heart.png";
 
 const Entry = props => (
 	<div className={styles.heartImageDiv} style={{ background: `center / contain no-repeat url(${heartImgSrc})` }}>
