@@ -75,9 +75,9 @@ module.exports = {
 	},
 	plugins: [
 		new ExtractTextPlugin("css/[name].css", { allChunks: true }),
-		new CleanWebpackPlugin([BUILD_DIR] + "/*.*"),
+		new CleanWebpackPlugin(`${BUILD_DIR}/*.*`),
 	],
 	resolve: {
-		extensions: [".js", ".jsx"]
+		extensions: [".js", ".jsx"],
 	},
 };

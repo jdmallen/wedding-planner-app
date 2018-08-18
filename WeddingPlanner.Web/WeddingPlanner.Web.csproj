@@ -25,7 +25,6 @@
     <None Remove="ClientApp\components\.gitkeep" />
     <None Remove="ClientApp\containers\.gitkeep" />
     <None Remove="ClientApp\middleware\.gitkeep" />
-    <None Remove="ClientApp\store\.gitkeep" />
   </ItemGroup>
 
   <ItemGroup>
