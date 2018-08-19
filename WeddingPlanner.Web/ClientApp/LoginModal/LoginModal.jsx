@@ -69,7 +69,10 @@ class LoginModal extends Component
 				toggle={() => this.toggleModal()}
 			>
 				<Form onSubmit={this.handleSubmit}>
-					<ModalHeader toggle={() => this.toggleModal()}>
+					<ModalHeader
+						toggle={() => this.toggleModal()}
+						className={styles.properModalTitle}
+					>
 						Please sign in
 					</ModalHeader>
 					<ModalBody>

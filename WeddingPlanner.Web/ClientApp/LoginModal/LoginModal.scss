@@ -1,4 +1,6 @@
-﻿.formSignin {
+﻿@import "../../Styles/customBootstrapVariables.scss";
+
+.formSignin {
 	text-align: center;
 	width: 100%;
 	padding: 15px;
@@ -50,4 +52,8 @@
 
 .closeMarginFormControl {
 	margin-bottom: 0 !important;
+}
+
+.properModalTitle {
+	color: $gray-900;
 }
