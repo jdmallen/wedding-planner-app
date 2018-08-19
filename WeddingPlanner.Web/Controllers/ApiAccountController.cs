@@ -10,9 +10,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.Models.Dtos;
-using WeddingPlanner.Models.Entities;
 using WeddingPlanner.Models.Entities.Identity;
 
 namespace WeddingPlanner.Web.Controllers
@@ -59,7 +57,7 @@ namespace WeddingPlanner.Web.Controllers
 			var result = await _userManager.PasswordValidators
 											.First(x => x.GetType() == typeof(CustomPasswordValidator<AppUser>))
 											.ValidateAsync(_userManager,
-															new AppUser()
+															new AppUser
 															{
 																UserName = request.Email,
 																Email = request.Email

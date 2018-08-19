@@ -5,8 +5,8 @@ import { Router, Route, IndexRoute } from "react-router";
 import fontawesome from "@fortawesome/fontawesome";
 import { faUser } from "@fortawesome/fontawesome-free-solid";
 import store from "./store";
-import App from "./containers/AppContainer";
-import { getBrowserInfo, history } from "./helpers";
+import App from "./MainApp/MainApp";
+import { getBrowserInfo, history } from "./_helpers";
 import "./index.scss";
 import "../Styles/customBootstrap.scss";
 

@@ -1,6 +1,6 @@
-﻿import { userService } from "../services";
+﻿import { userService } from "../_services";
 import { success as successAlert, error as errorAlert } from "./alert";
-import { history } from "../helpers";
+import { history } from "../_helpers";
 
 // Actions
 const REGISTER_REQUEST = "wedding-planner/user/REGISTER_REQUEST";

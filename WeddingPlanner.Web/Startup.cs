@@ -159,6 +159,8 @@ namespace WeddingPlanner.Web
 
 			app.UseStaticFiles("");
 
+			app.UseStatusCodePagesWithRedirects("/");
+
 			app.UseMvc(
 				routes =>
 				{

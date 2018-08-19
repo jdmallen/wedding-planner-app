@@ -11,7 +11,7 @@
 		"react/prop-types": [0],
 		"no-tabs": "off",
 		"no-mixed-spaces-and-tabs": "warn",
-		"jsx-a11y/label-has-for": [ 2, {
+		"jsx-a11y/label-has-for": [ "warn", {
 			"components": [ "Label" ],
 			"required": {
 				"some": [ "nesting", "id" ]

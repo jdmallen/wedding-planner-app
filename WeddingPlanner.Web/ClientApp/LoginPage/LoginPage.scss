@@ -9,10 +9,6 @@
 		margin: 20px auto auto auto;
 	}
 
-	.checkbox {
-		font-weight: 400;
-	}
-
 	.form-control {
 		position: relative;
 		box-sizing: border-box;
@@ -50,4 +46,8 @@
 	font-family: 'Shadows Into Light', cursive;
 	font-size: 10vmin;
 	text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}
+
+.closeMarginFormControl {
+	margin-bottom: 0 !important;
 }

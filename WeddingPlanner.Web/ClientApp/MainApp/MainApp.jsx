@@ -17,11 +17,11 @@ import {
 	DropdownMenu,
 	DropdownItem,
 	} from "reactstrap";
-import { listFetchData } from "../ducks/list";
-import { toggleNav } from "../ducks/ui";
-import styles from "./AppContainer.scss";
-import Entry from "../components/Entry";
-import Login from "../containers/LoginContainer";
+import { listFetchData } from "../_ducks/list";
+import { toggleNav } from "../_ducks/ui";
+import styles from "./MainApp.scss";
+import Entry from "../_components/Entry";
+import Login from "../LoginPage/LoginPage";
 
 class App extends Component {
 	componentDidMount() {

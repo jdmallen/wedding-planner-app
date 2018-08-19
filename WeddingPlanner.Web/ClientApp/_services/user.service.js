@@ -1,5 +1,5 @@
 ﻿import axios from "axios";
-import { authHeader, config } from "../helpers";
+import { authHeader, config } from "../_helpers";
 
 export function login(email, password) {
 	axios.post(`${config.apiUrl}/account/login`, {

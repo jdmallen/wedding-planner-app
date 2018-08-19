@@ -2,16 +2,39 @@
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
+	Button,
 	Col,
 	Container,
+	Form,
+	FormGroup,
+	FormText,
+	Input,
+	Label,
 	Row,
 	} from "reactstrap";
 import cn from "classnames";
-import styles from "./LoginContainer.scss";
+import { login } from "../_ducks/user.login";
+import styles from "./LoginPage.scss";
 import opalImgSrc from "../../Images/opal_circle_200.png";
 
 class Login extends Component {
 	componentDidMount() {
+	}
+
+	handleChange(e) {
+		const { name, value } = e.target;
+		this.setState({ [name]: value });
+	}
+
+	handleSubmit(e) {
+		e.preventDefault();
+
+		// this.setState({ submitted: true });
+		const { username, password } = this.state;
+		const { dispatch } = this.props;
+		if (username && password) {
+			dispatch(login(username, password));
+		}
 	}
 
 	render() {
@@ -23,20 +46,18 @@ class Login extends Component {
 					</div>
 				</Col>
 				<Col sm="6">
-					<form>
+					<Form onSubmit={this.handleSubmit}>
 						<h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-						<label htmlFor="inputEmail" className="sr-only">Email address</label>
-						<input id="inputEmail" className="form-control" placeholder="Email address" required="" type="email" />
-						<label htmlFor="inputPassword" className="sr-only">Password</label>
-						<input id="inputPassword" className="form-control" placeholder="Password" required="" type="password" />
-						<div className="checkbox mb-3">
-							<label htmlFor="rememberMe">
-								<input id="rememberMe" value="remember-me" type="checkbox" /> Remember me
-							</label>
-						</div>
-						<button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-						<p className="mt-5 mb-3 text-muted">© 2017-2018</p>
-					</form>
+						<FormGroup className={styles.closeMarginFormControl}>
+							<Label hidden for="inputEmail">Email</Label>
+							<Input id="inputEmail" name="email" placeholder="Email address" required type="email" onChange={e => this.handleChange(e)} />
+						</FormGroup>
+						<FormGroup className={styles.closeMarginFormControl}>
+							<Label hidden for="inputPassword">Password</Label>
+							<Input id="inputPassword" name="password" placeholder="Password" required type="password" onChange={e => this.handleChange(e)} />
+						</FormGroup>
+						<Button color="primary" type="submit">Sign in</Button>
+					</Form>
 				</Col>
 			</Row>
 		);
