@@ -1,7 +1,11 @@
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Switch, Route, Link, NavLink as RouterNavLink } from "react-router-dom";
+import {
+	Switch,
+	Route,
+	Link,
+	NavLink as RouterNavLink,
+} from "react-router-dom";
 import PropTypes from "prop-types";
 import {
 	Collapse,
@@ -12,25 +16,26 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-	UncontrolledDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
-	} from "reactstrap";
-import { listFetchData } from "../_ducks/list";
-import { toggleNav } from "../_ducks/ui";
+} from "reactstrap";
+import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Entry from "../_components/Entry";
-import Login from "../LoginPage/LoginPage";
+import LoginModal from "../LoginModal/LoginModal";
 
 class App extends Component {
 	componentDidMount() {
-		this.props.fetchData("https://5aae9a497389ab0014b7b953.mockapi.io" +
-			"/api/v1/list");
 	}
 
-	toggle() {
-		this.props.toggleNav(!this.props.isOpen);
+	toggleLoginModal() {
+		if (this.props.isModalOpen) {
+			this.props.closeModal();
+		} else {
+			this.props.openModal();
+		}
+	}
+
+	toggleNavbar() {
+		this.props.toggleNav(!this.props.isNavbarOpen);
 	}
 
 	render() {
@@ -38,19 +43,19 @@ class App extends Component {
 			<div className={styles.app}>
 				<Navbar color="black" dark expand="md">
 					<NavbarBrand tag={Link} to="/">Kristen & Jesse</NavbarBrand>
-					<NavbarToggler onClick={() => this.toggle()} />
-					<Collapse isOpen={this.props.isOpen} navbar>
+					<NavbarToggler onClick={() => this.toggleNavbar()} />
+					<Collapse isOpen={this.props.isNavbarOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink tag={RouterNavLink} to="/login">Login</NavLink>
+								<NavLink onClick={() => this.toggleLoginModal()}>Login</NavLink>
 							</NavItem>
 						</Nav>
 					</Collapse>
 				</Navbar>
 				<Container>
+					<LoginModal />
 					<Switch>
 						<Route exact path="/" component={Entry} />
-						<Route path="/login" component={Login} />
 					</Switch>
 				</Container>
 			</div>
@@ -59,31 +64,25 @@ class App extends Component {
 }
 
 App.propTypes = {
-	list: PropTypes.array,
-	hasErrored: PropTypes.bool,
-	isLoading: PropTypes.bool,
-	isOpen: PropTypes.bool,
-	fetchData: PropTypes.func.isRequired,
+	isModalOpen: PropTypes.bool,
+	isNavbarOpen: PropTypes.bool,
 	toggleNav: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
-	list: [],
-	hasErrored: false,
-	isLoading: false,
-	isOpen: false,
+	isModalOpen: false,
+	isNavbarOpen: false,
 };
 
 const mapStateToProps = state => ({
-	list: state.list.list,
-	hasErrored: state.list.hasErrored,
-	isLoading: state.list.isLoading,
-	isOpen: state.ui.isOpen,
+	isModalOpen: state.ui.isModalOpen,
+	isNavbarOpen: state.ui.isNavbarOpen,
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchData: url => dispatch(listFetchData(url)),
-	toggleNav: isOpen => dispatch(toggleNav(isOpen)),
+	toggleNav: isNavbarOpen => dispatch(toggleNav(isNavbarOpen)),
+	openModal: () => dispatch(openModal()),
+	closeModal: () => dispatch(openModal()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
