@@ -10,8 +10,10 @@ export default (state = {
 	hasErrored: false,
 	isLoading: false,
 	list: [],
-}, action) => {
-	switch (action.type) {
+}, action) =>
+{
+	switch (action.type)
+	{
 	case ERRORED:
 		return {
 			...state,
@@ -37,33 +39,39 @@ export default (state = {
 
 // Action Creators
 
-export function listHasErrored(boolValue) {
+export function listHasErrored(boolValue)
+{
 	return {
 		type: ERRORED,
 		payload: boolValue,
 	};
 }
 
-export function listIsLoading(boolValue) {
+export function listIsLoading(boolValue)
+{
 	return {
 		type: LOADING,
 		payload: boolValue,
 	};
 }
 
-export function listFetchDataSuccess(list) {
+export function listFetchDataSuccess(list)
+{
 	return {
 		type: FETCH_DATA_SUCCESS,
 		payload: list,
 	};
 }
 
-export function listFetchData(url) {
-	return (dispatch) => {
+export function listFetchData(url)
+{
+	return (dispatch) =>
+	{
 		dispatch(listIsLoading(true));
 
 		axios.get(url)
-			.then((response) => {
+			.then((response) =>
+			{
 				dispatch(listIsLoading(false));
 				return response;
 			})

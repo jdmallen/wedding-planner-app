@@ -1,6 +1,7 @@
 ﻿/* eslint prefer-destructuring: 0 */
 
-export function addWarning() {
+export function addWarning()
+{
 	const warning = document.getElementById("browser-warning");
 	warning.display = "block";
 	warning.innerHTML =
@@ -10,57 +11,75 @@ export function addWarning() {
 		"your browser</a> to improve your experience and security.";
 }
 
-export function getBrowserInfo() {
+export function getBrowserInfo()
+{
 	const browser = {};
 
-	if (/edge\/[0-9]{2}/i.test(navigator.userAgent)) {
+	if (/edge\/[0-9]{2}/i.test(navigator.userAgent))
+	{
 		browser.agent = "edge";
 		browser.majorVersion =
 			parseInt(/edge\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /edge\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-	} else if (/chrome\/[0-9]{2}/i.test(navigator.userAgent)) {
+	}
+	else if (/chrome\/[0-9]{2}/i.test(navigator.userAgent))
+	{
 		browser.agent = "chrome";
 		browser.majorVersion =
 			parseInt(/chrome\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /chrome\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-	} else if (/firefox\/[0-9]{2}/i.test(navigator.userAgent)) {
+	}
+	else if (/firefox\/[0-9]{2}/i.test(navigator.userAgent))
+	{
 		browser.agent = "firefox";
 		browser.majorVersion =
 			parseInt(/firefox\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /firefox\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-	} else if (/msie [0-9]{1}/i.test(navigator.userAgent)) {
+	}
+	else if (/msie [0-9]{1}/i.test(navigator.userAgent))
+	{
 		browser.agent = "msie";
 		browser.majorVersion =
 			parseInt(/MSIE ([0-9]{1})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /MSIE ([0-9.]+)/i.exec(navigator.userAgent)[1];
 		addWarning();
-	} else if (/opr\/[0-9]{2}/i.test(navigator.userAgent)) {
+	}
+	else if (/opr\/[0-9]{2}/i.test(navigator.userAgent))
+	{
 		browser.agent = "opera";
 		browser.majorVersion =
 			parseInt(/opr\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /opera\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-	} else if (/Trident\/[7]{1}/i.test(navigator.userAgent)) {
+	}
+	else if (/Trident\/[7]{1}/i.test(navigator.userAgent))
+	{
 		browser.agent = "msie";
 		browser.majorVersion = 11;
 		browser.version = "11";
 		addWarning();
-	} else if (/Safari\/[0-9.]+/i.test(navigator.userAgent)) {
+	}
+	else if (/Safari\/[0-9.]+/i.test(navigator.userAgent))
+	{
 		browser.agent = "safari";
 		browser.majorVersion =
 			parseInt(/Version\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /Version\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-	} else {
+	}
+	else
+	{
 		browser.agent = false;
 		browser.majorVersion = false;
 		browser.version = false;
 	}
 
-	if (/Windows NT/.test(navigator.userAgent)) {
+	if (/Windows NT/.test(navigator.userAgent))
+	{
 		const winver =
 			parseFloat(/Windows NT ([0-9]{1,2}\.[0-9]{1})/i
 				.exec(navigator.userAgent)[1]);
 		browser.os = "windows";
-		switch (winver) {
+		switch (winver)
+		{
 		case 6.0:
 			browser.osversion = "Vista";
 			break;
@@ -79,12 +98,16 @@ export function getBrowserInfo() {
 		default:
 			browser.osversion = false;
 		}
-	} else if (/OS X /.test(navigator.userAgent)) {
+	}
+	else if (/OS X /.test(navigator.userAgent))
+	{
 		browser.os = "os x";
 		browser.osversion =
 			/OS X [0-9]{2}_([0-9]{1,2})_[0-9]{1,2}/i
 				.exec(navigator.userAgent)[1];
-	} else if (/(Linux)/.test(navigator.userAgent)) {
+	}
+	else if (/(Linux)/.test(navigator.userAgent))
+	{
 		browser.os = "linux";
 		browser.osversion = false;
 	}

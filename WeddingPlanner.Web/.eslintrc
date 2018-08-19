@@ -7,6 +7,7 @@
 		"browser": true
 	},
 	"rules": {
+		"brace-style": ["warn", "allman", { "allowSingleLine": true }],
 		"max-len": [1, 80, 2, {"ignoreComments": true}],
 		"react/prop-types": [0],
 		"no-tabs": "off",

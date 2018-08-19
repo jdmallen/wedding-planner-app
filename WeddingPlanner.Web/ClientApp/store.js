@@ -5,7 +5,8 @@ import * as reducers from "./_ducks";
 
 const middleware = [thunk];
 
-if (process.env.ASPNETCORE_ENVIRONMENT !== "Production") {
+if (process.env.ASPNETCORE_ENVIRONMENT !== "Production")
+{
 	middleware.push(createLogger());
 }
 

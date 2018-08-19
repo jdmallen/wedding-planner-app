@@ -8,8 +8,10 @@ const REGISTER_SUCCESS = "wedding-planner/user/REGISTER_SUCCESS";
 const REGISTER_FAILURE = "wedding-planner/user/REGISTER_FAILURE";
 
 // Reducer
-export default (state = {}, action) => {
-	switch (action.type) {
+export default (state = {}, action) =>
+{
+	switch (action.type)
+	{
 	case REGISTER_REQUEST:
 		return { registering: true };
 	case REGISTER_SUCCESS:
@@ -26,18 +28,22 @@ const request = user => ({ type: REGISTER_REQUEST, user });
 const success = user => ({ type: REGISTER_SUCCESS, user });
 const failure = error => ({ type: REGISTER_FAILURE, error });
 
-export function register(user) {
-	return (dispatch) => {
+export function register(user)
+{
+	return (dispatch) =>
+	{
 		dispatch(request(user));
 
 		userService.register(user)
 			.then(
-				(userResp) => {
+				(userResp) =>
+				{
 					dispatch(success(userResp));
 					history.push("/login");
 					dispatch(successAlert("Registration successful!"));
 				},
-				(error) => {
+				(error) =>
+				{
 					dispatch(failure(error));
 					dispatch(errorAlert(error));
 				}

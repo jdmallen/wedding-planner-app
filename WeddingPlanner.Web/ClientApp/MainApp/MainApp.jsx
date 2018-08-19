@@ -4,7 +4,6 @@ import {
 	Switch,
 	Route,
 	Link,
-	NavLink as RouterNavLink,
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -22,23 +21,29 @@ import styles from "./MainApp.scss";
 import Entry from "../_components/Entry";
 import LoginModal from "../LoginModal/LoginModal";
 
-class App extends Component {
-	componentDidMount() {
-	}
+class App extends Component
+{
+	componentDidMount()	{}
 
-	toggleLoginModal() {
-		if (this.props.isModalOpen) {
+	toggleLoginModal()
+	{
+		if (this.props.isModalOpen)
+		{
 			this.props.closeModal();
-		} else {
+		}
+		else
+		{
 			this.props.openModal();
 		}
 	}
 
-	toggleNavbar() {
+	toggleNavbar()
+	{
 		this.props.toggleNav(!this.props.isNavbarOpen);
 	}
 
-	render() {
+	render()
+	{
 		return (
 			<div className={styles.app}>
 				<Navbar color="black" dark expand="md">
@@ -47,7 +52,11 @@ class App extends Component {
 					<Collapse isOpen={this.props.isNavbarOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
-								<NavLink onClick={() => this.toggleLoginModal()}>Login</NavLink>
+								<NavLink
+									href="#"
+									onClick={() => this.toggleLoginModal()}
+								>Login
+								</NavLink>
 							</NavItem>
 						</Nav>
 					</Collapse>
@@ -82,7 +91,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	toggleNav: isNavbarOpen => dispatch(toggleNav(isNavbarOpen)),
 	openModal: () => dispatch(openModal()),
-	closeModal: () => dispatch(openModal()),
+	closeModal: () => dispatch(closeModal()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

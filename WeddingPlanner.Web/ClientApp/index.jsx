@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Router, Route, IndexRoute } from "react-router";
+import { Router, Route } from "react-router";
 import fontawesome from "@fortawesome/fontawesome";
 import { faUser } from "@fortawesome/fontawesome-free-solid";
 import store from "./store";
