@@ -23,9 +23,30 @@ class LoginModal extends Component
 	{
 		super(props);
 		this.state = { submitted: false };
+		this.toggleModal = this.toggleModal.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	componentDidMount() {}
+	componentDidMount()
+	{
+	}
+
+	componentWillUnmount()
+	{
+	}
+
+	toggleModal()
+	{
+		if (this.props.isModalOpen)
+		{
+			this.props.closeModal();
+		}
+		else
+		{
+			this.props.openModal();
+		}
+	}
 
 	handleChange(e)
 	{
@@ -46,18 +67,6 @@ class LoginModal extends Component
 		}
 	}
 
-	toggleModal()
-	{
-		if (this.props.isModalOpen)
-		{
-			this.props.closeModal();
-		}
-		else
-		{
-			this.props.openModal();
-		}
-	}
-
 	render()
 	{
 		return (
@@ -66,11 +75,11 @@ class LoginModal extends Component
 				centered
 				size="lg"
 				isOpen={this.props.isModalOpen}
-				toggle={() => this.toggleModal()}
+				toggle={this.toggleModal}
 			>
 				<Form onSubmit={this.handleSubmit}>
 					<ModalHeader
-						toggle={() => this.toggleModal()}
+						toggle={this.toggleModal}
 						className={styles.properModalTitle}
 					>
 						Please sign in
