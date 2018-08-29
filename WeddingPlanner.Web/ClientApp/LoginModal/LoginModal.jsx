@@ -59,11 +59,10 @@ class LoginModal extends Component
 		e.preventDefault();
 
 		this.setState({ submitted: true });
-		const { username, password } = this.state;
-		const { dispatch } = this.props;
-		if (username && password)
+		const { email, password } = this.state;
+		if (email && password)
 		{
-			dispatch(login(username, password));
+			this.props.login(email, password);
 		}
 	}
 
@@ -140,6 +139,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	openModal: () => dispatch(openModal()),
 	closeModal: () => dispatch(closeModal()),
+	login: (email, password) => dispatch(login(email, password)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

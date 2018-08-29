@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
 using JDMallen.Toolbox.Extensions;
 using JDMallen.Toolbox.Factories;
-using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -21,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using WeddingPlanner.DataAccess.Config;
-using WeddingPlanner.Models.Entities.Identity;
+using WeddingPlanner.DataAccess.Entities.Identity;
 
 namespace WeddingPlanner.Web
 {
@@ -40,15 +37,6 @@ namespace WeddingPlanner.Web
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
 			var oAuthSettings =
 				Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
-#if DEBUG
-			settings.JwtSecretKey = Configuration[nameof(settings.JwtSecretKey)];
-			settings.DbConnectionPassword =
-				Configuration[nameof(settings.DbConnectionPassword)];
-			oAuthSettings.GitHubClientSecret =
-				Configuration[nameof(oAuthSettings.GitHubClientSecret)];
-			oAuthSettings.GoogleClientSecret =
-				Configuration[nameof(oAuthSettings.GoogleClientSecret)];
-#endif
 			services.AddSingleton(settings);
 
 			var signingKey =
@@ -176,37 +164,37 @@ namespace WeddingPlanner.Web
 						});
 				});
 #if DEBUG
-			var conn = dbContext.Database.GetDbConnection();
-			conn.Open();
-			dbContext.Model.GetEntityTypes()
-				.ToList()
-				.ForEach(
-					et =>
-					{
-						bool tableExists;
-						var tableName =
-							et.GetAnnotations().FirstOrDefault(x => x.Name == "Relational:TableName")
-								?.Value.ToString()
-								.ToLowerInvariant()
-							?? et.ClrType.Name.ToLowerInvariant();
-						using (var cmd = conn.CreateCommand())
-						{
-							cmd.CommandText =
-								$"SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = \'{dbContext.Database.GetDbConnection().Database}\' AND TABLE_NAME = \'{tableName.ToLowerInvariant()}\';";
-							cmd.CommandType = CommandType.Text;
-							using (var reader = cmd.ExecuteReader())
-							{
-								reader.Read();
-								tableExists = reader.GetInt32(0) > 0;
-								reader.Close();
-							}
-						}
-						if (!tableExists)
-							return;
-						var dropCommand = $"SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;DROP TABLE `{tableName.ToLowerInvariant()}`;SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;";
-						dbContext.Database.ExecuteSqlCommand(dropCommand);
-					});
-			conn.Close();
+			// var conn = dbContext.Database.GetDbConnection();
+			// conn.Open();
+			// dbContext.Model.GetEntityTypes()
+			// 	.ToList()
+			// 	.ForEach(
+			// 		et =>
+			// 		{
+			// 			bool tableExists;
+			// 			var tableName =
+			// 				et.GetAnnotations().FirstOrDefault(x => x.Name == "Relational:TableName")
+			// 					?.Value.ToString()
+			// 					.ToLowerInvariant()
+			// 				?? et.ClrType.Name.ToLowerInvariant();
+			// 			using (var cmd = conn.CreateCommand())
+			// 			{
+			// 				cmd.CommandText =
+			// 					$"SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = \'{dbContext.Database.GetDbConnection().Database}\' AND TABLE_NAME = \'{tableName.ToLowerInvariant()}\';";
+			// 				cmd.CommandType = CommandType.Text;
+			// 				using (var reader = cmd.ExecuteReader())
+			// 				{
+			// 					reader.Read();
+			// 					tableExists = reader.GetInt32(0) > 0;
+			// 					reader.Close();
+			// 				}
+			// 			}
+			// 			if (!tableExists)
+			// 				return;
+			// 			var dropCommand = $"SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;DROP TABLE `{tableName.ToLowerInvariant()}`;SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;";
+			// 			dbContext.Database.ExecuteSqlCommand(dropCommand);
+			// 		});
+			// conn.Close();
 			dbContext.Database.EnsureCreated();
 #endif
 		}

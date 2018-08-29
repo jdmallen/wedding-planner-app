@@ -1,4 +1,4 @@
-﻿namespace WeddingPlanner.Models.Parameters
+﻿namespace WeddingPlanner.DataAccess.Parameters
 {
 	public class AppRoleQueryParameters
 	{

@@ -3,7 +3,7 @@ using JDMallen.Toolbox.Infrastructure.EFCore.Models;
 using JDMallen.Toolbox.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace WeddingPlanner.Models.Entities.Identity
+namespace WeddingPlanner.DataAccess.Entities.Identity
 {
 	public class AppUser : IdUser, IComplexEntityModel<Guid>
 	{

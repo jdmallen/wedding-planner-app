@@ -5,7 +5,7 @@ using JDMallen.Toolbox.Interfaces;
 using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
 
-namespace WeddingPlanner.Models.Entities.Identity
+namespace WeddingPlanner.DataAccess.Entities.Identity
 {
   public class AppUserLogin : IdentityUserLogin<Guid>, IEntityModel<Guid>
   {

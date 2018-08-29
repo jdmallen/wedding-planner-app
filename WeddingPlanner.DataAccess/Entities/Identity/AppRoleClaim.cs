@@ -5,7 +5,7 @@ using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace WeddingPlanner.Models.Entities.Identity
+namespace WeddingPlanner.DataAccess.Entities.Identity
 {
 	public class AppRoleClaim : IdentityRoleClaim<Guid>, IComplexEntityModel<Guid>
 	{

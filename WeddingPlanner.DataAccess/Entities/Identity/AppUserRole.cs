@@ -5,7 +5,7 @@ using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace WeddingPlanner.Models.Entities.Identity
+namespace WeddingPlanner.DataAccess.Entities.Identity
 {
 	public class AppUserRole : IdentityUserRole<Guid>, IComplexEntityModel<Guid>
 	{

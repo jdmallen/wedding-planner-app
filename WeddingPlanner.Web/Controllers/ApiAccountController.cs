@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WeddingPlanner.Models.Dtos;
-using WeddingPlanner.Models.Entities.Identity;
+using WeddingPlanner.DataAccess.Dtos;
+using WeddingPlanner.DataAccess.Entities.Identity;
 
 namespace WeddingPlanner.Web.Controllers
 {
@@ -83,8 +83,16 @@ namespace WeddingPlanner.Web.Controllers
 				return BadRequest(ModelState);
 			}
 
+//			var claims = await _userManager.GetClaimsAsync(user);
+
 			var token = _jwtTokenFactory.GenerateToken(user);
-			return Ok(token);
+
+			var returnData = new
+			{
+				token,
+//				user
+			};
+			return Ok(returnData);
 		}
 
 		private async Task<ClaimsIdentity> GetUserIdentity(LoginDto login)
