@@ -13,41 +13,36 @@ using WeddingPlanner.DataAccess.Entities.Identity;
 
 namespace WeddingPlanner.Web.Utilities
 {
-	public interface ITokenFactory : IJwtTokenFactory
+	public class TokenFactory : JwtTokenFactory, ITokenFactory
 	{
-		Task<ClaimsIdentity> GenerateClaimsIdentity(AppUser user);
-	}
+		private readonly UserManager<AppUser> _userManager;
 
-    public class TokenFactory : JwtTokenFactory, ITokenFactory
-    {
-	    private readonly UserManager<AppUser> _userManager;
+		public TokenFactory(
+			IOptions<JwtOptions> jwtOptions,
+			UserManager<AppUser> userManager) : base(jwtOptions)
+		{
+			_userManager = userManager;
+		}
 
-	    public TokenFactory(
-		    IOptions<JwtOptions> jwtOptions,
-		    UserManager<AppUser> userManager) : base(jwtOptions)
-	    {
-		    _userManager = userManager;
-	    }
+		public async Task<ClaimsIdentity> GenerateClaimsIdentity(AppUser user)
+		{
+			var claims = new List<Claim>
+			{
+				new Claim(JwtClaimTypes.UserId, user.NormalizedUserName),
+				new Claim(ClaimTypes.Name, user.NormalizedEmail),
+				new Claim(ClaimTypes.Email, user.NormalizedEmail),
+			};
 
-	    public async Task<ClaimsIdentity> GenerateClaimsIdentity(AppUser user)
-	    {
-		    var claims = new List<Claim>
-		    {
-			    new Claim(JwtClaimTypes.UserId, user.NormalizedUserName),
-			    new Claim(ClaimTypes.Name, user.NormalizedEmail),
-			    new Claim(ClaimTypes.Email, user.NormalizedEmail),
-		    };
-
-		    var userRoles = await _userManager.GetClaimsAsync(user);
+			var userRoles = await _userManager.GetClaimsAsync(user);
 
 			claims.AddRange(userRoles);
 
-		    var identity = new ClaimsIdentity(
-			    new GenericIdentity(user.NormalizedEmail, "token"),
-			    claims
-		    );
+			var identity = new ClaimsIdentity(
+				new GenericIdentity(user.NormalizedEmail, "token"),
+				claims
+			);
 
-		    return identity;
-	    }
+			return identity;
+		}
 	}
 }

@@ -19,6 +19,7 @@ using MySql.Data.MySqlClient;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Entities.Identity;
+using WeddingPlanner.Web.Utilities;
 
 namespace WeddingPlanner.Web
 {
@@ -53,7 +54,7 @@ namespace WeddingPlanner.Web
 						SecurityAlgorithms.HmacSha256);
 				});
 
-			services.AddScoped<IJwtTokenFactory, JwtTokenFactory>();
+			services.AddScoped<ITokenFactory, TokenFactory>();
 
 			var mySqlConnectionStringBuilder = new MySqlConnectionStringBuilder
 			{

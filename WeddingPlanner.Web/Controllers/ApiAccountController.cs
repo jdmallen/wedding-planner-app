@@ -10,29 +10,34 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Dtos;
 using WeddingPlanner.DataAccess.Entities.Identity;
+using WeddingPlanner.Web.Utilities;
 
 namespace WeddingPlanner.Web.Controllers
 {
 	[Route("api/account")]
 	public class ApiAccountController : Controller
 	{
-		private readonly IJwtTokenFactory _jwtTokenFactory;
+		private readonly ITokenFactory _jwtTokenFactory;
 		private readonly Settings _settings;
 		private readonly SignInManager<AppUser> _signInManager;
 		private readonly UserManager<AppUser> _userManager;
+		private readonly WpDbContext _context;
 
 		public ApiAccountController(
-			IJwtTokenFactory jwtTokenFactory,
+			ITokenFactory jwtTokenFactory,
 			Settings settings, 
 			SignInManager<AppUser> signInManager, 
-			UserManager<AppUser> userManager)
+			UserManager<AppUser> userManager,
+			WpDbContext context)
 		{
 			_jwtTokenFactory = jwtTokenFactory;
 			_settings = settings;
 			_signInManager = signInManager;
 			_userManager = userManager;
+			_context = context;
 		}
 
 		[HttpGet]
@@ -105,7 +110,7 @@ namespace WeddingPlanner.Web.Controllers
 			
 			if (await _userManager.CheckPasswordAsync(user, login.Password))
 			{
-				return _jwtTokenFactory.GenerateClaimsIdentity(login.Email, user.Id);
+				return await _jwtTokenFactory.GenerateClaimsIdentity(user);
 			}
 
 			return null;
