@@ -2,6 +2,8 @@
 {
     public class Settings
     {
+		public string DbConnectionDbName { get; set; }
+
 		public string DbConnectionServer { get; set; }
 
 		public string DbConnectionLogin { get; set; }

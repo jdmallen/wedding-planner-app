@@ -1,18 +1,35 @@
 ﻿using System;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
-using JDMallen.Toolbox.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using JDMallen.Toolbox.Implementations;
 
 namespace WeddingPlanner.DataAccess.Entities
 {
-	public class InvitationType : MySqlComplexEntityModel<Guid>
+	public class InvitationType : MySqlEntityModel<Guid>
 	{
-		public string TypeName { get; set; }
+		[Required, Column("TypeName", TypeName = "nvarchar(256)"),
+		 StringLength(256)]
+		public string DbTypeName { get; set; }
 
-		public override void OnModelCreating(ModelBuilder modelBuilder)
+		[NotMapped]
+		public InviteType TypeName
 		{
-			modelBuilder.Entity<InvitationType>(it => {
-			});
+			get => (InviteType) Enum.Parse(
+				typeof(InviteType),
+				DbTypeName,
+				true);
+			set => DbTypeName = value.ToString("G");
 		}
+
+		public virtual ICollection<Invitation> Invitations { get; set; }
+	}
+
+	public enum InviteType
+	{
+		Solo,
+		PlusOne,
+		Couple,
+		Family
 	}
 }

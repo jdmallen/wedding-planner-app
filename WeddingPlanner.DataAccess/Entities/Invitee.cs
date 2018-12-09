@@ -1,29 +1,25 @@
 ﻿using System;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
-using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using JDMallen.Toolbox.Implementations;
 
 namespace WeddingPlanner.DataAccess.Entities
 {
-	public class Invitee : MySqlComplexEntityModel<Guid>
+	public class Invitee : MySqlEntityModel<Guid>
 	{
+		[Required, Column(TypeName = "nvarchar(256)"), StringLength(256)]
+		public string FirstName { get; set; }
+		
+		[Required, Column(TypeName = "nvarchar(256)"), StringLength(256)]
+		public string LastName { get; set; }
+
+		public bool IsPlusOne { get; set; }
+		
+		[Column(TypeName = "nvarchar(256)"), StringLength(256)]
+		public string EmailAddress { get; set; }
+
 		public Guid InvitationId { get; set; }
 
-		public Guid AddressId { get; set; }
-
 		public virtual Invitation Invitation { get; set; }
-
-		public virtual Address Address { get; set; }
-
-		public override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<Invitee>(i => {
-				i.HasOne(x => x.Invitation)
-					.WithMany()
-					.HasForeignKey(x => x.InvitationId);
-				i.HasOne(x => x.Address)
-					.WithMany()
-					.HasForeignKey(x => x.AddressId);
-			});
-		}
 	}
 }
