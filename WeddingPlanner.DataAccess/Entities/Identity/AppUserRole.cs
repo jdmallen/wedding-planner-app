@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
+using JDMallen.Toolbox.EFCore.Models;
 using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +10,9 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 	public class AppUserRole : IdentityUserRole<Guid>, IComplexEntityModel<Guid>
 	{
 		public Guid Id { get; set; }
-		
+
 		public string IdText => Id.ToString();
-		
+
 		[NotMapped]
 		public MiniGuid ShortId
 		{
@@ -23,6 +23,8 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 		public DateTime DateCreated { get; set; }
 
 		public DateTime DateModified { get; set; }
+
+		public bool IsDeleted { get; set; }
 
 		public void OnModelCreating(ModelBuilder modelBuilder)
 		{

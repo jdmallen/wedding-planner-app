@@ -6,11 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Impls\**" />
-    <Compile Remove="Interfaces\**" />
     <EmbeddedResource Remove="Impls\**" />
-    <EmbeddedResource Remove="Interfaces\**" />
     <None Remove="Impls\**" />
-    <None Remove="Interfaces\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,8 +15,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Microservices\JDMallen.Toolbox.Microservices.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Microservices.EFCore\JDMallen.Toolbox.EFCore.Services.csproj" />
     <ProjectReference Include="..\WeddingPlanner.DataAccess\WeddingPlanner.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitsOfWork\" />
   </ItemGroup>
 
 </Project>

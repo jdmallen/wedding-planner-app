@@ -1,42 +1,55 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using JDMallen.Toolbox.Implementations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using WeddingPlanner.DataAccess.Constants;
 
 namespace WeddingPlanner.DataAccess.Entities
 {
-	public class Address : MySqlEntityModel<Guid>
+	public class Address : EntityModel<Guid>
 	{
-		[Required, Column(TypeName = "nvarchar(256)"), StringLength(256)]
+		public Address()
+		{
+		}
+
+		public Address(
+			string streetLine1,
+			string city,
+			USState state,
+			string zip10,
+			string streetLine2 = null,
+			string streetLine3 = null)
+		{
+			Id = Guid.NewGuid();
+			StreetLine1 = streetLine1;
+			StreetLine2 = streetLine2;
+			StreetLine3 = streetLine3;
+			City = city;
+			State = state;
+			Zip = zip10;
+		}
+
 		public string StreetLine1 { get; set; }
 
-		[Column(TypeName = "nvarchar(256)"), StringLength(256)]
 		public string StreetLine2 { get; set; }
 
-		[Column(TypeName = "nvarchar(256)"), StringLength(256)]
 		public string StreetLine3 { get; set; }
 
-		[Required, Column(TypeName = "nvarchar(128)"), StringLength(128)]
 		public string City { get; set; }
 
-		[Required, Column("State", TypeName = "varchar(2)"), StringLength(2)]
+		[JsonIgnore]
 		public string DbState { get; set; }
 
-		[NotMapped]
+		[JsonConverter(typeof(StringEnumConverter))]
 		public USState State
 		{
 			get => (USState) Enum.Parse(typeof(USState), DbState, true);
 			set => DbState = value.ToString("G");
 		}
-		
-		[Required, Column(TypeName = "mediumint")]
-		public int Zip { get; set; }
-		
-		[Column(TypeName = "smallint")]
-		public short? Zip4 { get; set; }
 
-		public virtual IEnumerable<Invitation> Invitations { get; set; }
+		public string Zip { get; set; }
+
+		public virtual ICollection<Invitation> Invitations { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
+using JDMallen.Toolbox.EFCore.Models;
 using JDMallen.Toolbox.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +14,8 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 		public DateTime DateCreated { get; set; }
 
 		public DateTime DateModified { get; set; }
+
+		public bool IsDeleted { get; set; }
 
 		public void OnModelCreating(ModelBuilder modelBuilder)
 		{

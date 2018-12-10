@@ -1,5 +1,5 @@
 ﻿using System;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
+using JDMallen.Toolbox.EFCore.Models;
 using JDMallen.Toolbox.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +11,16 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 
 		public DateTime DateModified { get; set; }
 
+		public bool IsDeleted { get; set; }
+
 		public void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<AppRole>(
 				ar =>
 				{
-					ar.HasIndex(r => r.NormalizedName).HasName("RoleNameIndex").IsUnique();
+					ar.HasIndex(r => r.NormalizedName)
+						.HasName("RoleNameIndex")
+						.IsUnique();
 					ar.ToTable("AspNetRoles");
 					ar.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
 

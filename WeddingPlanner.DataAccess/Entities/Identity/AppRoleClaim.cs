@@ -1,13 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using JDMallen.Toolbox.Infrastructure.EFCore.Models;
+using JDMallen.Toolbox.EFCore.Models;
 using JDMallen.Toolbox.Structs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace WeddingPlanner.DataAccess.Entities.Identity
 {
-	public class AppRoleClaim : IdentityRoleClaim<Guid>, IComplexEntityModel<Guid>
+	public class AppRoleClaim
+		: IdentityRoleClaim<Guid>, IComplexEntityModel<Guid>
 	{
 		public new Guid Id { get; set; }
 
@@ -24,13 +25,12 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 
 		public DateTime DateModified { get; set; }
 
+		public bool IsDeleted { get; set; }
+
 		public void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<AppRoleClaim>(
-				arc =>
-				{
-					arc.ToTable("AspNetRoleClaims");
-				});
+				arc => { arc.ToTable("AspNetRoleClaims"); });
 		}
 	}
 }

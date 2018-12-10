@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Infrastructure.EFCore\JDMallen.Toolbox.EFCore.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.RepositoryPattern\JDMallen.Toolbox.EFCore.Patterns.csproj" />
+    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
   </ItemGroup>
 
 </Project>

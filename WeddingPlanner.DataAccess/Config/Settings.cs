@@ -1,4 +1,4 @@
-﻿namespace WeddingPlanner.Web
+﻿namespace WeddingPlanner.DataAccess.Config
 {
     public class Settings
     {
@@ -9,6 +9,8 @@
 		public string DbConnectionLogin { get; set; }
 
 		public string DbConnectionPassword { get; set; }
+
+		public int InvitationCodeLength { get; set; }
 
 		public string JwtAudience { get; set; }
 

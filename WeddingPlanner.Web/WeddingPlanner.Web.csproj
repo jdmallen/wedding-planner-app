@@ -52,7 +52,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox\JDMallen.Toolbox.csproj" />
-    <ProjectReference Include="..\WeddingPlanner.Service\WeddingPlanner.Service.csproj" />
+    <ProjectReference Include="..\WeddingPlanner.Service\WeddingPlanner.Services.csproj" />
   </ItemGroup>
 
 	<Target Name="BuildProdJS" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' != 'Debug' ">

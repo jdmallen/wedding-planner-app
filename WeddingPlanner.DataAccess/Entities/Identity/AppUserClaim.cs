@@ -24,5 +24,7 @@ namespace WeddingPlanner.DataAccess.Entities.Identity
 		public DateTime DateCreated { get; set; }
 
 		public DateTime DateModified { get; set; }
+
+		public bool IsDeleted { get; set; }
 	}
 }

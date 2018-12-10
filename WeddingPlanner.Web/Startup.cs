@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using JDMallen.Toolbox.EFCore.Extensions;
+using JDMallen.Toolbox.EFCore.Patterns.Repository.Interfaces;
 using JDMallen.Toolbox.Extensions;
-using JDMallen.Toolbox.Factories;
 using JDMallen.Toolbox.Options;
+using JDMallen.Toolbox.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
@@ -15,22 +19,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using MySql.Data.MySqlClient;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Entities.Identity;
+using WeddingPlanner.Services.Implementations;
+using WeddingPlanner.Services.Interfaces;
 using WeddingPlanner.Web.Utilities;
 
 namespace WeddingPlanner.Web
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IHostingEnvironment env)
 		{
 			Configuration = configuration;
+			Env = env;
 		}
 
 		public IConfiguration Configuration { get; }
+
+		public IHostingEnvironment Env { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -39,16 +46,17 @@ namespace WeddingPlanner.Web
 			var oAuthSettings =
 				Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
 			services.AddSingleton(settings);
-
 			var signingKey =
-				new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtSecretKey));
+				new SymmetricSecurityKey(
+					Encoding.UTF8.GetBytes(settings.JwtSecretKey));
 
 			services.Configure<JwtOptions>(
 				options =>
 				{
 					options.Audience = settings.JwtAudience;
 					options.Issuer = settings.JwtIssuer;
-					options.ValidForSpan = TimeSpan.FromMinutes(settings.JwtExpireMinutes);
+					options.ValidForSpan =
+						TimeSpan.FromMinutes(settings.JwtExpireMinutes);
 					options.SigningCredentials = new SigningCredentials(
 						signingKey,
 						SecurityAlgorithms.HmacSha256);
@@ -56,51 +64,91 @@ namespace WeddingPlanner.Web
 
 			services.AddScoped<ITokenFactory, TokenFactory>();
 
-			var mySqlConnectionStringBuilder = new MySqlConnectionStringBuilder
+			var connectionStringBuilder = new SqlConnectionStringBuilder
 			{
-				Server = settings.DbConnectionServer,
-				Database = settings.DbConnectionDbName,
+				DataSource = settings.DbConnectionServer,
+				InitialCatalog = settings.DbConnectionDbName,
 				UserID = settings.DbConnectionLogin,
-				Password = settings.DbConnectionPassword,
-				OldGuids = true
+				Password = settings.DbConnectionPassword
 			};
 
-			services.AddDbContextPool<WpDbContext>(
-				contextOptions => contextOptions.UseMySql(
-					mySqlConnectionStringBuilder.ToString(),
-					mySqlOptions =>
-					{
-						mySqlOptions.UnicodeCharSet(CharSet.Utf8mb4);
-						mySqlOptions.EnableRetryOnFailure(5);
-					}));
+			if (Env.IsDevelopment())
+			{
+				connectionStringBuilder.IntegratedSecurity = true;
+			}
+			else
+			{
+				connectionStringBuilder.UserID =
+					settings.DbConnectionLogin;
+				connectionStringBuilder.Password =
+					settings.DbConnectionPassword;
+			}
 
-			services.AddCustomIdentity<WpDbContext, AppUser, AppRole>(
-				options =>
-				{
-					options.Password.RequireDigit = false;
-					options.Password.RequireLowercase = false;
-					options.Password.RequireNonAlphanumeric = false;
-					options.Password.RequireUppercase = false;
-					options.Password.RequiredLength = 2;
-					options.Password.RequiredUniqueChars = 1;
-				});
+			services.AddDbContextPool<WpDbContext>(
+				contextOptions => contextOptions.UseSqlServer(
+						connectionStringBuilder.ToString(),
+						options =>
+						{
+							options.EnableRetryOnFailure(5);
+							options.MigrationsAssembly("WeddingPlanner.Web");
+						})
+#if DEBUG
+					.EnableSensitiveDataLogging()
+#endif
+			);
+
+			services.AddScoped(typeof(IRepository<,>), typeof(WpRepository<,>));
+
+			services.AddScoped<IInvitationService, InvitationService>();
+			services.AddScoped<IInviteeService, InviteeService>();
+
+			services
+				.AddCustomIdentity<WpDbContext, AppUser, AppRole, Guid,
+					UserStore<
+						AppUser,
+						AppRole,
+						WpDbContext,
+						Guid,
+						AppUserClaim,
+						AppUserRole,
+						AppUserLogin,
+						AppUserToken,
+						AppRoleClaim>, CustomPasswordValidator<AppUser>,
+					CustomIdentityErrorDescriber,
+					AppUserClaim,
+					AppUserRole,
+					AppUserLogin,
+					AppUserToken,
+					AppRoleClaim>(
+					options =>
+					{
+						options.Password.RequireDigit = false;
+						options.Password.RequireLowercase = false;
+						options.Password.RequireNonAlphanumeric = false;
+						options.Password.RequireUppercase = false;
+						options.Password.RequiredLength = 2;
+						options.Password.RequiredUniqueChars = 1;
+					});
 
 			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 			services.AddAuthentication(
-						options =>
-						{
-							options.DefaultAuthenticateScheme =
-								JwtBearerDefaults.AuthenticationScheme;
-							options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-							options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-						})
-					.AddJwtBearer(
-						config =>
-						{
-							config.RequireHttpsMetadata = true;
-							config.SaveToken = true;
-							config.TokenValidationParameters = new TokenValidationParameters
+					options =>
+					{
+						options.DefaultAuthenticateScheme =
+							JwtBearerDefaults.AuthenticationScheme;
+						options.DefaultScheme =
+							JwtBearerDefaults.AuthenticationScheme;
+						options.DefaultChallengeScheme =
+							JwtBearerDefaults.AuthenticationScheme;
+					})
+				.AddJwtBearer(
+					config =>
+					{
+						config.RequireHttpsMetadata = true;
+						config.SaveToken = true;
+						config.TokenValidationParameters =
+							new TokenValidationParameters
 							{
 								ValidIssuer = settings.JwtIssuer,
 								ValidAudience = settings.JwtIssuer,
@@ -109,9 +157,9 @@ namespace WeddingPlanner.Web
 								RequireExpirationTime = true,
 								ClockSkew = TimeSpan.Zero
 							};
-						})
-					.AddOAuthGitHub(oAuthSettings)
-					.AddOAuthGoogle(oAuthSettings);
+					})
+				.AddOAuthGitHub(oAuthSettings)
+				.AddOAuthGoogle(oAuthSettings);
 
 			services.AddAntiforgery(
 				options =>
@@ -142,7 +190,8 @@ namespace WeddingPlanner.Web
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseRewriter(new RewriteOptions().AddRedirectToHttps(302, 44321));
+			app.UseRewriter(
+				new RewriteOptions().AddRedirectToHttps(302, 44321));
 
 			app.UseAuthentication();
 
@@ -163,7 +212,8 @@ namespace WeddingPlanner.Web
 							controller = "BaseView",
 							action = "Index"
 						});
-				});
+				}
+			);
 #if DEBUG
 			dbContext.DropTablesAndEnsureCreated();
 #endif
