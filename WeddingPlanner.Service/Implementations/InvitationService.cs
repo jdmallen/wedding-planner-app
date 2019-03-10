@@ -53,7 +53,8 @@ namespace WeddingPlanner.Services.Implementations
 		/// </summary>
 		/// <param name="parameters">The search parameters</param>
 		/// <returns>The fetched list of objects</returns>
-		public IAsyncEnumerable<Invitation> Find(InvitationQueryParameters parameters)
+		public IAsyncEnumerable<Invitation> Find(
+			InvitationQueryParameters parameters)
 		{
 			var specification =
 				new InvitationFilterSpecification(parameters);
@@ -78,7 +79,10 @@ namespace WeddingPlanner.Services.Implementations
 			var results = Find(parameters);
 
 			var list = await results.ToList();
-			return list.AsPaged(parameters.Skip.Value, parameters.Take.Value, 0);
+			return list.AsPaged(
+				parameters.Skip.Value,
+				parameters.Take.Value,
+				0);
 		}
 
 		/// <summary>
@@ -94,7 +98,7 @@ namespace WeddingPlanner.Services.Implementations
 				// todo validation
 				return await Repository.UpdateAsync(model);
 			}
-			
+
 			// todo validation
 			return await Repository.AddAsync(model);
 		}
@@ -112,6 +116,7 @@ namespace WeddingPlanner.Services.Implementations
 				// todo validation
 				return await Repository.UpdateAsync(model);
 			}
+
 			throw new ArgumentException(
 				"Cannot update model; id not found",
 				nameof(model));
@@ -145,7 +150,7 @@ namespace WeddingPlanner.Services.Implementations
 			bool codeAlreadyExists;
 			var newCodeChars = new List<char>(codeLength);
 			string code;
-			
+
 			do
 			{
 				var random = new Random();
@@ -157,7 +162,7 @@ namespace WeddingPlanner.Services.Implementations
 				}
 
 				code = new string(newCodeChars.ToArray());
-				
+
 				codeAlreadyExists = await Repository.FindBySpecAsync(
 						new InvitationFilterSpecification(
 							new InvitationQueryParameters

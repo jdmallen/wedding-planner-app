@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -215,7 +216,23 @@ namespace WeddingPlanner.Web
 				}
 			);
 #if DEBUG
-			dbContext.DropTablesAndEnsureCreated();
+			var orderOfDroppage = new List<string>
+			{
+				"Invitee",
+				"MealChoice",
+				"Relationship",
+				"Invitation",
+				"Address",
+				"AppUserClaim",
+				"AppUserLogin",
+				"AppUserToken",
+				"AspNetUserRoles",
+				"AspNetRoleClaims",
+				"AspNetRoles",
+				"AppUser"
+			};
+
+			dbContext.DropTablesAndEnsureCreated(true, orderOfDroppage);
 #endif
 		}
 	}
