@@ -1,16 +1,23 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+@import "../../Styles/customBootstrapVariables.scss";
 
-.heartImageDiv {
-	display: flex;
-	margin: auto;
-	justify-content: center;
-	align-items: center;
-	height: 60vh;
-	padding-bottom: 5vh;
-}
+.entryOuterDiv {
 
-.kAndJOverlay {
-	font-family: 'Shadows Into Light', cursive;
-	font-size: 20vmin;
-	text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+	.heartImageDiv {
+		display: flex;
+		margin: auto;
+		justify-content: center;
+		align-items: center;
+		height: 60vh;
+		padding-bottom: 5vh;
+	}
+
+	.kAndJOverlay {
+		font-family: 'Shadows Into Light', cursive;
+		letter-spacing: 0.25em;
+		margin-right: -0.25em;
+		color: $gray-100;
+		font-size: 20vmin;
+		text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000, 1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+	}
 }

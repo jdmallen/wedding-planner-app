@@ -172,12 +172,7 @@ namespace WeddingPlanner.Web
 				}
 			);
 
-			services.AddMvc(
-				options =>
-				{
-					options.SslPort = 44321;
-					options.Filters.Add(new RequireHttpsAttribute());
-				});
+			services.AddMvc();
 		}
 
 		public void Configure(
@@ -190,10 +185,7 @@ namespace WeddingPlanner.Web
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
-			app.UseRewriter(
-				new RewriteOptions().AddRedirectToHttps(302, 44321));
-
+			
 			app.UseAuthentication();
 
 			app.UseStaticFiles("");

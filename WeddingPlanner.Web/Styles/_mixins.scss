@@ -1,0 +1,6 @@
+﻿@mixin border-radius($radii...) {
+	-moz-border-radius: $radii;
+	-webkit-border-radius: $radii;
+	border-radius: $radii; /* future proofing */
+	-khtml-border-radius: $radii; /* for old Konqueror browsers */
+}

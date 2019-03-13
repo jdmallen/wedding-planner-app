@@ -18,20 +18,24 @@ namespace WeddingPlanner.Web
 		public static IWebHost BuildWebHost(string[] args)
 		{
 			return WebHost.CreateDefaultBuilder(args)
-						.UseKestrel(options => options.ConfigureEndpoints())
-						.UseStartup<Startup>()
-						.ConfigureAppConfiguration((hostingContext, config) =>
+				.UseStartup<Startup>()
+				.ConfigureAppConfiguration(
+					(hostingContext, config) =>
+					{
+						var env = hostingContext.HostingEnvironment;
+						if (env.EnvironmentName.Equals("LinuxDevelopment"))
 						{
-							var env = hostingContext.HostingEnvironment;
-							if (env.EnvironmentName.Equals("LinuxDevelopment")){
-								var appAssembly = Assembly.Load(new AssemblyName(env.ApplicationName));
-                        if (appAssembly != null)
-                        {
-                            config.AddUserSecrets(appAssembly, optional: true);
-                        }
+							var appAssembly = Assembly.Load(
+								new AssemblyName(env.ApplicationName));
+							if (appAssembly != null)
+							{
+								config.AddUserSecrets(
+									appAssembly,
+									optional: true);
 							}
-						})
-						.Build();
+						}
+					})
+				.Build();
 		}
 	}
 }

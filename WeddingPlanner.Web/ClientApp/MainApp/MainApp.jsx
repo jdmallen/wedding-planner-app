@@ -16,10 +16,13 @@ import {
 	NavItem,
 	NavLink,
 } from "reactstrap";
+import classnames from "classnames";
 import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Entry from "../_components/Entry";
 import LoginModal from "../LoginModal/LoginModal";
+import leaves1src from "../../Images/leaves1.png";
+import leaves2src from "../../Images/leaves2.png";
 
 class App extends Component
 {
@@ -42,31 +45,23 @@ class App extends Component
 		this.props.toggleNav(!this.props.isNavbarOpen);
 	}
 
-	render()
-	{
+	render() {
 		return (
-			<div className={styles.app}>
-				<Navbar color="black" dark expand="md">
-					<NavbarBrand tag={Link} to="/">Kristen & Jesse</NavbarBrand>
-					<NavbarToggler onClick={() => this.toggleNavbar()} />
-					<Collapse isOpen={this.props.isNavbarOpen} navbar>
-						<Nav className="ml-auto" navbar>
-							<NavItem>
-								<NavLink
-									href="#"
-									onClick={() => this.toggleLoginModal()}
-								>Login
-								</NavLink>
-							</NavItem>
-						</Nav>
-					</Collapse>
-				</Navbar>
-				<Container>
-					<LoginModal />
-					<Switch>
-						<Route exact path="/" component={Entry} />
-					</Switch>
-				</Container>
+			<div>
+				<div className={styles.app}>
+					<Container
+						className={styles.invitationBody}
+						style={{ background: `rgb(250, 240, 230) -110px 450px / 80% no-repeat url(${leaves1src})` }}
+					>
+						<LoginModal />
+						<Switch>
+							<Route exact path="/" component={Entry} />
+						</Switch>
+					</Container>
+				</div>
+				<div className={styles.footer}>
+          <span className={styles.kAndJText}>K&amp;J</span>
+				</div>
 			</div>
 		);
 	}

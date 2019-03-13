@@ -7,15 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\middleware\**" />
     <Compile Remove="wwwroot\fonts\**" />
     <Compile Remove="wwwroot\img\**" />
     <Compile Remove="wwwroot\lib\**" />
+    <Content Remove="ClientApp\middleware\**" />
     <Content Remove="wwwroot\fonts\**" />
     <Content Remove="wwwroot\img\**" />
     <Content Remove="wwwroot\lib\**" />
+    <EmbeddedResource Remove="ClientApp\middleware\**" />
     <EmbeddedResource Remove="wwwroot\fonts\**" />
     <EmbeddedResource Remove="wwwroot\img\**" />
     <EmbeddedResource Remove="wwwroot\lib\**" />
+    <None Remove="ClientApp\middleware\**" />
     <None Remove="wwwroot\fonts\**" />
     <None Remove="wwwroot\img\**" />
     <None Remove="wwwroot\lib\**" />
@@ -24,7 +28,6 @@
   <ItemGroup>
     <None Remove="ClientApp\components\.gitkeep" />
     <None Remove="ClientApp\containers\.gitkeep" />
-    <None Remove="ClientApp\middleware\.gitkeep" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\middleware\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\js\" />
