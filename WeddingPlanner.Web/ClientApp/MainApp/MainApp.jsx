@@ -21,7 +21,7 @@ import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Welcome from "../_components/Welcome";
 import LoginModal from "../LoginModal/LoginModal";
-import leaves1src from "../../Images/leaves1-64.png";
+import leaves1src from "../../Images/leaves1-32.png";
 import leaves2src from "../../Images/leaves2.png";
 
 class App extends Component
