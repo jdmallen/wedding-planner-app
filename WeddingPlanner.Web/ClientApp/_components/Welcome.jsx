@@ -42,6 +42,7 @@ const Welcome = () => (
             <FontAwesomeIcon icon="map-marker-alt" />
         </Button>
 			</div>
+			<h6>in Geneva, NY</h6>
 			<h3>5:30 p.m.</h3>
 			<h3>Adults Only Event</h3>
 		</div>
