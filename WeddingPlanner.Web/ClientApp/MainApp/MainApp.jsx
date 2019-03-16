@@ -21,7 +21,7 @@ import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Entry from "../_components/Entry";
 import LoginModal from "../LoginModal/LoginModal";
-import leaves1src from "../../Images/leaves1.png";
+import leaves1src from "../../Images/leaves1-64.png";
 import leaves2src from "../../Images/leaves2.png";
 
 class App extends Component
@@ -51,7 +51,7 @@ class App extends Component
 				<div className={styles.app}>
 					<Container
 						className={styles.invitationBody}
-						style={{ background: `rgb(250, 240, 230) -110px 450px / 80% no-repeat url(${leaves1src})` }}
+						style={{ background: `rgb(250, 240, 230) center / 90vmax no-repeat url(${leaves1src})` }}
 					>
 						<LoginModal />
 						<Switch>
