@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="JDMallen.Toolbox.EFCore.Services" Version="2.3.3" />
     <PackageReference Include="RestSharp" Version="106.5.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\toolbox\JDMallen.Toolbox.Microservices.EFCore\JDMallen.Toolbox.EFCore.Services.csproj" />
     <ProjectReference Include="..\WeddingPlanner.DataAccess\WeddingPlanner.DataAccess.csproj" />
   </ItemGroup>
 
