@@ -19,7 +19,7 @@ import {
 import classnames from "classnames";
 import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
-import Entry from "../_components/Entry";
+import Welcome from "../_components/Welcome";
 import LoginModal from "../LoginModal/LoginModal";
 import leaves1src from "../../Images/leaves1-64.png";
 import leaves2src from "../../Images/leaves2.png";
@@ -55,7 +55,7 @@ class App extends Component
 					>
 						<LoginModal />
 						<Switch>
-							<Route exact path="/" component={Entry} />
+							<Route exact path="/" component={Welcome} />
 						</Switch>
 					</Container>
 				</div>
