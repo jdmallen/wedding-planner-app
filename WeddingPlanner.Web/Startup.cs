@@ -59,6 +59,9 @@ namespace WeddingPlanner.Web
 
 			// Log.Debug("Configuration -- {0}: {1}", Configuration. );
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
+			Log.Logger.With("Settings", settings).Debug("Settings section bound to object.");
+
+			Log.Debug("Hosting environment is {HostingEnvironment}", Env.EnvironmentName);
 			var oAuthSettings =
 				Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
 			services.AddSingleton(settings);
