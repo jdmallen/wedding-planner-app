@@ -49,7 +49,7 @@ const Welcome = () => (
 		<div className={styles.welcomeNavigation}>
       <Button color="primary" size="lg" block>RSVP</Button>
       <Button color="secondary" size="lg" block>Hotel Information</Button>
-      <Button color="secondary" size="lg" block>Directions</Button>
+      <Button color="secondary" size="lg" block>Gift Registries</Button>
       <Button color="secondary" size="lg" block>Itinerary</Button>
 		</div>
 	</div>

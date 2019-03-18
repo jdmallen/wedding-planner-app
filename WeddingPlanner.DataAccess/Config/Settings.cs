@@ -1,7 +1,7 @@
 ﻿namespace WeddingPlanner.DataAccess.Config
 {
-    public class Settings
-    {
+	public class Settings
+	{
 		public string DbConnectionDbName { get; set; }
 
 		public string DbConnectionServer { get; set; }

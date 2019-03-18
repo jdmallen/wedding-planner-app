@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 using JDMallen.Toolbox.EFCore.Extensions;
 using JDMallen.Toolbox.EFCore.Patterns.Repository.Interfaces;
@@ -13,17 +14,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.AspNetCore;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Entities.Identity;
 using WeddingPlanner.Services.Implementations;
 using WeddingPlanner.Services.Interfaces;
+using WeddingPlanner.Web.Extensions;
+using WeddingPlanner.Web.Middleware;
 using WeddingPlanner.Web.Utilities;
 
 namespace WeddingPlanner.Web
@@ -43,6 +46,18 @@ namespace WeddingPlanner.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var loggerConfig = new LoggerConfiguration();
+			loggerConfig.ReadFrom.Configuration(Configuration);//.WriteTo.Debug(new CompactJsonFormatter());
+			var logger = loggerConfig.CreateLogger();
+			Log.Logger = logger;
+			services.AddSingleton<ILoggerFactory>(
+				x => new SerilogLoggerFactory(null, true));
+
+			Log.Debug("Reading settings from configuration sources.");
+
+			LogConfiguration();
+
+			// Log.Debug("Configuration -- {0}: {1}", Configuration. );
 			var settings = Configuration.GetSection("Settings").Get<Settings>();
 			var oAuthSettings =
 				Configuration.GetSection("OAuth").Get<OAuthConfiguration>();
@@ -181,11 +196,13 @@ namespace WeddingPlanner.Web
 			ILoggerFactory loggerFactory,
 			WpDbContext dbContext)
 		{
+			app.UseRequestContextMiddleware();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 			}
-			
+
 			app.UseAuthentication();
 
 			app.UseStaticFiles("");
@@ -226,6 +243,23 @@ namespace WeddingPlanner.Web
 
 			dbContext.DropTablesAndEnsureCreated(true, orderOfDroppage);
 #endif
+		}
+
+		private void LogConfiguration()
+		{
+			foreach (var configurationProvider in
+				((ConfigurationRoot) Configuration)
+				.Providers)
+			{
+				var baseType = configurationProvider.GetType().BaseType;
+				var prop = baseType.GetProperty(
+					"Data",
+					BindingFlags.NonPublic | BindingFlags.Instance);
+				var data = (IDictionary<string, string>)
+					prop?.GetValue(configurationProvider);
+				Log.Logger.With("DictionaryData", data).Debug(
+					"Values from {ProviderTypeName}", configurationProvider.GetType().Name);
+			}
 		}
 	}
 }
