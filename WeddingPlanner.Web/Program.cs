@@ -77,7 +77,7 @@ namespace WeddingPlanner.Web
 							}
 						}
 
-						config.AddEnvironmentVariables("ASPNETCORE_");
+						config.AddEnvironmentVariables("WP_");
 
 						if (args != null)
 						{
