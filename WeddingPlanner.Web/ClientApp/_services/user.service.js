@@ -1,4 +1,6 @@
-﻿import axios from "axios";
+﻿/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+import axios from "axios";
 import { authHeader, config } from "../_helpers";
 
 function handleResponse(resp)
@@ -22,7 +24,7 @@ export function login(email, password)
 	).then(response => handleResponse(response))
 		.catch((error) =>
 		{
-			console.log(error);
+			console.error(error);
 		});
 }
 

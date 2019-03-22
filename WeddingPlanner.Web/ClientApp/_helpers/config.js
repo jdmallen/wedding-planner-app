@@ -1,5 +1,5 @@
 ﻿const CONFIG = {
-	apiUrl: "https://localhost:44321/api",
+	apiUrl: "http://localhost:5000/api",
 };
 
 export default CONFIG;

@@ -50,6 +50,7 @@ namespace WeddingPlanner.DataAccess.Entities
 
 		public string Zip { get; set; }
 
+		[JsonIgnore]
 		public virtual ICollection<Invitation> Invitations { get; set; }
 	}
 }

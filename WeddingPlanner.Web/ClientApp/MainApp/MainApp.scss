@@ -1,14 +1,22 @@
 @import "../../Styles/customBootstrapVariables.scss";
 @import "../../Styles/_mixins.scss";
 
+$shadow-font: $gray-700;
 
+.kAndJText {
+	font-family: 'Shadows Into Light', cursive;
+	letter-spacing: 0.25em;
+	color: $linen !important;
+	//font-size: 20vmin;
+	text-shadow: -1px -1px 0 $shadow-font, 0 -1px 0 $shadow-font, 1px -1px 0 $shadow-font, 1px 0 0 $shadow-font, 1px 1px 0 $shadow-font, 0 1px 0 $shadow-font, -1px 1px 0 $shadow-font, -1px 0 0 $shadow-font;
+}
 
 .app {
 	background-color: darken($linen, 5%);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	min-height: 100vh;
+	min-height: 95vh;
 	overflow-x: hidden;
 	z-index: -10;
 
@@ -29,14 +37,4 @@
 	background-color: darken($linen, 10%);
 	padding: 0 15px;
 
-	$shadow-font: $gray-700;
-
-	.kAndJText {
-		font-family: 'Shadows Into Light', cursive;
-		letter-spacing: 0.25em;
-		margin-right: -0.25em;
-		color: $linen;
-		//font-size: 20vmin;
-		text-shadow: -1px -1px 0 $shadow-font, 0 -1px 0 $shadow-font, 1px -1px 0 $shadow-font, 1px 0 0 $shadow-font, 1px 1px 0 $shadow-font, 0 1px 0 $shadow-font, -1px 1px 0 $shadow-font, -1px 0 0 $shadow-font;
-	}
 }

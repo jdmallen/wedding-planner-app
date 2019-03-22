@@ -6,7 +6,7 @@ import fontawesome from "@fortawesome/fontawesome";
 import {
 	faUser,
 	faMapMarkerAlt,
-	faCalendarAlt
+	faCalendarAlt,
 } from "@fortawesome/fontawesome-free-solid";
 import store from "./store";
 import App from "./MainApp/MainApp";

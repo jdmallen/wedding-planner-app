@@ -16,13 +16,12 @@ import {
 	NavItem,
 	NavLink,
 } from "reactstrap";
-import classnames from "classnames";
 import { toggleNav, openModal, closeModal } from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Welcome from "../_components/Welcome";
 import LoginModal from "../LoginModal/LoginModal";
+import RsvpForm from "../RsvpForm/RsvpForm";
 import leaves1src from "../../Images/leaves1-32.png";
-import leaves2src from "../../Images/leaves2.png";
 
 class App extends Component
 {
@@ -45,22 +44,51 @@ class App extends Component
 		this.props.toggleNav(!this.props.isNavbarOpen);
 	}
 
-	render() {
+	render()
+	{
 		return (
 			<div>
+				<Navbar color="linen" light expand="md">
+					<NavbarBrand tag={Link} className={styles.kAndJText} to="/">
+						K&amp;J
+					</NavbarBrand>
+					<NavbarToggler onClick={() => this.toggleNavbar()} />
+					<Collapse isOpen={this.props.isNavbarOpen} navbar>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<Link to="/rsvp" className="nav-link">RSVP</Link>
+							</NavItem>
+							<NavItem>
+								<Link to="/hotels" className="nav-link">Hotel Information</Link>
+							</NavItem>
+							<NavItem>
+								<Link to="/registries" className="nav-link">
+									Gift Registries
+								</Link>
+							</NavItem>
+							<NavItem>
+								<Link to="/itinerary" className="nav-link">Itinerary</Link>
+							</NavItem>
+							<NavLink
+								href="#"
+								onClick={() => this.toggleLoginModal()}
+							>Admin
+							</NavLink>
+						</Nav>
+					</Collapse>
+				</Navbar>
 				<div className={styles.app}>
 					<Container
 						className={styles.invitationBody}
+						// eslint-disable-next-line max-len
 						style={{ background: `rgb(250, 240, 230) center / 90vmax no-repeat url(${leaves1src})` }}
 					>
 						<LoginModal />
 						<Switch>
 							<Route exact path="/" component={Welcome} />
+							<Route path="/rsvp" component={RsvpForm} />
 						</Switch>
 					</Container>
-				</div>
-				<div className={styles.footer}>
-          <span className={styles.kAndJText}>K&amp;J</span>
 				</div>
 			</div>
 		);
