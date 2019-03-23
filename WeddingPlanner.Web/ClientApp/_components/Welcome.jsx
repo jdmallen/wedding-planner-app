@@ -1,6 +1,10 @@
 ﻿import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "reactstrap";
+import {
+	Button,
+	Col,
+	Row,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 import styles from "./Welcome.scss";
 
@@ -40,16 +44,35 @@ const Welcome = () => (
 			<h3>Adults Only Event</h3>
 		</div>
 		<div className={styles.welcomeNavigation}>
-			<Link to="/rsvp" className="btn btn-primary btn-lg btn-block">RSVP</Link>
-			<Link to="/hotels" className="btn btn-secondary btn-lg btn-block">
-				Hotel Information
-			</Link>
-			<Link to="/registries" className="btn btn-secondary btn-lg btn-block">
-				Gift Registries
-			</Link>
-			<Link to="/itinerary" className="btn btn-secondary btn-lg btn-block">
-				Itinerary
-			</Link>
+			<Row className={styles.customRow}>
+				<Col xs="12">
+					<Link to="/rsvp" className="btn btn-primary btn-lg btn-block">RSVP</Link>
+				</Col>
+			</Row>
+			<Row className={styles.customRow}>
+				<Col xs="6">
+					<Link to="/hotels" className="btn btn-secondary btn-lg btn-block">
+						Hotel Info
+					</Link>
+				</Col>
+				<Col xs="6">
+					<Link to="/registries" className="btn btn-secondary btn-lg btn-block">
+						Gift Registries
+					</Link>
+				</Col>
+			</Row>
+			<Row className={styles.customRow}>
+				<Col xs="6">
+					<Link to="/itinerary" className="btn btn-secondary btn-lg btn-block">
+						Itinerary
+					</Link>
+				</Col>
+				<Col xs="6">
+					<Link to="/us" className="btn btn-secondary btn-lg btn-block">
+						Us
+					</Link>
+				</Col>
+			</Row>
 		</div>
 	</div>
 );
