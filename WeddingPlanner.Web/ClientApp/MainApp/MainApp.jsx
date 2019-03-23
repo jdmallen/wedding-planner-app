@@ -59,11 +59,11 @@ class App extends Component
 								<Link to="/rsvp" className="nav-link">RSVP</Link>
 							</NavItem>
 							<NavItem>
-								<Link to="/hotels" className="nav-link">Hotel Information</Link>
+								<Link to="/hotels" className="nav-link">Hotels</Link>
 							</NavItem>
 							<NavItem>
 								<Link to="/registries" className="nav-link">
-									Gift Registries
+									Registries
 								</Link>
 							</NavItem>
 							<NavItem>

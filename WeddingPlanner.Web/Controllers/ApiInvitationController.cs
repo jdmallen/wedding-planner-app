@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WeddingPlanner.DataAccess.Entities;
@@ -9,7 +10,7 @@ namespace WeddingPlanner.Web.Controllers
 {
 	// [Authorize]
 	[Route("api/invitation")]
-    public class ApiInvitationController : Controller
+	public class ApiInvitationController : Controller
 	{
 		// todo go back to interface
 		private readonly IInvitationService _invitationService;
@@ -33,10 +34,9 @@ namespace WeddingPlanner.Web.Controllers
 			return Ok(await _invitationService.FindPaged(query));
 		}
 
-
 		[HttpGet]
 		[Route("types")]
-	    public IActionResult GetInvitationTypes()
+		public IActionResult GetInvitationTypes()
 		{
 			return Ok(_invitationService.GetAllInvitationTypes());
 		}
@@ -46,10 +46,10 @@ namespace WeddingPlanner.Web.Controllers
 		{
 			return Ok(await _invitationService.ListAllInvitations().ToList());
 		}
-		
-        public IActionResult Index()
-        {
-            return Ok();
-        }
-    }
+
+		public IActionResult Index()
+		{
+			return Ok();
+		}
+	}
 }

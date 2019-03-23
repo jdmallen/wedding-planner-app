@@ -1,5 +1,5 @@
 ﻿import React from "react";
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import styles from "./Welcome.scss";
