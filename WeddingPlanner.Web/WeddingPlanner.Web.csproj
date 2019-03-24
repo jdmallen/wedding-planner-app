@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>229e6bf0-9922-406f-8522-7102345f9ab6</UserSecretsId>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,10 +27,6 @@
   <ItemGroup>
     <None Remove="ClientApp\components\.gitkeep" />
     <None Remove="ClientApp\containers\.gitkeep" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="cert.pfx" />
   </ItemGroup>
 
   <ItemGroup>
