@@ -7,14 +7,20 @@ import {
 	CardFooter,
 	CardHeader,
 	CardImg,
-	CardSubtitle,
 	CardText,
-	CardTitle,
 } from "reactstrap";
 import styles from "./HotelCard.scss";
 
 const HotelCard = ({
-	logo, name, address, price, phone, websiteUrl, directionsUrl, rooms,
+	logo,
+	name,
+	address,
+	price,
+	phone,
+	websiteUrl,
+	directionsUrl,
+	rooms,
+	googleMapsIframeUrl,
 }) => (
 	<Card className={styles.hotelCard}>
 		<CardHeader>{name}</CardHeader>
@@ -27,12 +33,22 @@ const HotelCard = ({
 			</CardText>
 		</CardBody>
 		<CardFooter>
-			<ButtonGroup className={styles.hotelButtons}>
-				<Button color="success" href={`"tel:${phone}`}>Call</Button>
+			<ButtonGroup size="sm" className={styles.hotelButtons}>
+				<Button color="success" href={`tel:${phone}`}>Call</Button>
 				<Button color="secondary" href={directionsUrl}>Directions</Button>
-				<Button color="secondary" href={websiteUrl}>Website</Button>
+				<Button color="secondary" href={websiteUrl}>Site</Button>
 			</ButtonGroup>
 		</CardFooter>
+		<iframe
+			className="d-none d-xl-block"
+			title="map"
+			src={googleMapsIframeUrl}
+			width="100%"
+			height="300"
+			frameBorder="0"
+			style={{ border: 0 }}
+			allowFullScreen
+		/>
 	</Card>
 );
 

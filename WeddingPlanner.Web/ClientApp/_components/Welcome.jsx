@@ -18,7 +18,8 @@ const Welcome = () => (
 		</div>
 		<div className={styles.weddingInfo}>
 			<div className={styles.headingWithButton}>
-				<h1>July 27, 2019</h1>
+				<h2 className="d-block d-sm-none">July 27, 2019</h2>
+				<h1 className="d-none d-sm-block">July 27, 2019</h1>
 				<Button
 					outline
 					color="info"
@@ -29,7 +30,8 @@ const Welcome = () => (
 				</Button>
 			</div>
 			<div className={styles.headingWithButton}>
-				<h2>Ventosa Vineyards</h2>
+				<h4 className="d-block d-sm-none">Ventosa Vineyards</h4>
+				<h2 className="d-none d-sm-block">Ventosa Vineyards</h2>
 				<Button
 					outline
 					color="info"
@@ -46,18 +48,22 @@ const Welcome = () => (
 		<div className={styles.welcomeNavigation}>
 			<Row className={styles.customRow}>
 				<Col xs="12">
-					<Link to="/rsvp" className="btn btn-primary btn-lg btn-block">RSVP</Link>
+					<Link to="/rsvp" className="btn btn-primary btn-lg btn-block">
+						RSVP
+					</Link>
 				</Col>
 			</Row>
 			<Row className={styles.customRow}>
 				<Col xs="6">
 					<Link to="/hotels" className="btn btn-secondary btn-lg btn-block">
-						Hotel Info
+						<span className="d-none d-sm-block">Hotel Information</span>
+						<span className="d-block d-sm-none">Hotels</span>
 					</Link>
 				</Col>
 				<Col xs="6">
 					<Link to="/registries" className="btn btn-secondary btn-lg btn-block">
-						Gift Registries
+						<span className="d-none d-sm-block">Gift Registries</span>
+						<span className="d-block d-sm-none">Registries</span>
 					</Link>
 				</Col>
 			</Row>

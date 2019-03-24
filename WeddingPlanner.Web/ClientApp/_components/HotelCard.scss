@@ -1,3 +1,6 @@
+@import "../../Styles/customBootstrapVariables.scss";
+@import "../../node_modules/bootstrap/scss/_mixins.scss";
+
 .hotelCard {
 	img {
 		padding-top: 15px;
@@ -6,6 +9,10 @@
 		max-height: 100px;
 		width: auto;
 		height: auto;
+
+		@include media-breakpoint-only(sm) {
+			max-width: 120px;
+		}
 	}
 
 	.hotelButtons {
