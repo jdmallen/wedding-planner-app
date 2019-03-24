@@ -1,4 +1,5 @@
 ﻿import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -142,4 +143,4 @@ const mapDispatchToProps = dispatch => ({
 	login: (email, password) => dispatch(login(email, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginModal));

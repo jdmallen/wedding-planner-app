@@ -1,4 +1,5 @@
 ﻿import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -120,4 +121,4 @@ const mapDispatchToProps = dispatch => ({
 	codeLookup: code => dispatch(searchInvitationsByCode(code)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RsvpForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RsvpForm));

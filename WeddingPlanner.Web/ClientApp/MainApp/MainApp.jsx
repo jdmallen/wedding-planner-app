@@ -4,6 +4,7 @@ import {
 	Switch,
 	Route,
 	Link,
+	withRouter,
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
@@ -49,7 +50,7 @@ class App extends Component
 	{
 		return (
 			<div>
-				<Navbar color="linen" light expand="md">
+				<Navbar className={styles.navBarFont} color="linen" light expand="md">
 					<NavbarBrand tag={Link} className={styles.kAndJText} to="/">
 						K&amp;J
 					</NavbarBrand>
@@ -122,4 +123,4 @@ const mapDispatchToProps = dispatch => ({
 	closeModal: () => dispatch(closeModal()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
