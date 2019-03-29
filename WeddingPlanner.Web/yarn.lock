@@ -1172,7 +1172,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@^6.5.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -3190,6 +3190,11 @@ iferr@^0.1.5:
   resolved "https://registry.yarnpkg.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
   integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
 
+iframe-resizer@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/iframe-resizer/-/iframe-resizer-4.0.4.tgz#56b93b47512d80edabf8bcbdca2e227195c791a6"
+  integrity sha512-02+nZ1kBzTFjLqaM24zgqM6GQ9KUzOA55T0y9sn/Le7oe2xQ2mASXAyoELZmbbWdWKG+bkzcmIpRi8j1fJ5AcA==
+
 ignore-walk@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-3.0.1.tgz#a83e62e7d272ac0e3b551aaa82831a19b69f82f8"
@@ -5134,6 +5139,13 @@ react-dom@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.13.5"
+
+react-iframe-resizer-super@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-iframe-resizer-super/-/react-iframe-resizer-super-0.2.2.tgz#6838b52f1bdc85f004b71090aaca7fde8f26da1d"
+  integrity sha512-iWPEkYsNjQYi7ZEy1IBoJUIjTV47De8RhSbxxtAP2YUcYEArS6GKxIAAyl2gexM65ahXW9+NUP6hPFIxO0Du8A==
+  dependencies:
+    babel-runtime "^6.5.0"
 
 react-inlinesvg@^0.8.4:
   version "0.8.4"

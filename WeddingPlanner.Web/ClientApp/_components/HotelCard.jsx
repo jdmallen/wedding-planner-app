@@ -26,11 +26,9 @@ const HotelCard = ({
 		<CardHeader>{name}</CardHeader>
 		<CardImg top src={logo} alt={`${name} logo`} />
 		<CardBody>
-			<CardText>
-				<h6>${price}/night (plus taxes & fees)</h6>
-				<p className="small">{rooms}</p>
-				<p>{address}<br />{phone}</p>
-			</CardText>
+			<h6>${price}/night (plus taxes & fees)</h6>
+			<p className="small">{rooms}</p>
+			<p>{address}<br />{phone}</p>
 		</CardBody>
 		<CardFooter>
 			<ButtonGroup size="sm" className={styles.hotelButtons}>

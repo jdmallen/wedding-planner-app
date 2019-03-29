@@ -7,6 +7,7 @@ import {
 	faUser,
 	faMapMarkerAlt,
 	faCalendarAlt,
+	faCircleNotch,
 } from "@fortawesome/free-solid-svg-icons";
 import store from "./store";
 import App from "./MainApp/MainApp";
@@ -16,7 +17,7 @@ import "../Styles/customBootstrap.scss";
 
 getBrowserInfo();
 
-library.add(faUser, faMapMarkerAlt, faCalendarAlt);
+library.add(faUser, faMapMarkerAlt, faCalendarAlt, faCircleNotch);
 
 // pass initialState to store() once you have it
 const reduxStore = store();

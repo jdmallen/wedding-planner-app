@@ -60,17 +60,17 @@ const Hotels = function Hotels()
 				We have secured blocks of rooms at the below hotels.<br />
 				Mention &quot;Merritt-Mallen Wedding&quot; to get the rate!
 			</p>
-			<p className="small">
-				<em>
-					If any hotel reports that they&apos;re out of rooms,
-					please <a href="mailto:us@kristenandjesse.com">let us know</a>!
-				</em>
-			</p>
 			<CardDeck>
 				{holidayInn}
 				{hamptonInn}
 				{fairfieldInn}
 			</CardDeck>
+			<p className={styles.troubleText}>
+				<em>
+					If any hotel reports that they&apos;re out of rooms,
+					please <a href="mailto:us@kristenandjesse.com">let us know</a>!
+				</em>
+			</p>
 		</div>
 	);
 };

@@ -22,7 +22,7 @@ $shadow-font: $gray-700;
 
 	.invitationBody {
 		@include border-radius(20px);
-		height: 90vh;
+		min-height: 90vh;
 		padding: 15px;
 	}
 }
