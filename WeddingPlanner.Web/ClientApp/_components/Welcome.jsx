@@ -14,7 +14,7 @@ const Welcome = () => (
 			{"Kristen & Jesse"}
 		</div>
 		<div className={styles.kAndJShortOverlay}>
-			{"K\u0026J"}
+			{`K${String.fromCharCode(38)}J`}
 		</div>
 		<div className={styles.weddingInfo}>
 			<div className={styles.headingWithButton}>
