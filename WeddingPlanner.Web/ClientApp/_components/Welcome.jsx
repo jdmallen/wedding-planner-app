@@ -11,10 +11,10 @@ import styles from "./Welcome.scss";
 const Welcome = () => (
 	<div className={styles.entryOuterDiv}>
 		<div className={styles.kAndJOverlay}>
-			Kristen & Jesse
+			{"Kristen & Jesse"}
 		</div>
 		<div className={styles.kAndJShortOverlay}>
-			K&amp;J
+			{"K&amp;J"}
 		</div>
 		<div className={styles.weddingInfo}>
 			<div className={styles.headingWithButton}>
@@ -49,7 +49,7 @@ const Welcome = () => (
 			<Row className={styles.customRow}>
 				<Col xs="12">
 					<Link to="/rsvp" className="btn btn-primary btn-lg btn-block">
-						RSVP
+						{"RSVP"}
 					</Link>
 				</Col>
 			</Row>
@@ -70,12 +70,12 @@ const Welcome = () => (
 			<Row className={styles.customRow}>
 				<Col xs="6">
 					<Link to="/itinerary" className="btn btn-secondary btn-lg btn-block">
-						Itinerary
+						{"Itinerary"}
 					</Link>
 				</Col>
 				<Col xs="6">
 					<Link to="/us" className="btn btn-secondary btn-lg btn-block">
-						Us
+						{"Us"}
 					</Link>
 				</Col>
 			</Row>

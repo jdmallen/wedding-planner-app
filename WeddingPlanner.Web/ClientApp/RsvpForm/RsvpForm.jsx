@@ -1,32 +1,12 @@
 ﻿import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import {
-	Button,
-	Col,
-	Container,
-	Form,
-	FormGroup,
-	Input,
-	Label,
-	Row,
-} from "reactstrap";
+import { Container } from "reactstrap";
 import ReactIframeResizer from "react-iframe-resizer-super";
-import { searchInvitationsByCode } from "../_ducks/invitation.lookup";
-import { openModal, closeModal } from "../_ducks/ui";
 import styles from "./RsvpForm.scss";
 
 class RsvpForm extends Component
 {
-	constructor(props)
-	{
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
 	componentDidMount()
 	{
 		setTimeout(() =>
@@ -34,27 +14,6 @@ class RsvpForm extends Component
 			document.getElementsByClassName("fa-circle-notch")[0]
 				.style.display = "none";
 		}, 2000);
-	}
-
-	componentWillUnmount()
-	{
-	}
-
-	handleChange(e)
-	{
-		const { name, value } = e.target;
-		this.setState({ [name]: value });
-	}
-
-	handleSubmit(e)
-	{
-		e.preventDefault();
-
-		const { invitationCode } = this.state;
-		if (invitationCode)
-		{
-			this.props.codeLookup(invitationCode);
-		}
 	}
 
 	render()
@@ -87,7 +46,9 @@ class RsvpForm extends Component
 				/>
 				<p className={styles.troubleText}>
 					<em>
-						{"Having trouble with the form above? Please "}
+						{"Having trouble with the form above? "}
+						{"Seeing just a girl's head? Try refreshing the site. "}
+						{"If that fails, please "}
 						<a href="mailto:us@kristenandjesse.com">let us know</a>{"!"}
 					</em>
 				</p>
@@ -96,22 +57,4 @@ class RsvpForm extends Component
 	}
 }
 
-RsvpForm.propTypes = {
-	isModalOpen: PropTypes.bool,
-};
-
-RsvpForm.defaultProps = {
-	isModalOpen: false,
-};
-
-const mapStateToProps = state => ({
-	isModalOpen: state.ui.isModalOpen,
-});
-
-const mapDispatchToProps = dispatch => ({
-	openModal: () => dispatch(openModal()),
-	closeModal: () => dispatch(closeModal()),
-	codeLookup: code => dispatch(searchInvitationsByCode(code)),
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RsvpForm));
+export default withRouter(RsvpForm);

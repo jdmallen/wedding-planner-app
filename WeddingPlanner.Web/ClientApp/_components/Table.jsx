@@ -1,6 +1,6 @@
 ﻿import React from "react";
 
-const Table = props => (
+const Table = ({ list }) => (
 	<table>
 		<thead>
 			<tr>
@@ -12,7 +12,7 @@ const Table = props => (
 		</thead>
 		<tbody>
 			{
-				props.list.map(row => (
+				list.map(row => (
 					<tr key={row.id}>
 						<td>{row.id}</td>
 						<td>{row.name}</td>

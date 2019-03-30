@@ -1,5 +1,6 @@
 ﻿// Actions
 const TOGGLE_NAV = "wedding-planner/ui/TOGGLE_NAV";
+const CLOSE_NAV = "wedding-planner/ui/CLOSE_NAV";
 const OPEN_MODAL = "wedding-planner/ui/OPEN_MODAL";
 const CLOSE_MODAL = "wedding-planner/ui/CLOSE_MODAL";
 
@@ -11,6 +12,11 @@ export default (state = {
 {
 	switch (action.type)
 	{
+	case CLOSE_NAV:
+		return {
+			...state,
+			isNavbarOpen: false,
+		};
 	case TOGGLE_NAV:
 		return {
 			...state,
@@ -32,6 +38,13 @@ export default (state = {
 };
 
 // Action Creators
+export function closeNav()
+{
+	return {
+		type: CLOSE_NAV,
+	};
+}
+
 export function toggleNav(boolValue)
 {
 	return {

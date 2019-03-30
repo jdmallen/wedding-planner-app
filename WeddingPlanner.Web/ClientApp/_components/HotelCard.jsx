@@ -7,7 +7,6 @@ import {
 	CardFooter,
 	CardHeader,
 	CardImg,
-	CardText,
 } from "reactstrap";
 import styles from "./HotelCard.scss";
 
@@ -26,9 +25,9 @@ const HotelCard = ({
 		<CardHeader>{name}</CardHeader>
 		<CardImg top src={logo} alt={`${name} logo`} />
 		<CardBody>
-			<h6>${price}/night (plus taxes & fees)</h6>
+			<h6>{`${price}/night (plus taxes & fees)`}</h6>
 			<p className="small">{rooms}</p>
-			<p>{address}<br />{phone}</p>
+			<p>{`${address}<br />${phone}`}</p>
 		</CardBody>
 		<CardFooter>
 			<ButtonGroup size="sm" className={styles.hotelButtons}>

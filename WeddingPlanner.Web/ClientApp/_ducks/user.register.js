@@ -1,4 +1,4 @@
-﻿import { userService } from "../_services";
+﻿import { register as registerService } from "../_services";
 import { success as successAlert, error as errorAlert } from "./alert";
 import { history } from "../_helpers";
 
@@ -34,7 +34,7 @@ export function register(user)
 	{
 		dispatch(request(user));
 
-		userService.register(user)
+		registerService(user)
 			.then(
 				(userResp) =>
 				{

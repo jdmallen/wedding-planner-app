@@ -12,7 +12,7 @@ $shadow-font: $gray-700;
 }
 
 .app {
-	background-color: darken($linen, 5%);
+	background-color: $linen;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

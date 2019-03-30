@@ -82,7 +82,7 @@ class LoginModal extends Component
 						toggle={this.toggleModal}
 						className={styles.properModalTitle}
 					>
-						Please sign in
+						{"Please sign in"}
 					</ModalHeader>
 					<ModalBody>
 						<FormGroup className={styles.closeMarginFormControl}>
@@ -143,4 +143,6 @@ const mapDispatchToProps = dispatch => ({
 	login: (email, password) => dispatch(login(email, password)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginModal));
+export default withRouter(
+	connect(mapStateToProps, mapDispatchToProps)(LoginModal)
+);
