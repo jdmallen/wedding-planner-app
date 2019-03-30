@@ -14,7 +14,7 @@ const Welcome = () => (
 			{"Kristen & Jesse"}
 		</div>
 		<div className={styles.kAndJShortOverlay}>
-			K&amp;J
+			{"K&J"}
 		</div>
 		<div className={styles.weddingInfo}>
 			<div className={styles.headingWithButton}>
