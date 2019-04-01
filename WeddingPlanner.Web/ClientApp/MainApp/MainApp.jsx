@@ -21,6 +21,7 @@ import styles from "./MainApp.scss";
 import Welcome from "../_components/Welcome";
 import Hotels from "../_components/Hotels";
 import RsvpForm from "../RsvpForm/RsvpForm";
+import Itinerary from "../_components/Itinerary";
 import leaves1src from "../../Images/leaves1-32.png";
 
 class App extends Component
@@ -54,7 +55,12 @@ class App extends Component
 		return (
 			<div>
 				<Navbar className={styles.navBarFont} color="linen" light expand="md">
-					<NavbarBrand tag={Link} className={styles.kAndJText} to="/">
+					<NavbarBrand
+						tag={Link}
+						className={styles.kAndJText}
+						to="/"
+						onClick={() => this.closeNav()}
+					>
 						K&amp;J
 					</NavbarBrand>
 					<NavbarToggler onClick={() => this.toggleNavbar()} />
@@ -118,6 +124,7 @@ class App extends Component
 							<Route exact path="/" component={Welcome} />
 							<Route path="/rsvp" component={RsvpForm} />
 							<Route path="/hotels" component={Hotels} />
+							<Route path="/itinerary" component={Itinerary} />
 						</Switch>
 					</Container>
 				</div>
