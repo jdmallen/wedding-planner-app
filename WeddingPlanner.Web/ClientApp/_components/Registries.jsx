@@ -12,9 +12,9 @@ const Stores = function Stores()
 			logo={amazonLogo}
 			name="Amazon.com"
 			// eslint-disable-next-line max-len
-			websiteUrl="https://smile.amazon.com"
+			websiteUrl="https://www.amazon.com"
 			// eslint-disable-next-line max-len
-			registryUrl="https://smile.amazon.com/wedding/kristen-merritt-jesse-mallen-geneva-july-2019/registry/3IA093643JPQR"
+			registryUrl="https://www.amazon.com/wedding/kristen-merritt-jesse-mallen-geneva-july-2019/registry/3IA093643JPQR"
 		/>);
 
 	const bbb =
