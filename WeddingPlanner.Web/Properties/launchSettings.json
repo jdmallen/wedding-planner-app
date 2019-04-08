@@ -18,7 +18,11 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+				"ASPNETCORE_ENVIRONMENT": "Development",
+				"WP_Settings__DbConnectionPassword":"8De1IulIxsQ9k6ty",
+				"WP_Settings__JwtSecretKey":"S*@9&rA$D6W3v27ZXfay6!dVTnyH^^!aac*999z2pckX&btge2S54QZ8yFTk&yXq7*S^xd6hQVQ6tt$#dK7Em!rMv*58d!qxRpHeDv#z*&WCV69cBh6Pnsd8DJt#WqD!",
+				"WP_OAuth__GithubClientSecret":"5457f68b15ddb477b283b482f5bd182ba863e740",
+				"WP_OAuth__GoogleClientSecret":"grr-GA5JDVSX8MzdhpGxoML-"
       },
       "applicationUrl": "http://localhost:5000/"
     }

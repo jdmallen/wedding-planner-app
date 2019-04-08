@@ -22,6 +22,7 @@ import Welcome from "../_components/Welcome";
 import Hotels from "../_components/Hotels";
 import RsvpForm from "../RsvpForm/RsvpForm";
 import Itinerary from "../_components/Itinerary";
+import Registries from "../_components/Registries";
 import leaves1src from "../../Images/leaves1-32.png";
 
 class App extends Component
@@ -125,6 +126,7 @@ class App extends Component
 							<Route path="/rsvp" component={RsvpForm} />
 							<Route path="/hotels" component={Hotels} />
 							<Route path="/itinerary" component={Itinerary} />
+							<Route path="/registries" component={Registries} />
 						</Switch>
 					</Container>
 				</div>

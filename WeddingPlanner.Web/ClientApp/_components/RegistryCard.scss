@@ -1,15 +1,14 @@
 @import "../../Styles/customBootstrapVariables.scss";
 @import "../../node_modules/bootstrap/scss/_mixins.scss";
 
-.hotelCard {
+.storeCard {
 	.cardBody{
+		text-align: center;
 	}
 	.logoImg {
 		align-self: center;
 		display: block;
 		max-width: 100%;
-		text-align: center;
-		padding-bottom: 25px;
 	}
 	img {
 		max-height: 100px;
@@ -22,7 +21,7 @@
 		}
 	}
 
-	.hotelButtons {
+	.storeButtons {
 		width: 100%;
 	}
 }

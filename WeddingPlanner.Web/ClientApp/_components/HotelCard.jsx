@@ -23,8 +23,10 @@ const HotelCard = ({
 }) => (
 	<Card className={styles.hotelCard}>
 		<CardHeader>{name}</CardHeader>
-		<CardImg top src={logo} alt={`${name} logo`} />
-		<CardBody>
+		<CardBody className={styles.cardBody}>
+			<a className={styles.logoImg} href={websiteUrl}>
+				<CardImg top src={logo} alt={`${name} logo`} />
+			</a>
 			<h6>{`${price}/night (plus taxes & fees)`}</h6>
 			<p className="small">{rooms}</p>
 			<p>{address}<br />{phone}</p>
@@ -32,7 +34,9 @@ const HotelCard = ({
 		<CardFooter>
 			<ButtonGroup
 				size="sm"
-				className={classnames(styles.hotelButtons, "d-sm-none d-md-block")}
+				className={
+					classnames(styles.hotelButtons, "d-sm-none d-md-inline-flex")
+				}
 			>
 				<Button color="success" href={`tel:${phone}`}>Call</Button>
 				<Button color="secondary" href={directionsUrl}>Directions</Button>
@@ -42,7 +46,7 @@ const HotelCard = ({
 				size="sm"
 				vertical
 				className={
-					classnames(styles.hotelButtons, "d-none d-sm-block d-md-none")
+					classnames(styles.hotelButtons, "d-none d-sm-inline-flex d-md-none")
 				}
 			>
 				<Button color="success" href={`tel:${phone}`}>Call</Button>
