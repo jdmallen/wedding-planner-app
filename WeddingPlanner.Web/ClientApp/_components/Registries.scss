@@ -1,0 +1,15 @@
+.center {
+	text-align: center;
+}
+
+.customRow {
+	+ .customRow {
+		margin-top: 0.5rem;
+	}
+}
+
+.troubleText {
+	text-align: center;
+	font-size: 1.5vmax;
+	padding: 20px 0;
+}

@@ -41,8 +41,8 @@ const Stores = function Stores()
 			</CardDeck>
 			<p className={styles.troubleText}>
 				<em>
-					If any hotel reports that they&apos;re out of rooms,
-					please <a href="mailto:us@kristenandjesse.com">let us know</a>!
+					{"If any of the registry links aren't working, please "}
+					<a href="mailto:us@kristenandjesse.com">let us know</a>{"!"}
 				</em>
 			</p>
 		</div>

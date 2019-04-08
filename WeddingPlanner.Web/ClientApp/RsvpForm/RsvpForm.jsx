@@ -47,8 +47,8 @@ class RsvpForm extends Component
 				<p className={styles.troubleText}>
 					<em>
 						{"Having trouble with the form above? "}
-						{"Seeing just a girl's head? Try refreshing the site. "}
-						{"If that fails, please "}
+						{"Seeing just a picture of a girl's head? "}
+						{"Try refreshing the site. If that fails, please "}
 						<a href="mailto:us@kristenandjesse.com">let us know</a>{"!"}
 					</em>
 				</p>

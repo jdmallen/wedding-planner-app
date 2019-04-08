@@ -23,6 +23,7 @@ import Hotels from "../_components/Hotels";
 import RsvpForm from "../RsvpForm/RsvpForm";
 import Itinerary from "../_components/Itinerary";
 import Registries from "../_components/Registries";
+import Us from "../_components/Us";
 import leaves1src from "../../Images/leaves1-32.png";
 
 class App extends Component
@@ -125,8 +126,9 @@ class App extends Component
 							<Route exact path="/" component={Welcome} />
 							<Route path="/rsvp" component={RsvpForm} />
 							<Route path="/hotels" component={Hotels} />
-							<Route path="/itinerary" component={Itinerary} />
 							<Route path="/registries" component={Registries} />
+							<Route path="/itinerary" component={Itinerary} />
+							<Route path="/us" component={Us} />
 						</Switch>
 					</Container>
 				</div>
