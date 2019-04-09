@@ -2,7 +2,9 @@ import { DateTime } from "luxon";
 
 const time = DateTime.TIME_SIMPLE;
 const timezone = "America/New_York";
-const ceremony = DateTime.local(2019, 7, 27, 17, 30).setZone(timezone);
+const ceremony =
+	DateTime.local(2019, 7, 27, 17, 30)
+		.setZone(timezone, { keepLocalTime: true });
 const itineraryItems =
 [
 	{
