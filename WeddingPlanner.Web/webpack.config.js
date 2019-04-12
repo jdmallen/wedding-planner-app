@@ -1,10 +1,12 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const BUILD_DIR = path.resolve(__dirname, "wwwroot");
 const APP_DIR = path.resolve(__dirname, "ClientApp");
 const STYLES_DIR = path.resolve(__dirname, "Styles");
+const IMAGES_DIR = path.resolve(__dirname, "Images");
 
 const isProd =
 	process.argv.indexOf("--optimize-minimize") > -1 ||
@@ -76,6 +78,9 @@ module.exports = {
 	plugins: [
 		new ExtractTextPlugin("css/[name].css", { allChunks: true }),
 		new CleanWebpackPlugin(`${BUILD_DIR}/*.*`),
+		new CopyPlugin([
+			{ from: `${IMAGES_DIR}/favicon.ico`, to: `${BUILD_DIR}/favicon.ico` },
+		]),
 	],
 	resolve: {
 		extensions: [".js", ".jsx"],
