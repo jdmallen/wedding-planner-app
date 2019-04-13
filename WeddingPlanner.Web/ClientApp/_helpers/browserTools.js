@@ -57,7 +57,7 @@ export default function getBrowserInfo()
 		browser.majorVersion =
 			parseInt(/Version\/([0-9]{2})/i.exec(navigator.userAgent)[1], 10);
 		browser.version = /Version\/([0-9.]+)/i.exec(navigator.userAgent)[1];
-		browser.supported = false;
+		browser.supported = true;
 	}
 	else
 	{
