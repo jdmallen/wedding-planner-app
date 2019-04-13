@@ -11,11 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import store from "./store";
 import App from "./MainApp/MainApp";
-import { getBrowserInfo, history } from "./_helpers";
+import { history } from "./_helpers";
 import "./index.scss";
 import "../Styles/customBootstrap.scss";
-
-getBrowserInfo();
 
 library.add(faUser, faMapMarkerAlt, faCalendarAlt, faCircleNotch);
 

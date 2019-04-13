@@ -7,6 +7,8 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import styles from "./Welcome.scss";
+import BrowserWarning from "../_components/BrowserWarning";
+import { getBrowserInfo } from "../_helpers";
 
 const Welcome = () => (
 	<div className={styles.entryOuterDiv}>
@@ -79,6 +81,7 @@ const Welcome = () => (
 					</Link>
 				</Col>
 			</Row>
+			<BrowserWarning supported={getBrowserInfo().supported} />
 		</div>
 	</div>
 );

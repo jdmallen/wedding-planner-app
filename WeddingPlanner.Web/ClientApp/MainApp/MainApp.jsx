@@ -28,8 +28,6 @@ import leaves1src from "../../Images/leaves1-32.png";
 
 class App extends Component
 {
-	componentDidMount()	{}
-
 	toggleLoginModal()
 	{
 		if (this.props.isModalOpen)
