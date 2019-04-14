@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import {
 	Button,
 	ButtonGroup,
@@ -8,11 +8,27 @@ import {
 	CardHeader,
 	CardImg,
 } from "reactstrap";
+import InViewMonitor from "react-inview-monitor";
 import classnames from "classnames";
-import LazyLoad from "react-lazy-load";
 import firstPhoto from "../../Images/album/20160508-first_photo.jpg";
-import ImageLoader from "../ImageLoader/ImageLoader";
+import ImageWrapper from "./ImageWrapper";
 import styles from "./Us.scss";
+
+function importAll(req)
+{
+	const images = {};
+	req.keys().map((item) =>
+	{
+		images[item.replace("./", "")] = req(item);
+		return false;
+	});
+	return images;
+}
+
+const images =
+	importAll(
+		require.context("../../Images/album/", false, /\.(png|jpe?g|svg)$/)
+	);
 
 const Us = () => (
 	<div className={styles.outer}>
@@ -32,15 +48,11 @@ const Us = () => (
 			{"before sharing them freely across the internet."}
 		</div>
 		<div className={styles.paragraph}>Enjoy!</div>
-		<div style={{ height: "600px" }} />
-		<LazyLoad
-			debounce={false}
-			offsetVertical={50}
-		>
-			<div className={styles.photo}>
-				<ImageLoader alt="first pic I took" src={firstPhoto} />
-			</div>
-		</LazyLoad>
+		{Object.keys(images).map((image, i) => (
+			<InViewMonitor key={image} childPropsInView={{ render: true }}>
+				<ImageWrapper image={images[image]} nr={i} />
+			</InViewMonitor>
+		))}
 	</div>
 );
 
