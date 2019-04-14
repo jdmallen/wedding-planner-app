@@ -1,5 +1,4 @@
-﻿/* eslint prefer-destructuring: 0 */
-
+﻿/* eslint-disable prefer-destructuring */
 export default function getBrowserInfo()
 {
 	const browser = {};

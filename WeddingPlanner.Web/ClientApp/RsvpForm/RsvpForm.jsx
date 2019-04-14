@@ -46,18 +46,25 @@ class RsvpForm extends Component
 				/>
 				<p className={styles.troubleText}>
 					<em>
-						{"Having trouble with the form above? "}<br />
+						{"Having trouble with the form above? "}
+						<br />
 						{"Try refreshing this site, or "}
 						<a href="http://kristenandjesse.rsvpify.com">
-							going to RSVPify directly
-						</a>{"."}<br /><br />
+							{"going to RSVPify directly"}
+						</a>
+						{"."}
+						<br />
+						<br />
 						{"You may have to go to "}
 						<a href="http://kristenandjesse.rsvpify.com">their site</a>
-						{" if you're "}<br />
+						{" if you're "}
+						<br />
 						{"using a browser other than Chrome or Firefox."}
-						<br /><br />
+						<br />
+						<br />
 						{"If everything fails, please "}
-						<a href="mailto:us@kristenandjesse.com">let us know</a>{"!"}
+						<a href="mailto:us@kristenandjesse.com">let us know</a>
+						{"!"}
 					</em>
 				</p>
 			</Container>

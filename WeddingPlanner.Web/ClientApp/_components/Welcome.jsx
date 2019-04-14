@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import styles from "./Welcome.scss";
-import BrowserWarning from "../_components/BrowserWarning";
+import BrowserWarning from "./BrowserWarning";
 import { getBrowserInfo } from "../_helpers";
 
 const Welcome = () => (

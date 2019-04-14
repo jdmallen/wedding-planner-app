@@ -29,7 +29,11 @@ const HotelCard = ({
 			</a>
 			<h6>{`${price}/night (plus taxes & fees)`}</h6>
 			<p className="small">{rooms}</p>
-			<p>{address}<br />{phone}</p>
+			<p>
+				{address}
+				<br />
+				{phone}
+			</p>
 		</CardBody>
 		<CardFooter>
 			<ButtonGroup

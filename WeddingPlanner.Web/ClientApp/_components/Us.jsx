@@ -15,7 +15,7 @@ const Us = () => (
 	<div>
 		<h1>Us</h1>
 		<div className={styles.center}>
-			Coming soon!
+			{"Coming soon!"}
 		</div>
 	</div>
 );

@@ -14,7 +14,7 @@ const isProd =
 
 module.exports = {
 	devtool: isProd ? "" : "source-map",
-	entry: ["babel-polyfill", `${APP_DIR}/index.jsx`],
+	entry: ["@babel/polyfill", `${APP_DIR}/index.jsx`],
 	module: {
 		rules: [
 			{
@@ -77,7 +77,7 @@ module.exports = {
 	},
 	plugins: [
 		new ExtractTextPlugin("css/[name].css", { allChunks: true }),
-		new CleanWebpackPlugin(`${BUILD_DIR}/*.*`),
+		new CleanWebpackPlugin(),
 		new CopyPlugin([
 			{ from: `${IMAGES_DIR}/favicon.ico`, to: `${BUILD_DIR}/favicon.ico` },
 		]),

@@ -8,24 +8,28 @@ import styles from "./Registries.scss";
 const Stores = function Stores()
 {
 	const amazon =
-		(<RegistryCard
-			logo={amazonLogo}
-			name="Amazon.com"
-			// eslint-disable-next-line max-len
-			websiteUrl="https://www.amazon.com"
-			// eslint-disable-next-line max-len
-			registryUrl="https://www.amazon.com/wedding/kristen-merritt-jesse-mallen-geneva-july-2019/registry/3IA093643JPQR"
-		/>);
+		(
+			<RegistryCard
+				logo={amazonLogo}
+				name="Amazon.com"
+				// eslint-disable-next-line max-len
+				websiteUrl="https://www.amazon.com"
+				// eslint-disable-next-line max-len
+				registryUrl="https://www.amazon.com/wedding/kristen-merritt-jesse-mallen-geneva-july-2019/registry/3IA093643JPQR"
+			/>
+		);
 
 	const bbb =
-		(<RegistryCard
-			logo={bbbLogo}
-			name="Bed Bath & Beyond"
-			// eslint-disable-next-line max-len
-			websiteUrl="https://www.bedbathandbeyond.com"
-			// eslint-disable-next-line max-len
-			registryUrl="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/547241477?eventType=Wedding"
-		/>);
+		(
+			<RegistryCard
+				logo={bbbLogo}
+				name="Bed Bath & Beyond"
+				// eslint-disable-next-line max-len
+				websiteUrl="https://www.bedbathandbeyond.com"
+				// eslint-disable-next-line max-len
+				registryUrl="https://www.bedbathandbeyond.com/store/giftregistry/viewregistryguest/547241477?eventType=Wedding"
+			/>
+		);
 
 	return (
 		<div>
@@ -42,7 +46,8 @@ const Stores = function Stores()
 			<p className={styles.troubleText}>
 				<em>
 					{"If any of the registry links aren't working, please "}
-					<a href="mailto:us@kristenandjesse.com">let us know</a>{"!"}
+					<a href="mailto:us@kristenandjesse.com">let us know</a>
+					{"!"}
 				</em>
 			</p>
 		</div>

@@ -15,42 +15,48 @@ const BrowserWarning = ({ supported }) => (
 			{"The site may still work OK, but you may run into problems."}
 		</p>
 		<p>
-			{"Please consider using the latest version of "}<br />
+			{"Please consider using the latest version of "}
+			<br />
 			<a
 				href="https://www.mozilla.org/en-US/firefox/new/"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Firefox
-			</a>{", "}
+				{"Firefox"}
+			</a>
+			{", "}
 			<a
 				href="https://www.google.com/chrome/"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Chrome
-			</a>{", "}
+				{"Chrome"}
+			</a>
+			{", "}
 			<a
 				href="https://www.microsoft.com/en-us/windows/microsoft-edge"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Edge
-			</a>{", "}
+				{"Edge"}
+			</a>
+			{", "}
 			<a
 				href="https://www.opera.com/"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Opera
-			</a>{", or "}
+				{"Opera"}
+			</a>
+			{", or "}
 			<a
 				href="https://www.chromium.org/"
 				rel="noopener noreferrer"
 				target="_blank"
 			>
-				Chromium
-			</a>{" instead."}
+				{"Chromium"}
+			</a>
+			{" instead."}
 		</p>
 	</div>
 );

@@ -16,7 +16,12 @@ import {
 	Nav,
 	NavItem,
 } from "reactstrap";
-import { closeNav, toggleNav, openModal, closeModal } from "../_ducks/ui";
+import {
+	closeNav,
+	toggleNav,
+	openModal,
+	closeModal,
+} from "../_ducks/ui";
 import styles from "./MainApp.scss";
 import Welcome from "../_components/Welcome";
 import Hotels from "../_components/Hotels";
@@ -30,28 +35,32 @@ class App extends Component
 {
 	toggleLoginModal()
 	{
-		if (this.props.isModalOpen)
+		const { isModalOpen, closeModal: close, openModal: open } = this.props;
+		if (isModalOpen)
 		{
-			this.props.closeModal();
+			close();
 		}
 		else
 		{
-			this.props.openModal();
+			open();
 		}
 	}
 
 	closeNav()
 	{
-		this.props.closeNav();
+		const { closeNav: close } = this.props;
+		close();
 	}
 
 	toggleNavbar()
 	{
-		this.props.toggleNav(!this.props.isNavbarOpen);
+		const { isNavbarOpen, toggleNav: toggle } = this.props;
+		toggle(!isNavbarOpen);
 	}
 
 	render()
 	{
+		const { isNavbarOpen } = this.props;
 		return (
 			<div>
 				<Navbar className={styles.navBarFont} color="linen" light expand="md">
@@ -61,10 +70,10 @@ class App extends Component
 						to="/"
 						onClick={() => this.closeNav()}
 					>
-						K&amp;J
+						{"K&J"}
 					</NavbarBrand>
 					<NavbarToggler onClick={() => this.toggleNavbar()} />
-					<Collapse isOpen={this.props.isNavbarOpen} navbar>
+					<Collapse isOpen={isNavbarOpen} navbar>
 						<Nav className="ml-auto" navbar>
 							<NavItem>
 								<Link
@@ -72,7 +81,7 @@ class App extends Component
 									className="nav-link"
 									onClick={() => this.closeNav()}
 								>
-									RSVP
+									{"RSVP"}
 								</Link>
 							</NavItem>
 							<NavItem>
@@ -81,7 +90,7 @@ class App extends Component
 									className="nav-link"
 									onClick={() => this.closeNav()}
 								>
-									Hotels
+									{"Hotels"}
 								</Link>
 							</NavItem>
 							<NavItem>
@@ -90,7 +99,7 @@ class App extends Component
 									className="nav-link"
 									onClick={() => this.closeNav()}
 								>
-									Registries
+									{"Registries"}
 								</Link>
 							</NavItem>
 							<NavItem>
@@ -99,7 +108,7 @@ class App extends Component
 									className="nav-link"
 									onClick={() => this.closeNav()}
 								>
-									Itinerary
+									{"Itinerary"}
 								</Link>
 							</NavItem>
 							<NavItem>
@@ -108,7 +117,7 @@ class App extends Component
 									className="nav-link"
 									onClick={() => this.closeNav()}
 								>
-									Us
+									{"Us"}
 								</Link>
 							</NavItem>
 						</Nav>
