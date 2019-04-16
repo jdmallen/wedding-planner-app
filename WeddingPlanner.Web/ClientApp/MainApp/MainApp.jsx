@@ -127,7 +127,7 @@ class App extends Component
 					<Container
 						className={styles.invitationBody}
 						// eslint-disable-next-line max-len
-						style={{ background: `rgb(255, 247, 239) center / 90vmax no-repeat url(${leaves1src})` }}
+						style={{ background: `url(${leaves1src}) top center / 90vmax no-repeat rgb(255, 247, 239)` }}
 					>
 						<Switch>
 							<Route exact path="/" component={Welcome} />

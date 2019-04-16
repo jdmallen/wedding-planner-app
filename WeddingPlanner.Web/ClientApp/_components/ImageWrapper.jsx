@@ -9,11 +9,12 @@ const ImageContainer = styled.div`
   width:100%;
   display:block;
   border-radius:10px;
-  margin-bottom:20px;
+  margin-top:20px;
   overflow:hidden;
   position:relative;
   img {
-    width:100%;
+		max-height: 90vh;
+		max-width: 100%;
   }
   .blurry {
     filter:blur(10px);
@@ -83,7 +84,12 @@ const Loader = styled.div`
   }
 `;
 
-const ImageWrapper = ({ image, nr, render }) => (
+const ImageWrapper = ({
+	image,
+	nr,
+	render,
+	caption,
+}) => (
 	render
 		? (
 			<Suspense fallback={
@@ -95,6 +101,7 @@ const ImageWrapper = ({ image, nr, render }) => (
 					{/* This gets shown when the full res image is finally loaded */}
 					<img src={image} alt={`img_large_${nr}`} />
 				</ImageContainer>
+				<div className={styles.caption}>{caption}</div>
 			</Suspense>
 		)
 		:	(<ImageContainer />)

@@ -1,58 +1,8 @@
-@keyframes fadeInImg {
-	from {
-	 opacity: 0;
-	}
-	to {
-	 opacity: 1;
-	}
- }
- 
- .imgLoading {
-	 opacity: 0;
-	 width: 100%;
-	 height: auto;
- }
- 
- .imgLoaded {
-	 animation: fadeInImg cubic-bezier(0.23, 1, 0.32, 1) 1;
-	 opacity: 0;
-	 animation-fill-mode: forwards;
-	 animation-duration: 0.7s;
-	 animation-delay: 0.1s;
- }
-
- .photo {
-	width: 100%;
-    padding-bottom: 1rem;
-    background: #fff;
-    > img {
-      top: 0;
-      left: 0;
-      width: 100%;
-			height: auto;
-		}
-}
-
-.imageContainer {
-	width: 500px;
-	height: 281px;
-	display: block;
-	border-radius: 10px;
-	margin-bottom: 20px;
-	overflow: hidden;
-	position: relative;
-
-	img {
-		width: 100%;
-	}
-
-	.blurry {
-		filter: blur(10px);
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 2;
-	}
+$paragraphFontSize: 1rem;
+.caption {
+	margin: 0 auto;
+	max-width: 544px;
+	font-size: $paragraphFontSize;
+	line-height: 1.6875 * $paragraphFontSize;
+	padding: 1.0625 * $paragraphFontSize;
 }
