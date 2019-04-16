@@ -20,6 +20,7 @@ namespace WeddingPlanner.DataAccess.Config
 		{
 			LoadRelationships(modelBuilder);
 			LoadMealChoices(modelBuilder);
+			LoadPhotoDefaults(modelBuilder);
 			if ("development".Equals(
 				Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
 				StringComparison.CurrentCultureIgnoreCase))
@@ -37,6 +38,8 @@ namespace WeddingPlanner.DataAccess.Config
 				.Entity<MealChoice>(ConfigureMealChoice);
 			modelBuilder
 				.Entity<Relationship>(ConfigureRelationship);
+			modelBuilder
+				.Entity<Photo>(ConfigurePhoto);
 
 			base.OnModelCreating(modelBuilder);
 		}
@@ -270,6 +273,36 @@ namespace WeddingPlanner.DataAccess.Config
 			// relationships
 		}
 
+		private void ConfigurePhoto(EntityTypeBuilder<Photo> builder)
+		{
+			// required props
+			builder
+				.Property(x => x.FileName)
+				.IsRequired()
+				.HasColumnType("varchar(256)")
+				.HasMaxLength(256);
+			builder
+				.Property(x => x.IsCaptionHtml)
+				.IsRequired()
+				.HasDefaultValue(false);
+
+			// not required props
+			builder
+				.Property(x => x.Caption)
+				.IsRequired(false)
+				.HasColumnType("ntext");
+			builder
+				.Property(x => x.DateTaken)
+				.IsRequired(false)
+				.HasColumnType("date");
+			builder
+				.Property(x => x.Order)
+				.IsRequired(false);
+
+			// ignored props
+			// relationships
+		}
+
 		private void LoadRelationships(ModelBuilder modelBuilder)
 		{
 			var defaults = new List<Relationship>
@@ -384,7 +417,8 @@ namespace WeddingPlanner.DataAccess.Config
 				"Lauren",
 				"Betterlawn",
 				false,
-				DietaryRestrictions.Vegetarian | DietaryRestrictions.PeanutAllergy,
+				DietaryRestrictions.Vegetarian
+				| DietaryRestrictions.PeanutAllergy,
 				FamilySide.Groom,
 				RelationshipType.CloseFriend,
 				nateLaurenInvitation.Id,
@@ -394,6 +428,379 @@ namespace WeddingPlanner.DataAccess.Config
 				5,
 				5);
 			modelBuilder.Entity<Invitee>().HasData(nateInvitee, laurenInvitee);
+		}
+
+		private void LoadPhotoDefaults(ModelBuilder modelBuilder)
+		{
+			var defaults = new List<Photo>
+			{
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 5, 26),
+					FileName = "20160526-just_started_dating.jpg",
+					Caption =
+						"The first times Kristen came over to Jesse's place "
+						+ "were in April of 2016 under the guise of \"kitty "
+						+ "therapy\" with Baby, Jesse's cat. Within a month, "
+						+ "on May 23rd, they officially starting dating, "
+						+ "though they were tyring to keep it a secret from "
+						+ "their coworkers at Moog."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 5, 27),
+					FileName = "20160527-mist.jpg",
+					Caption =
+						"They went on Maid of the Mist a couple days later."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 5, 28),
+					FileName = "20160528-minigolf.jpg",
+					Caption =
+						"Mini-golf the day after that. This particular shot "
+						+ "was taken just after Kristen knocked Jesse's ball "
+						+ "far away from the hole (hers is the red; his is "
+						+ "long gone)."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 6, 10),
+					FileName = "20160610-bacchus.jpg",
+					Caption =
+						"Bacchus Wine Bar became their restaurant of choice. "
+						+ "This was taken a couple weeks after they started "
+						+ "dating, and would later be where they celebrated "
+						+ "each anniversary and their engagement."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 6, 17),
+					FileName = "20160617-canalside.jpg",
+					Caption =
+						"They decided to try to have a day of photoshooting at "
+						+ "Canalside and Delaware Park."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 5, 26),
+					FileName = "20160618-first_photo_shoot.jpg",
+					Caption =
+						"They weren't the best at it, and the sun certainly "
+						+ "wasn't cooperating with them, but they loved it "
+						+ "anyway."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 7, 9),
+					FileName = "20160709-day_drunk.jpg",
+					Caption =
+						"They discovered a weakness for frozen wine slushies "
+						+ "from Merritt Wineries (no relation). They have like "
+						+ "6 of those sippy cups now."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 7, 19),
+					FileName = "20160719-birthday_scavenger_hunt.jpg",
+					Caption =
+						"For Kristen's birthday that year, Jesse arranged an "
+						+ "elaborate scavenger hunt with limerick clues that "
+						+ "led her all over the building where they worked, "
+						+ "and later all over the apartment. She eventually "
+						+ "found a basket with all her favorite things."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 8, 26),
+					FileName = "20160826-long_distance.jpg",
+					Caption =
+						"They spent a good portion of the start of their "
+						+ "relationship long distance as Kristen finished her "
+						+ "degree. Jesse managed to put close to 25K miles on "
+						+ "his car in a single year driving back and forth to "
+						+ "Rochester every weekend to see her. It sucked, but "
+						+ "they made it through!"
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 9, 17),
+					FileName = "20160917-swimming.jpg",
+					Caption =
+						"Here we see Jesse attempting to drown Kristen in "
+						+ "Oneida Lake."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 9, 24),
+					FileName = "20160924-joshs_wedding.jpg",
+					Caption = "Looking dapper at the Peterson wedding."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 10, 2),
+					FileName = "20161002-apple_picking.jpg",
+					Caption =
+						"That fall they went apple picking, and of course it "
+						+ "started to rain. They clearly made the best of it."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 10, 15),
+					FileName = "20161015-rit_family_weekend.jpg",
+					Caption =
+						"Two weeks later, in October of 2016, Jesse finally "
+						+ "got to meet Kristen's sisters at an event at RIT."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 10, 29),
+					FileName = "20161029-eleven_and_eggo.jpg",
+					Caption =
+						"Eleven and her precious Eggo at a Halloween party."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 11, 5),
+					FileName = "20161105-trail1.jpg",
+					Caption =
+						"One of only two times they went hiking. This was "
+						+ "taken along the Niagara Whirlpool Trail."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 11, 5),
+					FileName = "20161105-trail2.jpg",
+					Caption =
+						"They got some pretty excellent pictures that hike."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 12, 3),
+					FileName = "20161203-first_xmas_tree.jpg",
+					Caption =
+						"She joined Jesse on his annual hunt for the perfect "
+						+ "Christmas tree. They upped the ante the following "
+						+ "year and began chopping them down themselves."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2016, 12, 31),
+					FileName = "20161231-first_new_years.jpg",
+					Caption =
+						"They celebrated their first New Years together down "
+						+ "in NJ, ringing in 2017 with ridiculous hats and "
+						+ "lots of champagne."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 2, 13),
+					FileName = "20170213-om_nom_nom.jpg",
+					Caption =
+						"They have some weird shots that they love. This is "
+						+ "one of them."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 3, 18),
+					FileName = "20170318-red_panda_encounter.jpg",
+					Caption =
+						"One of Jesse's Christmas gifts to Kristen was a "
+						+ "reservation to have an encounter with her favorite "
+						+ "animal, the red panda, capping off a weeklong "
+						+ "spring break roadship around the Northeast."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 3, 25),
+					FileName = "20170325-baby.jpg",
+					Caption =
+						"Nearly a year into the relationship, the two of them "
+						+ "and Baby were quickly becoming a family."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 5, 30),
+					FileName = "20170530-earrings.jpg",
+					Caption =
+						"Back at Bacchus, Jesse surprised Kristen with diamond "
+						+ "earrings for their 1st anniversary."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 5, 30),
+					FileName = "20170530-first_anniversary.jpg",
+					Caption =
+						"If it wasn't clear at this point, they really love "
+						+ "wine."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 6, 23),
+					FileName = "20170623-ef.jpg",
+					Caption =
+						"During the summer of 2017, they began traveling to "
+						+ "many outdoor festivals and concerts."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 10, 8),
+					FileName = "20171008-belle_baby.jpg",
+					Caption =
+						"Jesse had also adopted a new kitten. Here's Belle at "
+						+ "11 weeks old, cuddling up with an oddly tolerant "
+						+ "Baby."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2017, 10, 28),
+					FileName = "20171028-halloween.jpg",
+					Caption = "That Halloween they went as Boo and Kitty."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 1, 13),
+					FileName = "20180113-jesse_proposing.jpg",
+					Caption =
+						"Finally, on January 13th, 2018, Jesse proposed. In "
+						+ "cahoots with Kristen's sisters, Jesse rented out "
+						+ "Kristen's favorite ice cream place (yes, in "
+						+ "January), sneaked over their parents Jeannette and "
+						+ "David, and aimed to surprised Kristen with a "
+						+ "carefully plotted ruse.",
+					Order = 1
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 1, 13),
+					FileName = "20180113-kristens_reaction.jpg",
+					Caption = "She was definitely surprised.",
+					Order = 2
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 1, 13),
+					FileName = "20180113-forehead_kiss.jpg",
+					Caption =
+						"She said she liked him as a friend and would have to "
+						+ "think about it. Just kidding; it was a resounding "
+						+ "yes! :)",
+					Order = 3
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 5, 11),
+					FileName = "20180511-graduation.jpg",
+					Caption =
+						"That May came her graduation ceremony, and began "
+						+ "Jesse's bowtie phase."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 5, 13),
+					FileName = "20180513-idk.jpg",
+					Caption = "Yup, another weird one."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 6, 16),
+					FileName = "20180616-harry_potter.jpg",
+					Caption =
+						"One thing they figured out was to never stop dating. "
+						+ "Here they are at the Harry Potter play on Broadway."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2018, 12, 23),
+					FileName = "20181223-kristen_and_hobbes.jpg",
+					Caption =
+						"A few months after Baby sadly passed away, they "
+						+ "decided they were ready for a new member of the "
+						+ "family. Enter Hobbes, Kristen's crazy, cuddly, "
+						+ "orange kitty."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2019, 1, 1),
+					FileName = "20190101-jesse_and_hobbes.jpg",
+					Caption =
+						"Safe to say Jesse and Hobbes hit it off pretty well. "
+						+ "Here they are on New Years Day 2019, driving back "
+						+ "home from another holiday with the families."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2019, 1, 5),
+					FileName = "20190105-hobbes_and_belle.jpg",
+					Caption =
+						"Here's the picture included on the backs of the "
+						+ "paper invitations. The two cats get along FAR "
+						+ "better than Belle and Baby ever did."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2019, 2, 15),
+					FileName = "20190215-kristen_and_hobbes.jpg",
+					Caption = "The two of them are inseparable."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2019, 3, 11),
+					FileName = "20190311-jesse_and_hobbes.jpg",
+					Caption =
+						"Hobbes has done a good job of keeping them sane, as "
+						+ "the last few months have chiefly comprised of "
+						+ "frenetic wedding planning and turbulent job changes."
+				},
+				new Photo
+				{
+					Id = Guid.NewGuid(),
+					DateTaken = new DateTime(2019, 3, 23),
+					FileName = "20190323-hobbes_and_belle.jpg",
+					Caption =
+						"While they sadly can't accompany the bride and groom "
+						+ "to the wedding, here's the two of them saying they "
+						+ "hope to see you there!"
+				}
+			};
+			modelBuilder.Entity<Photo>().HasData(defaults);
 		}
 	}
 }

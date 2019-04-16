@@ -120,6 +120,7 @@ namespace WeddingPlanner.Web
 
 			services.AddScoped<IInvitationService, InvitationService>();
 			services.AddScoped<IInviteeService, InviteeService>();
+			services.AddScoped<IPhotoService, PhotoService>();
 
 			services
 				.AddCustomIdentity<WpDbContext, AppUser, AppRole, Guid,
