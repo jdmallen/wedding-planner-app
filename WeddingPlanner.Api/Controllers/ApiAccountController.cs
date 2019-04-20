@@ -4,18 +4,17 @@ using System.Threading.Tasks;
 using JDMallen.Toolbox.Constants;
 using JDMallen.Toolbox.Dtos;
 using JDMallen.Toolbox.Extensions;
-using JDMallen.Toolbox.Factories;
 using JDMallen.Toolbox.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WeddingPlanner.Api.Utilities;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Dtos;
 using WeddingPlanner.DataAccess.Entities.Identity;
-using WeddingPlanner.Web.Utilities;
 
-namespace WeddingPlanner.Web.Controllers
+namespace WeddingPlanner.Api.Controllers
 {
 	[Route("api/account")]
 	public class ApiAccountController : Controller

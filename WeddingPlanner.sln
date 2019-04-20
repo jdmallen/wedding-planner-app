@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Web", "WeddingPlanner.Web\WeddingPlanner.Web.csproj", "{6CF842D4-8772-4CDE-A27F-16C1A1C634C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Api", "WeddingPlanner.Api\WeddingPlanner.Api.csproj", "{6CF842D4-8772-4CDE-A27F-16C1A1C634C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeddingPlanner.Services", "WeddingPlanner.Service\WeddingPlanner.Services.csproj", "{B0F79EC9-A6B4-4AC9-910B-36A78EC3BC93}"
 EndProject

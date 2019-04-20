@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -11,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using WeddingPlanner.DataAccess.Entities.Identity;
 
-namespace WeddingPlanner.Web.Utilities
+namespace WeddingPlanner.Api.Utilities
 {
 	public class TokenFactory : JwtTokenFactory, ITokenFactory
 	{

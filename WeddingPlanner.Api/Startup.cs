@@ -21,15 +21,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.AspNetCore;
+using WeddingPlanner.Api.Extensions;
+using WeddingPlanner.Api.Middleware;
+using WeddingPlanner.Api.Utilities;
 using WeddingPlanner.DataAccess.Config;
 using WeddingPlanner.DataAccess.Entities.Identity;
 using WeddingPlanner.Services.Implementations;
 using WeddingPlanner.Services.Interfaces;
-using WeddingPlanner.Web.Extensions;
-using WeddingPlanner.Web.Middleware;
-using WeddingPlanner.Web.Utilities;
 
-namespace WeddingPlanner.Web
+namespace WeddingPlanner.Api
 {
 	public class Startup
 	{

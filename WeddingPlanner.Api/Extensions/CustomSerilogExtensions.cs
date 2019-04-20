@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace WeddingPlanner.Web.Extensions
+namespace WeddingPlanner.Api.Extensions
 {
 	public static class CustomSerilogExtensions
 	{

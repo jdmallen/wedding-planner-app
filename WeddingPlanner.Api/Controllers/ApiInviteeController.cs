@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using WeddingPlanner.DataAccess.Entities;
 using WeddingPlanner.DataAccess.Parameters;
 using WeddingPlanner.Services.Interfaces;
 
-namespace WeddingPlanner.Web.Controllers
+namespace WeddingPlanner.Api.Controllers
 {
 	// [Authorize]
 	[Route("api/invitee")]

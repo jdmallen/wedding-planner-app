@@ -18,11 +18,11 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development",
-				"WP_Settings__DbConnectionPassword": "",
-				"WP_Settings__JwtSecretKey": "",
-				"WP_OAuth__GithubClientSecret": "",
-				"WP_OAuth__GoogleClientSecret": ""
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "WP_Settings__DbConnectionPassword": "",
+        "WP_Settings__JwtSecretKey": "",
+        "WP_OAuth__GithubClientSecret": "",
+        "WP_OAuth__GoogleClientSecret": ""
       },
       "applicationUrl": "http://localhost:5000/"
     }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Serilog.Context;
 
-namespace WeddingPlanner.Web.Middleware
+namespace WeddingPlanner.Api.Middleware
 {
 	public class RequestContextMiddleware
 	{

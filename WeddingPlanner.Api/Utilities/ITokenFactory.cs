@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using JDMallen.Toolbox.Factories;
 using WeddingPlanner.DataAccess.Entities.Identity;
 
-namespace WeddingPlanner.Web.Utilities
+namespace WeddingPlanner.Api.Utilities
 {
 	public interface ITokenFactory : IJwtTokenFactory
 	{

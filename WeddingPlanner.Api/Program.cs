@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace WeddingPlanner.Web
+namespace WeddingPlanner.Api
 {
 	public class Program
 	{

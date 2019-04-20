@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WeddingPlanner.Web.Controllers
+namespace WeddingPlanner.Api.Controllers
 {
 	[Route("")]
 	public class BaseViewController : Controller
