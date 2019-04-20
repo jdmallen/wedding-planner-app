@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WeddingPlanner.DataAccess.Entities;
 using WeddingPlanner.DataAccess.Parameters;
@@ -7,14 +8,14 @@ using WeddingPlanner.Services.Interfaces;
 
 namespace WeddingPlanner.Api.Controllers
 {
-	// [Authorize]
+	[Authorize]
 	[Route("api/invitation")]
-	public class ApiInvitationController : Controller
+	public class InvitationController : Controller
 	{
 		// todo go back to interface
 		private readonly IInvitationService _invitationService;
 
-		public ApiInvitationController(IInvitationService invitationService)
+		public InvitationController(IInvitationService invitationService)
 		{
 			_invitationService = invitationService;
 		}

@@ -17,7 +17,7 @@ using WeddingPlanner.DataAccess.Entities.Identity;
 namespace WeddingPlanner.Api.Controllers
 {
 	[Route("api/account")]
-	public class ApiAccountController : Controller
+	public class AccountController : Controller
 	{
 		private readonly ITokenFactory _jwtTokenFactory;
 		private readonly Settings _settings;
@@ -25,7 +25,7 @@ namespace WeddingPlanner.Api.Controllers
 		private readonly UserManager<AppUser> _userManager;
 		private readonly WpDbContext _context;
 
-		public ApiAccountController(
+		public AccountController(
 			ITokenFactory jwtTokenFactory,
 			Settings settings, 
 			SignInManager<AppUser> signInManager, 

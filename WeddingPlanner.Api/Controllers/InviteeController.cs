@@ -9,11 +9,11 @@ namespace WeddingPlanner.Api.Controllers
 {
 	// [Authorize]
 	[Route("api/invitee")]
-	public class ApiInviteeController : Controller
+	public class InviteeController : Controller
 	{
 		private readonly IInviteeService _inviteeService;
 
-		public ApiInviteeController(IInviteeService inviteeService)
+		public InviteeController(IInviteeService inviteeService)
 		{
 			_inviteeService = inviteeService;
 		}
