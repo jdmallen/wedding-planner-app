@@ -19,5 +19,11 @@
 		public string JwtIssuer { get; set; }
 
 		public string JwtSecretKey { get; set; }
+
+		public string SwaggerApiName { get; set; }
+
+		public string SwaggerApiVersion { get; set; }
+
+		public string SwaggerEndpointFormatString { get; set; }
 	}
 }

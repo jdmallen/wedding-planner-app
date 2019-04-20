@@ -9,7 +9,7 @@ namespace WeddingPlanner.Api.Controllers
 {
 	// [Authorize]
 	[Route("api/invitee")]
-    public class ApiInviteeController : Controller
+	public class ApiInviteeController : Controller
 	{
 		private readonly IInviteeService _inviteeService;
 
@@ -31,7 +31,7 @@ namespace WeddingPlanner.Api.Controllers
 		{
 			return Ok(await _inviteeService.FindPaged(query));
 		}
-		
+
 		[HttpGet]
 		[Route("relationships")]
 		public async Task<IActionResult> GetRelationships()
@@ -52,10 +52,5 @@ namespace WeddingPlanner.Api.Controllers
 		{
 			return Ok(await _inviteeService.ListAllInvitees().ToList());
 		}
-
-        public IActionResult Index()
-        {
-            return Ok();
-        }
-    }
+	}
 }

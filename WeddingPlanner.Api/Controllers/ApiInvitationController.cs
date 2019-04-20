@@ -40,15 +40,11 @@ namespace WeddingPlanner.Api.Controllers
 			return Ok(_invitationService.GetAllInvitationTypes());
 		}
 
+		[HttpGet]
 		[Route("")]
 		public async Task<IActionResult> ListInvitations()
 		{
 			return Ok(await _invitationService.ListAllInvitations().ToList());
-		}
-
-		public IActionResult Index()
-		{
-			return Ok();
 		}
 	}
 }

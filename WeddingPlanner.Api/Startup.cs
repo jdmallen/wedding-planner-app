@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
 using WeddingPlanner.Api.Extensions;
 using WeddingPlanner.Api.Middleware;
 using WeddingPlanner.Api.Utilities;
@@ -191,42 +192,46 @@ namespace WeddingPlanner.Api
 			);
 
 			services.AddMvc();
+
+			services.AddSwaggerGen(
+				options =>
+				{
+					options.SwaggerDoc("v1", new Info
+					{
+						Title = settings.SwaggerApiName,
+						Version = settings.SwaggerApiVersion
+					});
+				});
 		}
 
 		public void Configure(
 			IApplicationBuilder app,
 			IHostingEnvironment env,
 			ILoggerFactory loggerFactory,
-			WpDbContext dbContext)
+			WpDbContext dbContext,
+			Settings settings)
 		{
+			app.UseStaticFiles();
+
 			app.UseRequestContextMiddleware();
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
+			app.UseSwagger();
+
+			app.UseSwaggerUI(
+				options =>
+				{
+					options.SwaggerEndpoint(
+						string.Format(
+							settings.SwaggerEndpointFormatString,
+							settings.SwaggerApiVersion),
+						$"{settings.SwaggerApiName} "
+						+ $"{settings.SwaggerApiVersion}");
+					options.RoutePrefix = string.Empty;
+				});
 
 			app.UseAuthentication();
 
-			app.UseStaticFiles("");
-
-			app.UseStatusCodePagesWithRedirects("/");
-
-			app.UseMvc(
-				routes =>
-				{
-					routes.MapRoute(
-						name: "default",
-						template: "{controller=BaseView}/{action=Index}/{id?}");
-					routes.MapSpaFallbackRoute(
-						name: "spa-fallback",
-						defaults: new
-						{
-							controller = "BaseView",
-							action = "Index"
-						});
-				}
-			);
+			app.UseMvc();
 #if DEBUG
 			var orderOfDroppage = new List<string>
 			{
