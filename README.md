@@ -1,20 +1,23 @@
 # Wedding Planner App
 
-I wrote this to help my fiancée and I organize our wedding, though the scope eventually narrowed to a simple app to provide information about our wedding and allow our invitees to easily RSVP paperlessly.
+I wrote this with the goal of helping my fiancée and I organize our wedding, though the scope eventually narrowed to a simple app to provide information about our wedding and allow our invitees to easily RSVP paperlessly. All the infrastructure is there to eventually make it more than a simple SPA, but I'll likely split it into separate .NET API and Node.js front-end projects before I get the juicier parts fully implemented and hooked up.
 
-It's written in C# and Javascript using [.NET Core 2.2](https://dotnet.microsoft.com/download) and [React](https://github.com/facebook/react) + [Redux](https://github.com/reduxjs/redux). I'm using [reactstrap](https://github.com/reactstrap/reactstrap) to style the UI because I [suck at front-end design](https://i.redd.it/u9v1bvq0j6611.jpg). I knew plenty about .NET Core before starting this, but basically nothing about React, Redux, or [Webpack](https://github.com/webpack/webpack). As you browse through the code, hopefully you'll gain an appreciation for the crazy things I've figured out along the way.
+I knew plenty about .NET Core before starting this, but basically nothing about React, Redux, or [Webpack](https://github.com/webpack/webpack). There are a number of crazy things I've figured out along the way. I chose to configure Webpack and [Babel](https://babeljs.io/) manually for React over the [create-react-app](https://github.com/facebook/create-react-app) starter app because I have a general disdain for magic black boxes, and I enjoy retaining control. Plus it helps me better understand what's going on with everything.
 
-There are no tests because of my initial resistance to TDD and due to time constraints. I've made a point to eventually put them into the code, as I imagine this app will continue to grow beyond our wedding date in the hopes that others may find it similarly useful.
+The backend is written in C# using [.NET Core 2.2](https://dotnet.microsoft.com/download). The frontend is written in ES7 using [React](https://github.com/facebook/react) + [Redux](https://github.com/reduxjs/redux). I'm using [reactstrap](https://github.com/reactstrap/reactstrap) to style the UI because I generally [suck at front-end design](https://i.redd.it/u9v1bvq0j6611.jpg), though I've gotten a bit better over the life of this project.
 
-This references my C# [toolbox](https://github.com/jdmallen/toolbox), which is where I store all my handy abstractions, extensions, utility classes, etc., that I've picked up through my career. Much of the toolbox was born out of this project.
+There are no tests because of my initial resistance to TDD and due to time constraints. I've made a point to eventually put them into the code, as I imagine this app will continue to grow beyond our wedding date in the hopes that others may find it similarly useful. I also don't want to keep paying for RSVPify, which is currently being injected into the RSVP page via iframe.
+
+This project references my C# [toolbox](https://github.com/jdmallen/toolbox), which is where I store all my handy abstractions, extensions, utility classes, etc., that I've picked up through my career. Much of the toolbox was born out of this project.
 
 ## Server Requirements
 
-* Any Windows or Unix-like machine can run the .NET Core binaries below.
+* Any Windows or Unix-like machine that can run the .NET Core binaries below.
 * [.NET Core 2.2 Runtime or SDK](https://dotnet.microsoft.com/download)
-* [Yarn](https://yarnpkg.com/en/)* or [npm](https://nodejs.org/en/)
+* [Node.js & npm](https://nodejs.org/en/)
+* _Optional:_ [Yarn](https://yarnpkg.com/en/)*
 
-_*If you choose to use npm instead of Yarn in a non-development environment, you'll need to modify the pre-build targets in the `WeddingPlanner.Web.csproj` file, which are currently set to yarn. It's just faster for me._
+_*If you choose to use npm instead of Yarn in a non-development environment, you'll need to modify the pre-build targets in the `WeddingPlanner.Web.csproj` file, which are currently set to yarn. It's just faster for me on Windows still, though I've read that [npm is way faster now](https://iamturns.com/yarn-vs-npm-2018/) than it used to be._
 
 ## Get it running
 
