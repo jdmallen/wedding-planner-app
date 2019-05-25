@@ -1,7 +1,7 @@
 const albumfilenames = [
 	{
 		filename: "20160526-just_started_dating.jpg",
-		caption: "The first times Kristen came over to Jesse's place were in April of 2016 under the guise of \"kitty therapy\" with Baby, Jesse's cat. Within a month, on May 23rd, they officially starting dating, though they were tyring to keep it a secret from their coworkers at Moog.",
+		caption: "The first times Kristen came over to Jesse's place were in April of 2016 under the guise of \"kitty therapy\" with Baby, Jesse's cat. Within a month, on May 23rd, they officially starting dating, though they were trying to keep it a secret from their coworkers at Moog.",
 	},
 	{
 		filename: "20160527-mist.jpg",
