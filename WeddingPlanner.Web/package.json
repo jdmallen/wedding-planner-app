@@ -16,7 +16,7 @@
 		"iframe-resizer": "^4.1.1",
 		"jasmine": "^3.4.0",
 		"jquery": "^3.4.0",
-		"lodash": "^4.17.5",
+		"lodash": "^4.17.19",
 		"luxon": "^1.12.1",
 		"popper.js": "^1.15.0",
 		"prop-types": "^15.6.1",
